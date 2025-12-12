@@ -1,0 +1,38 @@
+.otp-input {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    font-size: 20px;
+    margin: 0 5px;
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+}
+
+.otp-input:focus {
+    outline: none;
+    border: 2px solid #198754;
+    /* Bootstrap green */
+}
+
+.btn-close-custom::before {
+    content: '×';
+    font-size: 2rem;
+    color: #000;
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    cursor: pointer;
+}
+
+.header {
+    text-align: center;
+    background: #fff;
+    border-bottom: 1px solid gray;
+    padding-bottom: 5px !important;
+    padding-top: 15px !important;
+    color: black;
+}
+
+.modal-content {
+    background: #fff;
+}

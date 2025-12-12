@@ -1,0 +1,38 @@
+.navbar-brand img {
+    object-fit: cover;
+}
+
+.navbar img.rounded-circle {
+    object-fit: cover;
+}
+
+.profile-w {
+    height: 30px;
+    width: 30px;
+}
+
+.text-header {
+    font-size: .7rem;
+}
+
+
+.navbar {
+    padding: 0.5rem 1rem;
+}
+
+.profile-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+/* 
+.bg-gray {
+    height: calc(100vh - 72px);
+} */
+
+.navbar[_ngcontent-ng-c214581083] {
+    padding: 0.0rem 0.5rem;
+}

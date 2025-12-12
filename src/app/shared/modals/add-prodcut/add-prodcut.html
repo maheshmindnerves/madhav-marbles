@@ -1,0 +1,39 @@
+<div class="modal-header bg-light">
+    <h5 class="modal-title">Add Product</h5>
+    <button type="button" class="btn-close" mat-dialog-close></button>
+</div>
+<div class="bg-light p-3">
+    <form [formGroup]="productForm">
+        <div class="col-md-12 col-sm-12 col-12">
+            <label>Item Name</label>
+            <input class="form-control" formControlName="name">
+            @if(productForm.get('name')?.touched && productForm.get('name')?.invalid) {
+            <div class="error"> Name is required.</div>
+            }
+        </div>
+        <div class="col-md-12 col-sm-12 col-12">
+            <label>Item Code</label>
+            <input class="form-control" formControlName="code">
+            @if(productForm.get('code')?.touched && productForm.get('code')?.invalid) {
+            <div class="error"> Code is required.</div>
+            }
+        </div>
+
+        <div class="col-md-12 col-sm-12 col-12">
+            <label>Category</label>
+            <input class="form-control" formControlName="category">
+            @if(productForm.get('category')?.touched && productForm.get('category')?.invalid) {
+            <div class="error"> category is required.</div>
+            }
+        </div>
+    </form>
+    <div class="row mt-2">
+        <div class="col-md-6 col-sm-6 col-6 text-end">
+            <button type="button" class="btn btn-secondary" mat-dialog-close>Cancel</button>
+
+        </div>
+        <div class="col-md-6 col-sm-6 col-6">
+            <button type="button" class="btn btn-success" (click)="onClickConfirm()">Confirm</button>
+        </div>
+    </div>
+</div>

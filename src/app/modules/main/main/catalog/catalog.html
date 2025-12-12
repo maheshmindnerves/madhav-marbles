@@ -1,0 +1,103 @@
+<app-filter></app-filter>
+
+<div (click)="closeNav()">
+   @if(!isSubmit()) {
+   <div class="row">
+      @for (item of items(); track item.id) {
+      <div class="col-md-4 col-sm-4 col-6">
+         <div class="card custom-card">
+            <div class="card-body">
+               <img class="card-img-top" [src]="item.img" alt="Card image cap">
+               <div class="main-title">{{item.name}}</div>
+               <div class="sub-title">{{item.name}}</div>
+               <div class="row mt-1">
+                  <div class="col d-flex">
+                     <div><label class="sub-title"><input type="checkbox" [(ngModel)]="item.hold" /> Hold</label></div>
+                     <div class="ms-auto">
+                        <span class="border-custom" (click)="openDialog()">
+                           <img class="image-width" src="/images/vector.png">
+                           <span class="sub-title ms-1">View Details</span>
+                        </span>
+                     </div>
+                  </div>
+               </div>
+               <div class="row mt-1">
+                  <div class="col d-flex">
+                     <div><label class="sub-title"><input type="checkbox" [(ngModel)]="item.sampleOrder" /> Sample
+                           Order</label></div>
+
+                     <div class="ms-auto"><img class="image-width" src="/images/address.svg"><span
+                           class="sub-title ms-1">{{item.address}}</span></div>
+                  </div>
+               </div>
+
+            </div>
+         </div>
+      </div>
+      }
+   </div>
+   <div class="row">
+      <div class="col-md-12 col-sm-12 col-12 text-center mb-2">
+         <button type="button" class="btn btn-success w-75" (click)="submitRequest()">Submit Request</button>
+      </div>
+   </div>
+   } @else {
+   <div class="row">
+      <div class="header">
+         <i class="fa fa-angle-left cursor-pointer" (click)="goToCatalog()"></i> &nbsp;&nbsp;Submit Request
+      </div>
+   </div>
+   <div class="row">
+      <div class="col-md-6 col-sm-6 col-12">
+         @for (item of holdItem(); track item.id) {
+         <div class="card mt-2">
+            <div class="card-body">
+               <div class="row">
+                  <div class="col-md-3 col-sm-3 col-3">
+                     <img class="card-img-submit" [src]="item.img" alt="Card image cap">
+                  </div>
+                  <div class="col-md-9 col-sm-9 col-9">
+                     <div class="main-title-submit">{{item.name}}</div>
+                     <div class="sub-title-submit">Category :{{item.name}}</div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         }
+      </div>
+      <div class="col-md-6 col-sm-6 col-12">
+         <div class="form-container">
+            <form [formGroup]="otpForm" (ngSubmit)="onSubmit()">
+               <input type="text" class="form-control" placeholder="Name*" formControlName="name">
+               @if(otpForm.get('name')?.touched && otpForm.get('name')?.invalid) {
+               <div class="error"> Name is required.</div>
+               }
+               <input type="text" class="form-control" placeholder="City*" formControlName="city">
+               @if(otpForm.get('city')?.touched && otpForm.get('city')?.invalid) {
+               <div class="error"> City is required.</div>
+               }
+               <input type="text" class="form-control" placeholder="State*" formControlName="state">
+               @if(otpForm.get('state')?.touched && otpForm.get('state')?.invalid) {
+               <div class="error"> State is required.</div>
+               }
+               <input type="text" class="form-control" placeholder="Country*" formControlName="country">
+               @if(otpForm.get('country')?.touched && otpForm.get('country')?.invalid) {
+               <div class="error"> Country is required.</div>
+               }
+
+               <input type="email" class="form-control" placeholder="Email*" formControlName="email">
+               @if(otpForm.get('email')?.touched && otpForm.get('email')?.invalid) {
+               <div class="error"> Email is required.</div>
+               }
+               <input type="tel" class="form-control" placeholder="Mobile*" formControlName="mobile" maxlength="10">
+               @if(otpForm.get('mobile')?.touched && otpForm.get('mobile')?.invalid) {
+               <div class="error"> Enter valid 10-digit mobile number.</div>
+               }
+
+               <button type="submit" class="btn btn-success w-100 mt-2">Send OTP</button>
+            </form>
+         </div>
+      </div>
+   </div>
+   }
+</div>

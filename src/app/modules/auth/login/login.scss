@@ -1,0 +1,100 @@
+.bg-container {
+    background-image: url('/images/FACTORY-VIEW_Edit.webp');
+    background-size: cover;
+    /* makes it cover full div */
+    background-position: center;
+    /* centers image */
+    background-repeat: no-repeat;
+    height: 100vh;
+    /* full screen */
+}
+
+.center-abs {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.904);
+    padding: 2%;
+    border-radius: 10px;
+}
+
+.form-check-label {
+    font-weight: 300 !important;
+}
+
+.sub-title {
+    text-align: center;
+    padding: 0rem 2rem 2rem;
+    color: gray;
+}
+
+.sub-title-main {
+    text-align: left;
+    padding-bottom: 2rem;
+    color: gray;
+}
+
+.otp-screen {
+    text-align: center;
+    margin-top: 0.5rem;
+
+    .input {
+        width: 50px;
+        border: none;
+        border: 2px solid rgba(0, 0, 0, 0.5);
+        margin: 0 10px;
+        text-align: center;
+        border-radius: 10px;
+        font-size: 36px;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+
+    .input:focus {
+        border: 3px solid blue;
+        outline: none;
+    }
+
+    .input:nth-child(1) {
+        cursor: pointer;
+        pointer-events: all;
+    }
+}
+
+.mobile-view {
+    padding: 1rem;
+    color: white;
+
+    .sub-title {
+        text-align: left;
+        padding: 0rem;
+        color: lightgray;
+    }
+
+    .form-control {
+        background: #404252;
+        color: white;
+        font-weight: 700;
+        border: 1px solid gray;
+    }
+
+    ::placeholder {
+        color: gray;
+    }
+
+    .pos-button {
+        position: absolute;
+        left: 0;
+        bottom: 2rem;
+    }
+
+    .otp-screen {
+        .input {
+            background-color: #404252;
+            border: 1px solid gray;
+            color: white;
+        }
+    }
+}

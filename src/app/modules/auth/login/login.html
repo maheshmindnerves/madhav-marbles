@@ -1,0 +1,95 @@
+<div class="bg-container browser-view">
+  <div class="center-abs">
+    @if( !isOTP()) {
+    <img src="/images/login-black.png">
+    <h2>Login</h2>
+    <div class="sub-title-main">Welcome to Madhav Marbles & Granites Ltd. India's first choice of the region known for
+      its
+      rich reserves of metamorphosed granite.</div>
+    <div class="form-group">
+      <label for="username">Mobile Number</label>
+      <input type="text" class="form-control" numbersOnly placeholder="Enter Mobile Number" maxlength="10"
+        [formControl]="mobileNumber">
+    </div>
+    <div class="row mt-5">
+      <div class="col-md-9 col-sm-9 col-9 m-auto">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="check1" [formControl]="termsCondition">
+          <label class="form-check-label" for="check1">
+            I accept the Terms of Use & Privacy Policy
+          </label>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-3 col-3 text-end">
+        <button type="button" class="btn btn-success" (click)="onClickGetOtp(true)"
+          [disabled]="!(termsCondition.value && mobileNumber.valid)">Get
+          OTP</button>
+      </div>
+    </div>
+    } @else {
+    <h2 class="text-center">Verify OTP</h2>
+    <hr>
+    <div class="sub-title">A verification code has been sent to your mobile number via sms. please enter the code
+      below.</div>
+    <div class="text-center"><b>OTP sent on mobile {{mobileNumber.value}}</b></div>
+    <div class="text-center">Valid for 01:10</div>
+    <form [formGroup]="otpForm">
+      <div class="otp-screen">
+        <div id="inputs" class="inputs">
+          <input class="input" type="text" maxlength="1" (input)="onInputChange($event)" formControlName="v1" />
+          <input class="input" type="text" maxlength="1" (input)="onInputChange($event)" formControlName="v2" />
+          <input class="input" type="text" maxlength="1" (input)="onInputChange($event)" formControlName="v3" />
+          <input class="input" type="text" maxlength="1" (input)="onInputChange($event)" formControlName="v4" />
+        </div>
+      </div>
+    </form>
+    <div class="text-center mt-2">
+      <h6><a href="#">Resend</a></h6>
+    </div>
+    <div class="text-center mt-4">
+      <button type="button" class="btn btn btn-outline-secondary me-2" (click)="onClickGetOtp(false)">Back</button>
+      <button type="button" class="btn btn-success" (click)="verify()" [disabled]="otpForm.invalid">Verify</button>
+    </div>
+    }
+  </div>
+</div>
+
+<div class="mobile-view">
+  <img src="/images/login.png">
+  <h1>Login</h1>
+  <div class="sub-title">Welcome Back To Madhav Marbles Pvt.Ltd</div>
+  <div class="form-group mt-4">
+    <label for="username">Mobile Number</label>
+    <input type="text" class="form-control" numbersOnly placeholder="Enter Mobile Number" maxlength="10"
+      [formControl]="mobileNumber">
+  </div>
+  @if(isOTP()) {
+  <div class="row">
+    <div class="mt-5 mb-2"><b>Enter The OTP</b></div>
+    <form [formGroup]="otpForm">
+      <div class="otp-screen">
+        <div id="inputs" class="inputs">
+          <input class="input" type="text" maxlength="1" (input)="onInputChange($event)" formControlName="v1" />
+          <input class="input" type="text" maxlength="1" (input)="onInputChange($event)" formControlName="v2" />
+          <input class="input" type="text" maxlength="1" (input)="onInputChange($event)" formControlName="v3" />
+          <input class="input" type="text" maxlength="1" (input)="onInputChange($event)" formControlName="v4" />
+        </div>
+      </div>
+    </form>
+    <div class="text-center mt-5 mb-2"><b>Resend 00:00</b></div>
+  </div>
+  }
+  <div class="row mt-6">
+    <div class="col-md-12 col-sm-12 col-12 pos-button">
+      @if(!isOTP()) {
+      <button type="button" class="btn btn-warning w-100" (click)="onClickGetOtp(true)"
+        [disabled]="!mobileNumber.valid">Send OTP</button>
+      }@else {
+      <button type="button" class="btn btn-warning w-100" (click)="verify()" [disabled]="mobileNumber.invalid">Verify
+        And Continue</button>
+      }
+
+    </div>
+  </div>
+
+</div>

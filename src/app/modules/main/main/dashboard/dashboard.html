@@ -1,0 +1,16 @@
+<div class="row">
+    @for (item of items(); track item.id) {
+    <div class="col-md-4 col-sm-4 col-6">
+        <div class="card mb-1 mt-1">
+            <div class="card-body p-2">
+                <img class="image-width" src="/images/{{item.imageName}}.svg"> <span
+                    class="value-list">{{item.value}}</span>
+                <mat-icon class="right-icon" (click)="onClickCard(item)">chevron_right</mat-icon>
+            </div>
+            <div class="col-md-12 col-sm-12 col-12 name-title">
+                {{item.name}}
+            </div>
+        </div>
+    </div>
+    }
+</div>

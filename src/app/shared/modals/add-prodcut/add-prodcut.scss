@@ -1,0 +1,22 @@
+.btn-close-custom::before {
+    content: '×';
+    font-size: 2rem;
+    color: #b3b5bd;
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    cursor: pointer;
+}
+
+.card-img-top {
+    height: 26vh;
+}
+
+.desc-detials {
+    height: 20vh;
+    overflow: auto;
+    border: 1px solid gray;
+    padding: 3px;
+    border-radius: 5px;
+    color: #d3d1d1;
+}

@@ -1,0 +1,28 @@
+<div class="header">
+    <h5>Verify OTP</h5>
+    <span mat-dialog-close class="btn-close-custom"></span>
+</div>
+
+<div class="modal-content p-3">
+    <div class="modal-body text-center">
+        <p class="mb-1">A verification code has been sent to your mobile number via SMS. Please enter the code
+            below.
+        </p>
+        <p class="fw-bold text-black">OTP sent on number 9856231456</p>
+        <p class="text-muted">Valid For <span id="timer">01:10</span></p>
+
+        <!-- OTP Inputs -->
+        <div class="d-flex justify-content-center mb-3">
+            <input type="text" maxlength="1" class="otp-input" />
+            <input type="text" maxlength="1" class="otp-input" />
+            <input type="text" maxlength="1" class="otp-input" />
+            <input type="text" maxlength="1" class="otp-input" />
+        </div>
+
+        <!-- Buttons -->
+        <div class="justify-content-between">
+            <button class="btn btn-outline-secondary me-2">Resend</button>
+            <button class="btn btn-success">Verify</button>
+        </div>
+    </div>
+</div>
