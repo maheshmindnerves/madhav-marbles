@@ -5,7 +5,8 @@
             (click)="addProduct()">add_box</mat-icon></div>
 </div>
 <div class="row">
-    @for (item of items(); track item.item_Code) {
+    
+    @for (item of items(); track item.id) {
     <div class="col-md-4 col-sm-6 col-12">
         <div class="card p-2 mt-2">
             <div class="row">
@@ -21,10 +22,16 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-12 col-sm-12 col-12 text-end pt-2">
-                    <span class="me-2" (click)="onClickEdit(item)"> <mat-icon class="edit-list text-primary" >edit</mat-icon></span>
-                    <span>Add Specification</span>
-                    <span class="ms-2"><mat-icon class="edit-list text-success" (click)="onClickSpecification(item)"> list_alt</mat-icon></span>
+                <div class="col-md-6 col-sm-6 col-6 pt-2">
+                    Specification
+                </div>
+                <div class="col-md-6 col-sm-6 col-6 text-end pt-2">
+                    <span>Add</span>
+                    <span class="ms-2 me-2" (click)="onClickEdit(item)"> <mat-icon
+                            class="edit-list text-primary">add_box</mat-icon></span>
+                    <span>View</span>
+                    <span class="ms-2"><mat-icon class="edit-list text-success" (click)="onClickSpecification(item)">
+                            list_alt</mat-icon></span>
                 </div>
             </div>
 

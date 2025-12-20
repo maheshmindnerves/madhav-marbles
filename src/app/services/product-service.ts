@@ -23,6 +23,10 @@ export class ProductService {
         return this.http.post(environment.baseApiUrl + 'Product/AddOrUpdateProductSpecification', payload);
     }
 
+    GetCategory(): Observable<any> {
+        return this.http.get(environment.baseApiUrl + 'Product/GetCategory');
+    }
+
     // POST
     /*  createUser(data: any): Observable<any> {
          return this.http.post(this.baseUrl, data);

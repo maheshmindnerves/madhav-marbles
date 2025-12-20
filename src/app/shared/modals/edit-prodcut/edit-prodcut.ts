@@ -45,7 +45,7 @@ export class EditProdcut {
         specification: this.productForm.value.specification,
         base_price: 10.0,
         selling_price: 123.0,
-        isactive: false,
+        isactive: true,
       }
       this.loader.start();
       this.productService.addOrUpdateProductSpecification(payload).subscribe({

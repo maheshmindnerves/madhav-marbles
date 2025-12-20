@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
@@ -20,12 +20,32 @@ export class AddProdcut {
   private snackBar = inject(SnackBarService);
   private productService = inject(ProductService);
   private loader = inject(NgxUiLoaderService);
+  productList = signal<any[]>([]);
 
   ngOnInit(): void {
     this.productForm = this.fb.group({
       name: ['', Validators.required],
       code: ['', Validators.required],
-      category: ['', Validators.required],
+      category: [null, Validators.required],
+    });
+    this.getCategory();
+  }
+
+  getCategory(): void {
+    this.loader.start();
+    this.productService.GetCategory().subscribe({
+      next: (res: ResultModel) => {
+        this.loader.stop();
+        if (res.isSuccess) {
+          this.productList.set(res.data);
+        } else {
+          this.snackBar.error(res.message);
+        }
+      },
+      error: (err) => {
+        this.loader.stop();
+        console.error('Error:', err);
+      }
     });
   }
 
@@ -35,7 +55,7 @@ export class AddProdcut {
         item_Code: this.productForm.value.code,
         name: this.productForm.value.name,
         category_id: 0,
-        isactive: false,
+        isactive: true, //when prodcut edit then flag false
         flag: "Add",
         id: 0,
         category_desc: "",

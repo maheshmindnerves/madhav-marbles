@@ -21,7 +21,12 @@
 
         <div class="col-md-12 col-sm-12 col-12">
             <label>Category</label>
-            <input class="form-control" formControlName="category">
+            <select formControlName="category" class="form-control">
+                <option value="null" hidden>-select-</option>
+                @for (product of productList(); track product.id) {
+                <option [value]="product.category_Name">{{product.category_Name}}</option>
+                }
+            </select>
             @if(productForm.get('category')?.touched && productForm.get('category')?.invalid) {
             <div class="error"> category is required.</div>
             }
@@ -33,7 +38,7 @@
 
         </div>
         <div class="col-md-6 col-sm-6 col-6">
-            <button type="button" class="btn btn-success" (click)="onClickConfirm()">Confirm</button>
+            <button type="button" class="btn btn-success" (click)="onClickConfirm()">Save</button>
         </div>
     </div>
 </div>
