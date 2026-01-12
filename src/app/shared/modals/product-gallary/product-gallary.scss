@@ -1,0 +1,53 @@
+.upload-box {
+    border: 2px dashed #ccc;
+    text-align: center;
+    padding: 1.5rem;
+    border-radius: 6px;
+    position: relative;
+    cursor: pointer;
+    padding-bottom: 0;
+}
+
+.image-show {
+    height: 120px;
+    border-radius: 6px;
+    border: 2px dashed #ccc;
+    width: 100%;
+    display: block;
+}
+
+.image-clear {
+    position: absolute;
+    right: 15px;
+    top: 55px;
+    border: 1px solid;
+    z-index: 1;
+}
+
+.upload-box input {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.upload-icon {
+    font-size: 3rem;
+}
+
+.custom-padding-top {
+    padding-top: 1rem;
+}
+
+.card-bg-color {
+    background-color: #ebebeb;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.card-image {
+    height: 60px;
+    padding: 5px;
+    width: 100%;
+    border-radius: 10px;
+}

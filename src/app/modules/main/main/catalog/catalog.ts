@@ -19,12 +19,6 @@ export class Catalog {
   readonly holdItem = signal<any[]>([]);
   otpForm!: FormGroup;
 
-  /*   protected readonly items = signal([
-      { id: 1, name: 'Item A', img: 'https://lh3.googleusercontent.com/p/AF1QipMAZT2NAuaQom7jG418ggOfJ4-8PU3yK7THVgPL=s680-w680-h510-rw', hold: false, sampleOrder: false, address: 'India' },
-      { id: 2, name: 'Item B', img: 'https://lh3.googleusercontent.com/p/AF1QipOxsT3hfJMzE3byqNErrlwMgQgTRtQdgRfTNL2C=s680-w680-h510-rw', hold: false, sampleOrder: false, address: 'India' },
-      { id: 3, name: 'Item C', img: 'https://lh3.googleusercontent.com/p/AF1QipPHmhwZxL2JpcDcaGtoCBNX1N9oJ3lpBiWOT2NO=s680-w680-h510-rw', hold: false, sampleOrder: false, address: 'India' },
-      { id: 4, name: 'Item D', img: 'https://lh3.googleusercontent.com/p/AF1QipNVZwjUHhqTOLKV3_wq3yKGDv7l_IpdGWyybm_A=s680-w680-h510-rw', hold: false, sampleOrder: false, address: 'India' }
-    ]); */
   protected readonly items = signal([
     { id: 1, name: 'Item A', img: 'https://picsum.photos/200/300', hold: false, sampleOrder: false, address: 'India' },
     { id: 2, name: 'Item B', img: 'https://picsum.photos/200/300', hold: false, sampleOrder: false, address: 'India' },

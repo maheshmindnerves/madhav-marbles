@@ -27,6 +27,32 @@ export class ProductService {
         return this.http.get(environment.baseApiUrl + 'Product/GetCategory');
     }
 
+    GetCompanyList(): Observable<any> {
+        return this.http.get(environment.baseApiUrl + 'Product/GetCompanyList');
+    }
+
+    GetProductSubCategory(id: number): Observable<any> {
+        return this.http.get(environment.baseApiUrl + 'Product/GetProductSubCategory?categoryid=' + id);
+    }
+
+    GetProductSpecification(id: number): Observable<any> {
+        return this.http.get(environment.baseApiUrl + 'Product/GetProductSpecification?pid=' + id);
+    }
+
+    AddorUpdateProductGalley(formData: any): Observable<any> {
+        return this.http.post(environment.baseApiUrl + 'Product/AddorUpdateProductGalley', formData);
+    }
+
+    GetProductGallery(payload: any): Observable<any> {
+        return this.http.post(environment.baseApiUrl + 'Product/GetProductGallery', payload);
+    }
+
+    DeleteImageFromGallery(id: number): Observable<any> {
+        return this.http.get(environment.baseApiUrl + 'Product/DeleteImageFromGallery?imageid=' + id);
+    }
+
+
+
     // POST
     /*  createUser(data: any): Observable<any> {
          return this.http.post(this.baseUrl, data);

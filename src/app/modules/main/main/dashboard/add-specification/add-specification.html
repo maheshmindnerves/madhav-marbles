@@ -15,22 +15,22 @@
                 </div>
                 <div class="col-md-7 col-sm-7 col-7 text-end">
                     <div class="link pt-1">{{item.name}}</div>
-                    <div class="link pt-1">{{item.name}}</div>
-                    <div class="link pt-1">{{item.name}}</div>
-                    <div class="link pt-1">{{item.name}}</div>
+                    <div class="link pt-1">{{item.Color}}</div>
+                    <div class="link pt-1">{{item.Dimension}}</div>
+                    <div class="link pt-1">{{item.Thickness}}</div>
                 </div>
 
                 <div class="col-md-12 col-sm-12 col-12">
                     <label class="fw-normal">Specification</label>
-                    <textarea class="form-control"></textarea>
+                    <textarea class="form-control" disabled>{{item.Specification}}</textarea>
                 </div>
             </div>
             <div class="row mt-3">
-                <div class="col-md-6 col-sm-6 col-6 text-center">
-                    <button type="button" class="btn btn-warning">View Gallery</button>
+                <div class="col-md-6 col-sm-6 col-6">
+                    <button type="button" class="btn btn-warning" (click)="onClickViewGallery(item)">View Gallery</button>
                 </div>
                 <div class="col-md-6 col-sm-6 col-6 text-end">
-                    <button type="button" class="btn btn-success">New Product Gallery</button>
+                    <button type="button" class="btn btn-success" (click)="onClickProductGallary(item)">New Product Gallery</button>
                 </div>
                 <div class="col-md-12 col-sm-12 col-12 text-end mt-2">
                     <button type="button" class="btn btn-outline-secondary">Edit <mat-icon

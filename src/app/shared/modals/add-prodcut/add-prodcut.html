@@ -2,16 +2,28 @@
     <h5 class="modal-title">Add Product</h5>
     <button type="button" class="btn-close" mat-dialog-close></button>
 </div>
-<div class="bg-light p-3">
+<div class="bg-light ps-3 pe-3 p-1 p-2">
     <form [formGroup]="productForm">
-        <div class="col-md-12 col-sm-12 col-12">
+        <div class="col-md-12 col-sm-12 col-12 mb-3">
+            <label>Company Name</label>
+            <select formControlName="company_Id" class="form-control">
+                <option value="null" hidden>-select-</option>
+                @for (company of companyList(); track company.id) {
+                <option [value]="company.id">{{company.company_Name}}</option>
+                }
+            </select>
+            @if(productForm.get('company_Id')?.touched && productForm.get('company_Id')?.invalid) {
+            <div class="error"> Company is required.</div>
+            }
+        </div>
+        <div class="col-md-12 col-sm-12 col-12 mb-3">
             <label>Item Name</label>
             <input class="form-control" formControlName="name">
             @if(productForm.get('name')?.touched && productForm.get('name')?.invalid) {
             <div class="error"> Name is required.</div>
             }
         </div>
-        <div class="col-md-12 col-sm-12 col-12">
+        <div class="col-md-12 col-sm-12 col-12 mb-3">
             <label>Item Code</label>
             <input class="form-control" formControlName="code">
             @if(productForm.get('code')?.touched && productForm.get('code')?.invalid) {
@@ -19,16 +31,28 @@
             }
         </div>
 
-        <div class="col-md-12 col-sm-12 col-12">
+        <div class="col-md-12 col-sm-12 col-12 mb-3">
             <label>Category</label>
-            <select formControlName="category" class="form-control">
+            <select formControlName="category" class="form-control" (change)="onChangeCategory()">
                 <option value="null" hidden>-select-</option>
                 @for (product of productList(); track product.id) {
-                <option [value]="product.category_Name">{{product.category_Name}}</option>
+                <option [value]="product.id">{{product.category_Name}}</option>
                 }
             </select>
             @if(productForm.get('category')?.touched && productForm.get('category')?.invalid) {
             <div class="error"> category is required.</div>
+            }
+        </div>
+        <div class="col-md-12 col-sm-12 col-12 mb-3">
+            <label>Sub Category</label>
+            <select formControlName="subCategory_Id" class="form-control">
+                <option value="null" hidden>-select-</option>
+                @for (subCategory of subCategoryList(); track subCategory.id) {
+                <option [value]="subCategory.id">{{subCategory.SubCategory_name}}</option>
+                }
+            </select>
+            @if(productForm.get('subCategory_Id')?.touched && productForm.get('subCategory_Id')?.invalid) {
+            <div class="error"> sub category is required.</div>
             }
         </div>
     </form>

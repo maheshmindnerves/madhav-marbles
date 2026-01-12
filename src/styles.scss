@@ -85,6 +85,8 @@ mat-icon {
 .error {
   font-size: 11px;
   color: red !important;
+  position: absolute;
+  margin-top: -3px;
 }
 
 .success-snackbar {

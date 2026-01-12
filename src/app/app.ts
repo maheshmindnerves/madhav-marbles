@@ -10,9 +10,5 @@ import { NgxUiLoaderModule } from 'ngx-ui-loader';
 })
 export class App {
   protected readonly title = signal('madhav-marbles');
-  ngOnInit(): void {
-    console.log('11111111111111111');
-    localStorage.setItem('abc', 'mahesh');
-    console.log('44444444444444444', localStorage.getItem('abc'))
-  }
+  ngOnInit(): void { }
 }

@@ -7,7 +7,7 @@
             <div class="error"> Name is required.</div>
             }
         </div>
-        <div class="col-md-12 col-sm-12 col-12">
+        <div class="col-md-12 col-sm-12 col-12 mb-3">
             <label>Color</label>
             <select formControlName="color" class="form-control">
                 <option value="null" hidden>-select-</option>
@@ -21,7 +21,7 @@
             }
         </div>
 
-        <div class="col-md-12 col-sm-12 col-12">
+        <div class="col-md-12 col-sm-12 col-12 mb-3">
             <label>Dimension</label>
             <select formControlName="dimension" class="form-control">
                 <option value="null" hidden>-select-</option>
@@ -33,7 +33,7 @@
             <div class="error"> Dimension is required.</div>
             }
         </div>
-        <div class="col-md-12 col-sm-12 col-12">
+        <div class="col-md-12 col-sm-12 col-12 mb-3">
             <label>Thickness </label>
             <select formControlName="thickness" class="form-control">
                 <option value="null" hidden>-select-</option>
@@ -45,7 +45,7 @@
             <div class="error">Dhickness is required.</div>
             }
         </div>
-        <div class="col-md-12 col-sm-12 col-12" >
+        <div class="col-md-12 col-sm-12 col-12 mb-3" >
             <label>Specification</label>
             <textarea class="form-control" formControlName="specification"></textarea>
             @if(productForm.get('specification')?.touched && productForm.get('specification')?.invalid) {

@@ -21,7 +21,6 @@ export class Dashboard {
 
 
   onClickCard(item: any): void {
-    console.log('item')
     this.router.navigate(['/main/product-catalog']);
   }
 }

@@ -1,7 +1,22 @@
 import { Component, inject, signal } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from "@angular/material/icon";
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { ProductService } from '../../../../../services/product-service';
+import { SnackBarService } from '../../../../../services/snack-bar-service';
+import { ResultModel } from '../../../../../shared/models/result.model';
+import { ProductGallary } from '../../../../../shared/modals/product-gallary/product-gallary';
+import { ViewGallery } from '../../../../../shared/modals/view-gallery/view-gallery';
+export interface specificaiton {
+  id: number;
+  name: string;
+  Color: string;
+  Dimension: string;
+  Parent_Product_id: number;
+  Specification: string;
+  Thickness: string;
+}
 
 @Component({
   selector: 'app-add-specification',
@@ -10,17 +25,65 @@ import { Router } from '@angular/router';
   styleUrl: './add-specification.scss'
 })
 export class AddSpecification {
-
   private router = inject(Router);
   readonly dialog = inject(MatDialog);
-  protected readonly items = signal([
-    { id: 1, name: 'Customer Requests', imageName: 'request', value: 24 },
-    { id: 2, name: 'Product Catalog', imageName: 'catalog', value: 34 },
-    { id: 3, name: 'Finished Product Entry', imageName: 'entry', value: 25 },
-    { id: 4, name: 'Add Location', imageName: 'location', value: 40 },
-    { id: 6, name: 'Reports', imageName: 'reports', value: 33 },
-    { id: 7, name: 'User Management', imageName: 'management', value: 30 }
-  ]);
+  private snackBar = inject(SnackBarService);
+  private productService = inject(ProductService);
+  private loader = inject(NgxUiLoaderService);
+  private route = inject(ActivatedRoute);
+  items = signal<specificaiton[]>([]);
+
+  ngOnInit(): void {
+    this.loader.start();
+    this.productService.GetProductSpecification(1).subscribe({
+      next: (res: ResultModel) => {
+        this.loader.stop();
+        if (res.isSuccess) {
+          this.items.set(
+            res.data.map((item: any) => ({
+              ...item,
+              Parent_Product_id: this.route.snapshot.paramMap.get('id'),
+              name: this.route.snapshot.paramMap.get('name')
+            })));
+        } else {
+          this.snackBar.error(res.message);
+        }
+      },
+      error: (err) => {
+        this.loader.stop();
+        console.error('Error:', err);
+      }
+    });
+  }
+
+  onClickProductGallary(item: specificaiton): void {
+    const dialogRef = this.dialog.open(ProductGallary, {
+      width: '450px',
+      data: item
+    });
+  }
+
+  onClickViewGallery(item: specificaiton): void {
+    this.loader.start();
+    this.productService.GetProductGallery({ parent_Product_Id: Number(item.Parent_Product_id), product_Specification_Id: Number(item.id) }).subscribe({
+      next: (res: ResultModel) => {
+        if (res.isSuccess) {
+          const dialogRef = this.dialog.open(ViewGallery, {
+            width: '450px',
+            data: res.data
+          });
+        } else {
+          this.snackBar.error(res.message);
+        }
+      },
+      error: (err) => {
+        console.error('Error:', err);
+      },
+      complete: () => {
+        this.loader.stop();
+      }
+    });
+  }
 
   back(): void {
     this.router.navigate(['/main/product-catalog']);

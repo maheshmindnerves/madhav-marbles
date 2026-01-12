@@ -9,6 +9,20 @@ import { SnackBarService } from '../../../../../services/snack-bar-service';
 import { ResultModel } from '../../../../../shared/models/result.model';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 
+export interface product {
+  company_Name: string;
+  id: number;
+  name: string;
+  isactive: boolean;
+  flag: string;
+  category_name: string;
+  category_id: string;
+  category_desc: string;
+  item_Code: string;
+  subCategory_name: string;
+}
+
+
 @Component({
   selector: 'app-prodcut-catlog',
   imports: [MatIconModule],
@@ -21,12 +35,11 @@ export class ProdcutCatlog {
   private snackBar = inject(SnackBarService);
   private productService = inject(ProductService);
   private loader = inject(NgxUiLoaderService);
-
-  items = signal<any[]>([]);
+  items = signal<product[]>([]);
 
   ngOnInit(): void {
     this.getProducts();
-    
+
   }
 
   addProduct(): void {
@@ -73,16 +86,16 @@ export class ProdcutCatlog {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-     /*    const nextIndex = this.items().length + 1;
-        result.id = nextIndex;
-        this.items.update(arr => [...arr, result]); */
+        /*    const nextIndex = this.items().length + 1;
+           result.id = nextIndex;
+           this.items.update(arr => [...arr, result]); */
         this.getProducts();
       }
     });
   }
 
   onClickSpecification(item: any): void {
-    this.router.navigate(['/main/specificaiton']);
+    this.router.navigate(['/main/specificaiton', item.id, item.name]);
   }
 
   back(): void {

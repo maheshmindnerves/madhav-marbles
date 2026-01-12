@@ -1,0 +1,51 @@
+<div class="modal-header bg-light">
+    <h5 class="modal-title">Add Product Gallery</h5>
+    <button type="button" class="btn-close" mat-dialog-close></button>
+</div>
+<div class="bg-light p-3">
+
+    @if(imageSrc) {
+    <button type="button" class="btn-close image-clear" (click)="imageClear()"></button>
+    <img class="image-show" [src]="imageSrc" alt="Selected Image Preview" />
+    } @else {
+    <div class="upload-box">
+        <div class="upload-icon">📷</div>
+        <p class="custom-padding-top">Image Browse From<br />Camera Or Gallery</p>
+        <input type="file" id="file" (change)="onFileChange($event)">
+    </div>
+    }
+
+    <div clss="row">
+        <div class="col-md-12 col-sm-12 col-12 mt-2">
+            <textarea class="form-control" placeholder="Enter specification here." rows="1"
+                [formControl]="specification"></textarea>
+        </div>
+        <div class="col-md-12 col-sm-12 col-12 mt-2">
+            <button type="button" class="btn btn-success w-100" (click)="uploadImage()">Upload</button>
+        </div>
+    </div>
+    @if(items().length !== 0) {
+    <hr class="mb-1 mt-2">
+    <div clss="row">
+        <label>Image Preview</label>
+        @for (item of items(); track item.id) {
+
+        <div class="card card-bg-color">
+            <div class="row">
+                <div class="col-md-3 col-sm-3 col-3">
+                    <img class="card-image" [src]="'data:image/png;base64,' + item.Image_Path" alt="Card image cap"
+                        (click)="onClickImage(item)">
+                </div>
+                <div class="col-md-7 col-sm-7 col-7 m-auto">
+                    <!-- <div clas="row pb-2"><b>{{item.Image_Description}}</b></div> -->
+                    <div clas="row"><span class="text-secondary">{{item.Image_Description}} </span></div>
+                </div>
+                <div class="col-md-2 col-sm-2 col-2 m-auto text-center text-secondary">
+                    <mat-icon (click)="deleteItem(item)">delete</mat-icon>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+    }
+</div>

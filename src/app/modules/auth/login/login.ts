@@ -18,7 +18,7 @@ export class Login implements OnInit {
   readonly fb = inject(FormBuilder);
   private router = inject(Router);
   private snackBar = inject(SnackBarService);
-  mobileNumber = new FormControl('9226271890', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]);
+  mobileNumber = new FormControl('9950271506', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]);
   termsCondition = new FormControl(false, Validators.required);
   otpForm!: FormGroup;
 
