@@ -7,10 +7,23 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ResultModel } from '../../models/result.model';
 import { ZoomImage } from '../zoom-image/zoom-image';
+import { CommonModule } from '@angular/common';
+import { MatTooltipModule } from '@angular/material/tooltip';
+
+export interface ProductData {
+  Image_Description: string;
+  Image_Path: string;
+  Image_Sr_No: string;
+  Parent_Product_id: string;
+  Product_Specification_id: string;
+  bactive: string;
+  id: string;
+}
+
 
 @Component({
   selector: 'app-product-gallary',
-  imports: [MatDialogModule, MatIconModule, ReactiveFormsModule],
+  imports: [MatDialogModule, MatIconModule, ReactiveFormsModule, CommonModule, MatTooltipModule],
   templateUrl: './product-gallary.html',
   styleUrl: './product-gallary.scss',
 })
@@ -23,7 +36,7 @@ export class ProductGallary {
   specification = new FormControl('', Validators.required);
   selectedFile = signal<File | null>(null);
   imageSrc: any = null;
-  readonly data = inject<any>(MAT_DIALOG_DATA);
+  readonly data = inject<ProductData>(MAT_DIALOG_DATA);
   readonly dialog = inject(MatDialog);
 
   ngOnInit(): void {
@@ -90,7 +103,7 @@ export class ProductGallary {
     formData.append('id', '0');
     formData.append('parent_Product_id', this.data.Parent_Product_id);
     formData.append('product_Specification_id', this.data.id);
-    formData.append('image_sr_no', '1');
+    formData.append('image_sr_no', this.items().length === 0 ? '1' : '0');
     formData.append('image_Path', 'null');
     formData.append('image_Description', this.specification.value || '');
     formData.append('isactive', 'true');
@@ -116,9 +129,13 @@ export class ProductGallary {
     });
   }
 
-  deleteItem(imageItem: any): void {
+  deleteItem(imageItem: ProductData): void {
+    if (imageItem.Image_Sr_No === '1') {
+      this.snackBar.error('Please set another banner image then remove');
+      return;
+    }
     this.loader.start();
-    this.productService.DeleteImageFromGallery(imageItem.id).subscribe({
+    this.productService.DeleteImageFromGallery(Number(imageItem.id)).subscribe({
       next: (res: ResultModel) => {
         if (res.isSuccess) {
           this.snackBar.success(res.data[0].Result);
@@ -136,10 +153,37 @@ export class ProductGallary {
     });
   }
 
+  onClickStarMark(imageItem: ProductData): void {
+    this.loader.start();
+    this.productService.MarkImageAsCoverpAge(Number(imageItem.id)).subscribe({
+      next: (res: ResultModel) => {
+        if (res.isSuccess) {
+          this.snackBar.success(res.data[0].Result);
+          this.items.update(list => list.filter((item) => {
+            if (imageItem.id === item.id) {
+              item.bIsAppylyOnCoverPage = "True";
+            } else {
+              item.bIsAppylyOnCoverPage = "False";
+            }
+            return item;
+          }));
+        } else {
+          this.snackBar.error(res.message);
+        }
+      },
+      error: (err) => {
+        console.error('Error:', err);
+      },
+      complete: () => {
+        this.loader.stop();
+      }
+    });
+  }
+
   onClickImage(imageItem: any): void {
     const dialogRef = this.dialog.open(ZoomImage, {
-      width: '450px',
-      data: imageItem
+      width: '98vw', maxWidth: '98vw', height: '98vh',
+      data: imageItem.Image_Path
     });
   }
 }

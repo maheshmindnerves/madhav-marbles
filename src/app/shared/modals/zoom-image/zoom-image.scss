@@ -1,0 +1,33 @@
+.icon-position {
+    display: grid;
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+}
+
+@media screen and (max-width: 740px) {
+    .icon-position {
+        right: 5px;
+    }
+}
+
+.icon-boundry {
+    border: 1px solid #000;
+    border-radius: 91%;
+    margin: 6px;
+    cursor: pointer;
+    z-index: 9;
+    height: 40px;
+    display: flex;
+    width: 40px;
+}
+
+.icon-boundry:hover {
+    background-color: lightgray;
+}
+
+.image-div {
+    height: calc(100vh - 70px);
+    display: flex;
+    overflow: auto;
+}

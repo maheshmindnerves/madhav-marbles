@@ -51,6 +51,10 @@ export class ProductService {
         return this.http.get(environment.baseApiUrl + 'Product/DeleteImageFromGallery?imageid=' + id);
     }
 
+    MarkImageAsCoverpAge(id: number): Observable<any> {
+        return this.http.get(environment.baseApiUrl + 'Product/MarkImageAsCoverpAge?imageid=' + id);
+    }
+
 
 
     // POST

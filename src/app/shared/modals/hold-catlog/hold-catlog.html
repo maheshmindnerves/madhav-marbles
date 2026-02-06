@@ -1,0 +1,121 @@
+<div class="modal-header bg-light">
+    <h5 class="modal-title">Request Order Form</h5>
+    <button type="button" class="btn-close" mat-dialog-close></button>
+</div>
+<div class="bg-light p-3 pb-0 pt-0">
+    <div class="row">
+        <div class="col-md-8 col-sm-8 col-12 over-flow-hold">
+            <!-- Personal Information -->
+            <h5 class="mb-3 mt-2">
+                <i class="fa fa-user me-2" aria-hidden="true"></i> <b>Personal Information</b>
+            </h5>
+
+            <form [formGroup]="infoForm">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Full Name <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" formControlName="fullName"
+                            placeholder="Enter your full name">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Email Address <span class="text-danger">*</span></label>
+                        <input type="email" class="form-control" formControlName="email" placeholder="Enter your email">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Phone Number <span class="text-danger">*</span></label>
+                        <div class="input-group">
+                            <select class="form-select" formControlName="countryCode" style="max-width: 100px;">
+                                <option value="+968">OM +968</option>
+                                <option value="+91">IN +91</option>
+                                <option value="+1">US +1</option>
+                            </select>
+                            <input type="text" class="form-control" formControlName="phone" numbersOnly maxlength="10"
+                                placeholder="Enter phone number">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">City <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" formControlName="city" placeholder="Enter your city">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">State <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" formControlName="state" placeholder="Enter your state">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Country <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" formControlName="country"
+                            placeholder="Enter your country">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Category</label>
+                        <select formControlName="category" class="form-control">
+                            <option value="null" hidden>-select-</option>
+                            @for (company of categoryTypeList(); track company.id) {
+                            <option [value]="company.id">{{company.RequestOrderCategory}}</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Project Type</label>
+                        <select formControlName="projectType" class="form-control">
+                            <option value="null" hidden>-select-</option>
+                            @for (company of projectTypeList(); track company.id) {
+                            <option [value]="company.id">{{company.RequestOrder_Project_Type}}</option>
+                            }
+                        </select>
+                    </div>
+
+                </div>
+
+                <!-- Delivery Address -->
+                <h5 class="mt-4 mb-3">
+                    <i class="fa fa-map-marker me-2"></i> <b>Delivery Address</b>
+                </h5>
+                <div class="row">
+                    <div class="col-12">
+                        <label class="form-label">Complete Address <span class="text-danger">*</span></label>
+                        <textarea rows="3" class="form-control" formControlName="address"
+                            placeholder="Enter your complete delivery address">
+                        </textarea>
+                    </div>
+                </div>
+
+                <!-- Delivery Address -->
+                <h5 class="mt-4 mb-3">
+                    <i class="fa fa-envelope me-2"></i> <b>Additional Information</b>
+                </h5>
+                <div class="row">
+                    <div class="col-12">
+                        <label class="form-label">Messaage(Optional) <span class="text-danger">*</span></label>
+                        <textarea rows="3" class="form-control" formControlName="message"
+                            placeholder="Tell us about your project,timeline, or any specific requirements..">
+                        </textarea>
+                    </div>
+                </div>
+                <div class="text-center mt-2 mb-2">
+                    <button class="btn btn-primary w-100" type="submit" (click)="sendOTP()">Send OTP</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-4 col-sm-4 col-12 over-flow-hold">
+            <h5 class="mb-3 mt-2"> <b> Selected Products ({{data.length}})</b></h5>
+            @for (item of data; track item.category_id) {
+            <div class="card mt-2 p-2">
+                <div class="row">
+                    <div class="col-md-3 col-sm-3 col-3">
+                        <img class="card-img-submit" [src]="'data:image/png;base64,' + item.image_Path"
+                            alt="Card image cap" (click)="onClickImage(item)">
+                    </div>
+                    <div class="col-md-9 col-sm-9 col-9 m-auto">
+                        <div class="main-title-submit">{{item.name}}</div>
+                        <div class="sub-title-submit">Category :{{item.name}}</div>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</div>

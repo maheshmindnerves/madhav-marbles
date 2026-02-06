@@ -8,7 +8,7 @@
         <p class="mb-1">A verification code has been sent to your mobile number via SMS. Please enter the code
             below.
         </p>
-        <p class="fw-bold text-black">OTP sent on number 9856231456</p>
+        <p class="fw-bold text-black">OTP sent on number {{data.infoForm.phone}}</p>
         <p class="text-muted">Valid For <span id="timer">01:10</span></p>
 
         <!-- OTP Inputs -->
@@ -21,8 +21,8 @@
 
         <!-- Buttons -->
         <div class="justify-content-between">
-            <button class="btn btn-outline-secondary me-2">Resend</button>
-            <button class="btn btn-success">Verify</button>
+            <button class="btn btn-outline-secondary me-2" (click)="onClickResend()">Resend</button>
+            <button class="btn btn-success" (click)="onClickVerify()">Verify</button>
         </div>
     </div>
 </div>

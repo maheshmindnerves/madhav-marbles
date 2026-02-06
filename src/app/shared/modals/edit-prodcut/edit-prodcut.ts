@@ -38,7 +38,7 @@ export class EditProdcut {
       const payload = {
         flag: "Add",
         id: 0,
-        parent_Product_id: this.data.category_id,
+        parent_Product_id: Number(this.data.id),
         color: this.productForm.value.color,
         dimension: this.productForm.value.dimension,
         thickness: this.productForm.value.thickness,

@@ -3,7 +3,6 @@
     <button type="button" class="btn-close" mat-dialog-close></button>
 </div>
 <div class="bg-light p-3">
-
     <div id="myCarousel" class="carousel slide">
         <div class="carousel-inner">
             @for (item of items(); track item.id; let i = $index) {
@@ -30,15 +29,15 @@
         <div class="card card-bg-color">
             <div class="row">
                 <div class="col-md-3 col-sm-3 col-3">
-                    <img class="card-image" [src]="'data:image/png;base64,' + item.Image_Path" alt="Card image cap" (click)="onClickImage(item)">
+                    <img class="card-image" [src]="'data:image/png;base64,' + item.Image_Path" alt="Card image cap"
+                        (click)="onClickImage(item)">
                 </div>
-                <div class="col-md-7 col-sm-7 col-7 m-auto">
-                    <!-- <div clas="row pb-2"><b>{{item.Image_Description}}</b></div> -->
+                <div class="col-md-9 col-sm-9 col-9 m-auto">
                     <div clas="row"><span class="text-secondary">{{item.Image_Description}} </span></div>
                 </div>
-                <div class="col-md-2 col-sm-2 col-2 m-auto text-center text-secondary">
+                <!--  <div class="col-md-2 col-sm-2 col-2 m-auto text-center text-secondary">
                     <mat-icon (click)="deleteItem(item)">delete</mat-icon>
-                </div>
+                </div> -->
             </div>
         </div>
         }

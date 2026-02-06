@@ -1,0 +1,13 @@
+.over-flow-hold {
+    overflow-y: scroll;
+    height: calc(100vh - 198px);
+}
+
+
+.card-img-submit {
+    height: 9vh;
+    border: 1px solid #d1d1d1;
+    border-radius: 6px;
+    width: 100%;
+    cursor: pointer;
+}

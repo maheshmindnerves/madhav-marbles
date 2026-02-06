@@ -30,12 +30,11 @@
                     Specification
                 </div>
                 <div class="col-md-6 col-sm-6 col-6 text-end pt-2">
-                    <span>Add</span>
-                    <span class="ms-2 me-2" (click)="onClickEdit(item)"> <mat-icon
-                            class="edit-list text-primary">add_box</mat-icon></span>
-                    <span>View</span>
-                    <span class="ms-2"><mat-icon class="edit-list text-success" (click)="onClickSpecification(item)">
-                            list_alt</mat-icon></span>
+                    <!-- <span></span> -->
+                    <button type="button" (click)="onClickEdit(item)" class="btn btn-primary edit-list"><i
+                            class="fa fa-plus me-1"></i>Add</button>
+                    <button type="button" (click)="onClickSpecification(item)" class="btn btn-success edit-list ms-2"><i
+                            class="fa fa-eye me-1"></i>View</button>
                 </div>
             </div>
 

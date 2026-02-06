@@ -40,8 +40,10 @@
                     <!-- <div clas="row pb-2"><b>{{item.Image_Description}}</b></div> -->
                     <div clas="row"><span class="text-secondary">{{item.Image_Description}} </span></div>
                 </div>
-                <div class="col-md-2 col-sm-2 col-2 m-auto text-center text-secondary">
-                    <mat-icon (click)="deleteItem(item)">delete</mat-icon>
+                <div class="col-md-2 col-sm-2 col-2 m-auto text-secondary">
+                    <mat-icon (click)="onClickStarMark(item)" [ngClass]="{'text-warning': item.bIsAppylyOnCoverPage === 'True'}"
+                        class="ml-minus-10" matTooltip="Image set as banner">star</mat-icon>
+                    <mat-icon class="ms-2" (click)="deleteItem(item)" matTooltip="Remove image">delete</mat-icon>
                 </div>
             </div>
         </div>

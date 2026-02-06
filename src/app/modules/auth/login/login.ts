@@ -45,7 +45,7 @@ export class Login implements OnInit {
     if (otp === 1234) {
       this.authService.login();
       if (this.mobileNumber.value === '9404697710') {
-        this.router.navigate(['/main/product-catalog']);
+        this.router.navigate(['/main/product-catlog']);
       }
 
       if (this.mobileNumber.value === '9950271506') {

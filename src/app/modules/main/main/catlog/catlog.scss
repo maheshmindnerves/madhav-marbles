@@ -2,12 +2,14 @@
   height: 30vh;
   border: 1px solid #d1d1d1;
   border-radius: 6px;
+  cursor: pointer;
 }
 
 .custom-card {
-  background-color: #5b5d6b;
+  background-color: #4c4c4c;;
   margin-bottom: .4rem;
   margin-top: .4rem;
+  border: 1px solid white;
 }
 
 .card-body {
@@ -16,18 +18,18 @@
 
 .main-title {
   font-size: 1.1rem;
-  color: #b3b5bd;
+  color: #e9e9e9;
   font-weight: 700;
   margin-top: 5px;
 }
 
 .sub-title {
   font-size: 0.8rem;
-  color: #b3b5bd;
+  color: #e9e9e9;
   font-weight: 100;
 }
 
-.border-custom {
+/* .border-custom {
   border: 1px solid gray;
   border-radius: 5px;
   padding-bottom: 3px;
@@ -37,6 +39,28 @@
   cursor: pointer;
 }
 
+.border-custom:focus:hover{
+  border-color: black;
+  background: white;
+} */
+.view-details {
+  /*    font-size: 16px;
+    height: 14px;
+    width: 16px; */
+  --bs-btn-padding-y: .2rem;
+  --bs-btn-padding-x: .5rem;
+  --bs-btn-font-size: .75rem;
+  /*  width: 10px; */
+  color: #e9e9e9;
+  background: #fd7e14;
+  font-weight: 700;
+}
+
+.view-details:hover {
+  color: #424141;
+}
+
+
 @media screen and (max-width: 600px) {
   .card-img-top {
     height: 22vh;
@@ -45,25 +69,20 @@
 
 .header {
   border-bottom: 1px solid lightgray;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   color: white;
-  font-size: 20px;
+  font-size: 12px;
   background-color: #5b5d6b;
 }
 
-.card-img-submit {
-  height: 10vh;
-  border: 1px solid #d1d1d1;
-  border-radius: 6px;
-  width: 100%;
-}
 
 .main-title-submit {
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: #000000;
   font-weight: 700;
   margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .sub-title-submit {
@@ -76,8 +95,9 @@
 .form-container {
   max-width: 400px;
   margin: 40px auto;
-  background: #b3b5bd;
+  color: #e9e9e9;
   padding: 10px;
+  border: 1px solid whitesmoke;
   border-radius: 10px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
 }
@@ -92,4 +112,9 @@
   font-size: 11px;
   color: red !important;
   padding-left: 5px;
+}
+
+.y-scroll-card {
+  overflow: auto;
+  height: calc(100vh - 110px);
 }

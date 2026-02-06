@@ -35,14 +35,14 @@ export class AddSpecification {
 
   ngOnInit(): void {
     this.loader.start();
-    this.productService.GetProductSpecification(1).subscribe({
+    this.productService.GetProductSpecification(Number(this.route.snapshot.paramMap.get('id'))).subscribe({
       next: (res: ResultModel) => {
         this.loader.stop();
         if (res.isSuccess) {
           this.items.set(
             res.data.map((item: any) => ({
               ...item,
-              Parent_Product_id: this.route.snapshot.paramMap.get('id'),
+              Parent_Product_id: Number(this.route.snapshot.paramMap.get('id')),
               name: this.route.snapshot.paramMap.get('name')
             })));
         } else {
@@ -67,13 +67,13 @@ export class AddSpecification {
     this.loader.start();
     this.productService.GetProductGallery({ parent_Product_Id: Number(item.Parent_Product_id), product_Specification_Id: Number(item.id) }).subscribe({
       next: (res: ResultModel) => {
-        if (res.isSuccess) {
+        if (res.isSuccess && res.data.length > 0) {
           const dialogRef = this.dialog.open(ViewGallery, {
             width: '450px',
             data: res.data
           });
         } else {
-          this.snackBar.error(res.message);
+          this.snackBar.error('No data found.');
         }
       },
       error: (err) => {
@@ -86,6 +86,6 @@ export class AddSpecification {
   }
 
   back(): void {
-    this.router.navigate(['/main/product-catalog']);
+    this.router.navigate(['/main/product-catlog']);
   }
 }

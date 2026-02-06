@@ -11,14 +11,14 @@ import { ZoomImage } from '../zoom-image/zoom-image';
 
 @Component({
   selector: 'app-view-gallery',
-  imports: [MatDialogModule, MatIcon],
+  imports: [MatDialogModule],
   templateUrl: './view-gallery.html',
   styleUrl: './view-gallery.scss',
 })
 export class ViewGallery {
-  private snackBar = inject(SnackBarService);
-  private productService = inject(ProductService);
-  private loader = inject(NgxUiLoaderService);
+  /*  private snackBar = inject(SnackBarService);
+   private productService = inject(ProductService); */
+  /*  private loader = inject(NgxUiLoaderService); */
   items = signal<any[]>([]);
   readonly data = inject<any>(MAT_DIALOG_DATA);
   private timer!: Subscription;
@@ -34,7 +34,7 @@ export class ViewGallery {
     });
   }
 
-  deleteItem(imageItem: any): void {
+  /* deleteItem(imageItem: any): void {
     this.loader.start();
     this.productService.DeleteImageFromGallery(imageItem.id).subscribe({
       next: (res: ResultModel) => {
@@ -52,12 +52,12 @@ export class ViewGallery {
         this.loader.stop();
       }
     });
-  }
+  } */
 
   onClickImage(imageItem: any): void {
     const dialogRef = this.dialog.open(ZoomImage, {
-      width: '450px',
-      data: imageItem
+      width: '98vw', maxWidth: '98vw', height: '98vh',
+      data: imageItem.Image_Path
     });
   }
 

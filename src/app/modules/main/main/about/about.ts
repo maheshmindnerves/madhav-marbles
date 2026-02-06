@@ -11,6 +11,6 @@ export class About {
   private router = inject(Router);
 
   goToCatlog(): void {
-    this.router.navigate(['/main/catalog']);
+    this.router.navigate(['/main/catlog']);
   }
 }

@@ -3,5 +3,17 @@
     <button type="button" class="btn-close" mat-dialog-close></button>
 </div>
 <div class="bg-light p-2">
-    <img [src]="'data:image/png;base64,' + data.Image_Path" class="d-block w-100" style="height: 50vh;">
+    <div class="col-md-12 image-div">
+        <img id="image" [src]="'data:image/png;base64,' + data" class="d-block w-100">
+        <div class="icon-position">
+            <span class="icon-boundry" (click)="zoomInImage()"><i class="fa fa-plus m-auto"
+                    aria-hidden="true"></i></span>
+            <span class="icon-boundry" (click)="zoomOutImage()"><i class="fa fa-minus m-auto"
+                    aria-hidden="true"></i></span>
+            <span class="icon-boundry" (click)="rotetRightImage()"><i class="fa fa-repeat m-auto"
+                    aria-hidden="true"></i></span>
+            <span class="icon-boundry" (click)="rotetLeftImage()"><i class="fa fa-undo m-auto"
+                    aria-hidden="true"></i></span>
+        </div>
+    </div>
 </div>

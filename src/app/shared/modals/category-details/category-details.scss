@@ -9,18 +9,68 @@
 }
 
 .card-img-top {
-    height: 26vh;
+    height: 30vh;
+    display: block;
+    width: 100%;
+    border: 1px solid gray;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
+
 .desc-detials {
-    height: 20vh;
+    height: 5vh;
     overflow: auto;
     border: 1px solid gray;
     padding: 3px;
     border-radius: 5px;
-    color: #afafaf;
+    color: #fff
 }
 
+
+.desc-detials-2 {
+    height: 10vh;
+    overflow: auto;
+    border: 1px solid gray;
+    padding: 3px;
+    border-radius: 5px;
+    color: #fff
+}
+
+
 .smoke-color {
-    color: #afafaf;
+    color: #e9e9e9;
+    margin-bottom: 0px;
+}
+
+.card-image {
+    height: 60px;
+    padding: 5px;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.card-bg-color {
+    background-color: #ebebeb;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.carousel-control-prev {
+    left: -35px;
+}
+
+.carousel-control-next {
+    right: -35px;
+}
+
+.carousel-inner {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.hr-line {
+    margin-top: 15px;
+    border: 1px solid white;
 }

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Catalog } from './catalog';
+import { HoldCatlog } from './hold-catlog';
 
-describe('Catalog', () => {
-  let component: Catalog;
-  let fixture: ComponentFixture<Catalog>;
+describe('HoldCatlog', () => {
+  let component: HoldCatlog;
+  let fixture: ComponentFixture<HoldCatlog>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Catalog]
+      imports: [HoldCatlog]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(Catalog);
+    fixture = TestBed.createComponent(HoldCatlog);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
