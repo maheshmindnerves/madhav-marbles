@@ -1,0 +1,34 @@
+<div class="bg-light p-3">
+    <form [formGroup]="assignToSaleForm">
+        <div class="col-md-12 col-sm-12 col-12 mb-3">
+            <label>Select Team Member</label>
+            <select formControlName="member" class="form-control">
+                <option value="null" hidden>-select-</option>
+                @for (user of data.user; track user.id) {
+                <option [value]="user.id">{{user.User_Full_name}}</option>
+                }
+                <!--   <option value="null" hidden>-select-</option>
+                <option value="red">mahesh</option>
+                <option value="white">nitin</option>
+                <option value="black">vikas</option>
+                <option value="pink">sweta</option> -->
+            </select>
+            @if(assignToSaleForm.get('member')?.touched && assignToSaleForm.get('member')?.invalid) {
+            <div class="error"> Team member is required.</div>
+            }
+        </div>
+        <div class="col-md-12 col-sm-12 col-12 mb-3">
+            <label>Note For Sales Team (Optional)</label>
+            <textarea class="form-control" formControlName="note"></textarea>
+        </div>
+    </form>
+    <div class="row mt-2">
+        <div class="col-md-6 col-sm-6 col-6 text-end">
+            <button type="button" class="btn btn-secondary" mat-dialog-close>Cancel</button>
+
+        </div>
+        <div class="col-md-6 col-sm-6 col-6">
+            <button type="button" class="btn btn-success" (click)="onClickConfirm()">Confirm</button>
+        </div>
+    </div>
+</div>

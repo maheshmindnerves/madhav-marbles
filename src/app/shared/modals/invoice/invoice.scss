@@ -1,0 +1,9 @@
+.btn-close-custom::before {
+    content: '×';
+    font-size: 2rem;
+    color: #b3b5bd;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    cursor: pointer;
+}

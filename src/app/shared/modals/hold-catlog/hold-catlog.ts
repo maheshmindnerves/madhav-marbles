@@ -40,7 +40,7 @@ export class HoldCatlog {
       state: ['', Validators.required],
       country: ['', Validators.required],
       countryCode: [{ value: '+91', disabled: true }],
-      phone: ['', Validators.required],
+      phone: ['', [Validators.required, Validators.minLength(10)]],
       category: [null, Validators.required],
       projectType: [null, Validators.required],
       address: ['', Validators.required],
@@ -81,7 +81,7 @@ export class HoldCatlog {
   onClickImage(imageItem: any): void {
     const dialogRef = this.dialog.open(ZoomImage, {
       width: '98vw', maxWidth: '98vw', height: '98vh',
-      data: imageItem.image_Path
+      data: imageItem.Image_Path
     });
   }
 }

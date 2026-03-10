@@ -24,11 +24,12 @@ export interface ProductList {
   image_sr_no: number;
   image_Path: string;
   address: string;
+  isOpen: boolean;
 }
 
 @Component({
   selector: 'app-catlog',
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './catlog.html',
   styleUrl: './catlog.scss'
 })
@@ -38,6 +39,7 @@ export class Catlog {
   private snackBar = inject(SnackBarService);
   private loader = inject(NgxUiLoaderService);
   readonly dialog = inject(MatDialog);
+  subCatlog: any[] = [];
   /*   readonly isSubmit = signal(false); */
   /*  readonly isOpenFilter = signal(false); */
   /*   readonly holdItem = signal<any[]>([]); */
@@ -64,26 +66,38 @@ export class Catlog {
   }
 
   openDialog(item: ProductList): void {
-    this.loader.start();
-    this.crService.GetRequestProductDetail(item.productId).subscribe({
-      next: (res: ResultModel) => {
-        if (res.isSuccess && res.data.length > 0) {
-          this.dialog.open(CategoryDetails, { data: { title: item.name + item.item_Code, data: res.data }, width: '480px', height: '90vh' });
-        } else {
-          this.snackBar.error('No data found.');
+    console.log('111111111111')
+    if (item.isOpen) {
+      const obj = this.subCatlog.filter((x) => x.Parent_Product_id === item.productId + '');
+      this.dialog.open(CategoryDetails, { data: { title: item.name + item.item_Code, data: obj }, width: '90vw', minWidth: '90vw', maxHeight: '90vh' });
+    } else {
+      this.loader.start();
+      this.crService.GetRequestProductDetail(item.productId).subscribe({
+        next: (res: ResultModel) => {
+          if (res.isSuccess && res.data.length > 0) {
+            item.isOpen = true;
+            this.dialog.open(CategoryDetails, { data: { title: item.name + item.item_Code, data: res.data }, width: '90vw', minWidth: '90vw', maxHeight: '90vh' });
+            res.data.forEach((o) => {
+              o.category_Name = item.category_Name;
+              o.subCategory_name = item.subCategory_name;
+              this.subCatlog.push(o);
+            });
+          } else {
+            this.snackBar.error('No data found.');
+          }
+        },
+        error: (err) => {
+          console.error('Error:', err);
+        },
+        complete: () => {
+          this.loader.stop();
         }
-      },
-      error: (err) => {
-        console.error('Error:', err);
-      },
-      complete: () => {
-        this.loader.stop();
-      }
-    });
+      });
+    }
   }
 
   submitRequest(): void {
-    const data: any[] = this.items().filter(item => item.hold);
+    const data: any[] = this.subCatlog.filter(item => item.hold || item.sampleOrder);
     if (data.length > 0) {
       this.dialog.open(HoldCatlog, {
         width: '76vw', maxWidth: '75vw', height: '80vh', data

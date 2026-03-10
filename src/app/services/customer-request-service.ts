@@ -31,4 +31,35 @@ export class CustomerRequestService {
         return this.http.get(environment.baseApiUrl + 'CustomerRequest/GetRequestOrderProjectType');
     }
 
+    GetRequestList(): Observable<any> {
+        return this.http.get(environment.baseApiUrl + 'CustomerRequest/GetRequestList');
+    }
+
+    GetRequestIdDetails(id: number): Observable<any> {
+        return this.http.get(environment.baseApiUrl + 'CustomerRequest/GetRequestIdDetails?RequestId=' + id);
+    }
+
+    GetUsers(id: number): Observable<any> {
+        return this.http.get(environment.baseApiUrl + 'CustomerRequest/GetUsers?categoryid=' + id);
+    }
+
+    GetRequestListAssignedTosalesTeam(id: number): Observable<any> {
+        return this.http.get(environment.baseApiUrl + 'CustomerRequest/GetRequestListAssignedTosalesTeam?userid=' + id);
+    }
+
+    RequestAssignToSalesTeam(payload: any): Observable<any> {
+        return this.http.post(environment.baseApiUrl + 'CustomerRequest/RequestAssignToSalesTeam', payload);
+    }
+
+    RequestMaterializeBySaleTeam(payload: any): Observable<any> {
+        return this.http.post(environment.baseApiUrl + 'CustomerRequest/RequestMaterializeBySaleTeam', payload);
+    }
+
+    GetMaxInvoiceNo(): Observable<any> {
+        return this.http.get(environment.baseApiUrl + 'CustomerRequest/GetMaxInvoiceNo');
+    }
+
+    GetProcessDataListofSalesTeam(id: number): Observable<any> {
+        return this.http.get(environment.baseApiUrl + 'CustomerRequest/GetProcessDataListofSalesTeam?userid=' + id);
+    }
 }

@@ -1,15 +1,5 @@
-.btn-close-custom::before {
-    content: '×';
-    font-size: 2rem;
-    color: #b3b5bd;
-    position: absolute;
-    right: 8px;
-    top: 8px;
-    cursor: pointer;
-}
-
 .card-img-top {
-    height: 30vh;
+    height: stretch;
     display: block;
     width: 100%;
     border: 1px solid gray;
@@ -17,8 +7,23 @@
     cursor: pointer;
 }
 
+.card-body {
+    padding: 0.5rem !important;
+}
 
-.desc-detials {
+/* 
+.card-img-top-request {
+    height: 32vh;
+    display: block;
+    width: 100%;
+    border: 1px solid gray;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 40px;
+} */
+
+
+/* .desc-detials {
     height: 5vh;
     overflow: auto;
     border: 1px solid gray;
@@ -26,30 +31,39 @@
     border-radius: 5px;
     color: #fff
 }
+ */
 
-
-.desc-detials-2 {
-    height: 10vh;
+/* .desc-detials-2 {
+    height: 9vh;
     overflow: auto;
     border: 1px solid gray;
     padding: 3px;
     border-radius: 5px;
     color: #fff
-}
+} */
 
 
-.smoke-color {
+/* .desc-detials-3 {
+    height: 15vh;
+    overflow: auto;
+    border: 1px solid gray;
+    padding: 3px;
+    border-radius: 5px;
+    color: #fff
+} */
+
+/* .smoke-color {
     color: #e9e9e9;
     margin-bottom: 0px;
 }
-
-.card-image {
+ */
+/* .card-image {
     height: 60px;
     padding: 5px;
     width: 100%;
     border-radius: 10px;
-}
-
+} */
+/* 
 .card-bg-color {
     background-color: #ebebeb;
     border-radius: 4px;
@@ -73,4 +87,28 @@
 .hr-line {
     margin-top: 15px;
     border: 1px solid white;
+} */
+/* 
+@media only screen and (max-width: 540px) {
+    .carousel-control-prev {
+        left: -25px;
+    }
+
+    .carousel-control-next {
+        right: -25px;
+    }
+}
+ */
+
+.addition-info {
+    font-size: 10px;
+    color: gray;
+}
+
+hr {
+    margin: 0.0rem 0;
+}
+
+.spe-info {
+    color: #ff7a00;
 }

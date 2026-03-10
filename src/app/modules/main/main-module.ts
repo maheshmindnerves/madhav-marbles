@@ -8,6 +8,8 @@ import { About } from './main/about/about';
 import { Dashboard } from './main/dashboard/dashboard';
 import { ProdcutCatlog } from './main/dashboard/prodcut-catlog/prodcut-catlog';
 import { AddSpecification } from './main/dashboard/add-specification/add-specification';
+import { Request } from './main/request/request';
+import { SalesRequest } from './main/sales-request/sales-request';
 const routes: Routes = [
   {
     path: '', component: Main,
@@ -16,8 +18,10 @@ const routes: Routes = [
       { path: 'about', component: About, canActivate: [authGuard] },
       { path: 'dashboard', component: Dashboard, canActivate: [authGuard] },
       { path: 'product-catlog', component: ProdcutCatlog, canActivate: [authGuard] },
-      { path: 'specificaiton/:id/:name', component: AddSpecification, canActivate: [authGuard] }
-
+      { path: 'specificaiton/:id/:name', component: AddSpecification, canActivate: [authGuard] },
+      { path: 'request', component: Request, canActivate: [authGuard] },
+      { path: 'sales-request', component: SalesRequest, canActivate: [authGuard] },
+      
     ],
   }
 ];

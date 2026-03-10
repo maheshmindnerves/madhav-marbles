@@ -1,50 +1,130 @@
-<div class="pt-2 p-3 overflow-hidden">
-    <span mat-dialog-close class="btn-close-custom"></span>
-    <div id="myCarousel" class="carousel slide">
-        <div class="carousel-inner">
-            <h5 class="smoke-color pb-2">{{categroyDetails.title}}</h5>
-            @for (item of categroyDetails.data; track item.id; let i = $index) {
-            <div class="carousel-item" [class.active]="i === 0">
-                <img [src]="'data:image/png;base64,' + item.Image_Path" class="card-img-top"
-                    (click)="onClickImage(item)">
-                <div class="col-md-12 col-sm-12 col-12 mt-2 mb-3 mt-4">
-                    <!--  <h5 class="smoke-color mb-2">Description</h5> -->
-                    <div class="desc-detials">
-                        {{item.Image_Description}}
-                    </div>
-                </div>
-                <div class="col-md-12 col-sm-12 col-12 hr-line"></div>
-                <div class="col-md-12 col-sm-12 col-12 mt-3">
-                    <h5 style="color: #d3d1d1;">Specification</h5>
-                    <div class="desc-detials-2">
-                        {{item.Specification}}
-                    </div>
-                </div>
-                <div class="col-md-12 col-sm-12 col-12 mt-3">
-                    <h5 style="color: #d3d1d1;">Additional Information</h5>
+<!--  -->
+<div class="modal-header bg-light">
+    <h5 class="modal-title">
+        @if(categroyDetails.title !== 'assign-to-sales-team' && categroyDetails.title !== 'request-tab') {
+        {{categroyDetails.title}}
+        } @else {
+        Category Deatils
+        }
+    </h5>
+    <button type="button" class="btn-close" mat-dialog-close></button>
+</div>
+<div class="container-fluid">
+    <div class="row mb-2">
+        @for (item of categroyDetails.data; track item.id; let i = $index) {
+        <div class="col-md-4 col-sm-6 col-12 mt-2">
+            <div class="card">
+                <div class="card-body">
                     <div class="row">
-                        <div class="col-md-4 col-sm-4 col-5 text-white">ORIGEN :</div>
-                        <div class="col-md-8 col-sm-8 col-7 smoke-color">Quartz</div>
-                        <div class="col-md-4 col-sm-4 col-5 text-white">THICKNESSES :</div>
-                        <div class="col-md-8 col-sm-8 col-7 smoke-color">{{item.Thickness}}</div>
-                        <div class="col-md-4 col-sm-4 col-5 text-white">DIMENSIONS :</div>
-                        <div class="col-md-8 col-sm-8 col-7 smoke-color">{{item.Dimension}}</div>
-                        <div class="col-md-4 col-sm-4 col-5 text-white">Color :</div>
-                        <div class="col-md-8 col-sm-8 col-7 smoke-color">{{item.color}}</div>
+                        <div class="col-md-3 col-sm-3 col-3">
+                            <img [src]="'data:image/png;base64,' + item.Image_Path" class="card-img-top"
+                                (click)="onClickImage(item)">
+                        </div>
+                        <div class="col-md-9 col-sm-9 col-9 m-auto">
+                            <div class="fs-5"><b>{{item.Image_Description}}</b>
+                                <mat-icon class="float-end spe-info" (mouseenter)="showPopover($event, item)"
+                                    (mouseleave)="hidePopover($event)">info</mat-icon>
+                            </div>
+                            @if(categroyDetails.title !== 'assign-to-sales-team') {
+                            <div class="mt-2">
+                                <label class="smoke-color"><input type="checkbox" [(ngModel)]="item.hold"
+                                        [disabled]="categroyDetails.title === 'request-tab'" />
+                                    Hold</label>
+                                <label class="smoke-color ms-3"><input type="checkbox" [(ngModel)]="item.sampleOrder"
+                                        [disabled]="categroyDetails.title === 'request-tab'" />
+                                    Sample Order</label>
+                            </div>
+                            <hr>
+                            <div class="mt-1 addition-info">
+                                <h6 class="mb-1">Additional Information</h6>
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6 col-6"> <b>ORIGEN:</b> Quartz</div>
+                                    <div class="col-md-6 col-sm-6 col-6"><b>THICKNESSES:</b>{{item.Thickness}}</div>
+                                    <div class="col-md-6 col-sm-6 col-6"> <b>DIMENSIONS:</b> {{item.Dimension}}</div>
+                                    <div class="col-md-6 col-sm-6 col-6"> <b>Color:</b> {{item.color}}</div>
+                                </div>
+                            </div>
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
-
-
-            }
         </div>
-
-        <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon"></span>
-        </button>
-
-        <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon"></span>
-        </button>
+        }
     </div>
 </div>
+<!-- <div class="col-md-12">
+    <div class="p-3 overflow-hidden">
+        <div id="myCarousel" class="carousel slide">
+            <div class="carousel-inner">
+                @if(categroyDetails.title !== 'assign-to-sales-team' && categroyDetails.title !== 'request-tab') {
+                <h5 class="smoke-color pb-2">{{categroyDetails.title}}</h5>
+                }
+
+                @for (item of categroyDetails.data; track item.id; let i = $index) {
+                <div class="carousel-item" [class.active]="i === 0">
+                    <img [src]="'data:image/png;base64,' + item.Image_Path" class="card-img-top"
+                        (click)="onClickImage(item)">
+                    @if(categroyDetails.title !== 'assign-to-sales-team' && categroyDetails.title !== 'request-tab') {
+                    <div class="col-md-12 col-sm-12 col-12 mt-2 mb-3 mt-4">
+                        <div class="desc-detials">
+                            {{item.Image_Description}}
+                        </div>
+                    </div>
+                    }
+                    <div class="col-md-12 col-sm-12 col-12 hr-line"></div>
+                    @if(categroyDetails.title !== 'assign-to-sales-team' && categroyDetails.title !== 'request-tab') {
+                    <div class="col-md-12 col-sm-12 col-12 mt-3">
+                        <h5 style="color: #d3d1d1;">Specification</h5>
+                        <div class="desc-detials-2">
+                            {{item.Specification}}
+                        </div>
+                    </div>
+                    } @else {
+                    <div class="col-md-12 col-sm-12 col-12 mt-3">
+                        <h5 style="color: #d3d1d1;">Specification</h5>
+                        <div class="desc-detials-3">
+                            {{item.Specification}}
+                        </div>
+                    </div>
+                    }
+                    <div class="row">
+                        <div class="col-md-8 col-sm-8 col-12 mt-3">
+                            <h5 style="color: #d3d1d1;">Additional Information</h5>
+                            <div class="row">
+                                <div class="col-md-5 col-sm-5 col-5 text-white">ORIGEN </div>
+                                <div class="col-md-7 col-sm-7 col-7 smoke-color">:&emsp;Quartz</div>
+                                <div class="col-md-5 col-sm-5 col-5 text-white">THICKNESSES </div>
+                                <div class="col-md-7 col-sm-7 col-7 smoke-color">:&emsp;{{item.Thickness}}</div>
+                                <div class="col-md-5 col-sm-5 col-5 text-white">DIMENSIONS </div>
+                                <div class="col-md-7 col-sm-7 col-7 smoke-color">:&emsp;{{item.Dimension}}</div>
+                                <div class="col-md-5 col-sm-5 col-5 text-white">Color </div>
+                                <div class="col-md-7 col-sm-7 col-7 smoke-color">:&emsp;{{item.color}}</div>
+                            </div>
+                        </div>
+                        @if(categroyDetails.title !== 'assign-to-sales-team') {
+                        <div class="col-md-4 col-sm-4 col-12 mt-auto">
+                            <label class="smoke-color"><input type="checkbox" [(ngModel)]="item.hold"
+                                    [disabled]="categroyDetails.title === 'request-tab'" />
+                                Hold</label>
+                            <label class="smoke-color float-end float-md-none"><input type="checkbox"
+                                    [(ngModel)]="item.sampleOrder"
+                                    [disabled]="categroyDetails.title === 'request-tab'" />
+                                Sample Order</label>
+                        </div>
+                        }
+
+                    </div>
+                </div>
+                }
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+
+            <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+        </div>
+    </div>
+</div> -->

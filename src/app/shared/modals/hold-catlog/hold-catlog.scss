@@ -1,6 +1,6 @@
 .over-flow-hold {
     overflow-y: scroll;
-    height: calc(100vh - 198px);
+    height: calc(100vh - 170px);
 }
 
 
@@ -10,4 +10,14 @@
     border-radius: 6px;
     width: 100%;
     cursor: pointer;
+}
+
+.error {
+    position: relative;
+}
+
+.sub-title-submit {
+    font-size: 0.8rem;
+    color: #b3b5bd;
+    font-weight: 100;
 }

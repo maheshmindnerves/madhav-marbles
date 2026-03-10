@@ -1,0 +1,117 @@
+<mat-tab-group animationDuration="500ms" (selectedTabChange)="onTabChange($event)">
+    <mat-tab label="Requests">
+        <div class="row m-0">
+            @for (item of requestItems(); track item.RequestID) {
+            <div class="col-md-4 col-sm-6 col-12">
+                <div class="card custom-card">
+                    <div class="card-body">
+                        <div class="col-md-12 col-sm-12 col-12">
+                            <span class="fs-6"><b>Request ID: #{{item.RequestID}}</b></span>
+                            <span class="float-end">
+                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                                {{item.Reuest_date}}
+                                <i class="fa fa-chevron-right ms-2 circle-icon"
+                                    (click)="openDialog(item, 'request-tab')"></i>
+                            </span>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-12 mt-2">
+                            <b>Customer:</b> {{item.RequesterName}}
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-12 mt-1">
+                            <b> <i class="fa fa-map-marker"></i> Address:</b> {{item.Delivery_Address}}
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-12 mt-1">
+                            <b> <i class="fa fa-phone" aria-hidden="true"></i> Contact No:</b>
+                            {{item.Requester_Mobile}}
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-12 mt-1">
+                            <b> <i class="fa fa-envelope" aria-hidden="true"></i> Email ID:</b>
+                            {{item.Requester_Email}}
+                            <button class="btn btn-success btn-sm float-end mr-t-10" (click)="onClickAccept(item)"><i
+                                    class="fa fa-check"></i>
+                                Accept</button>
+                        </div>
+                        <hr>
+                        <div class="segment-div">
+                            <div class="col-md-12 col-sm-12 col-12 mt-1">
+                                <div class="row">
+                                    <div class="col-md-5 col-sm-5 col-5"> <b>Customer Segment</b></div>
+                                    <div class="col-md-7 col-sm-7 col-7">:&nbsp;&nbsp;{{item.RequestOrderCategory}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-12 mt-1">
+                                <div class="row">
+                                    <div class="col-md-5 col-sm-5 col-5"> <b>Product Segment</b></div>
+                                    <div class="col-md-7 col-sm-7 col-7">:&nbsp;&nbsp;{{item.RequestOrder_Project_Type}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    </mat-tab>
+    <mat-tab label="Assign To Sales Team">
+        <div class="row m-0">
+            @for (item of rassignedToSalesItems(); track item.RequestID) {
+            <div class="col-md-4 col-sm-6 col-12">
+                <div class="card custom-card">
+                    <div class="card-body">
+                        <div class="col-md-12 col-sm-12 col-12">
+                            <span class="fs-6"><b>Request ID: #{{item.RequestID}}</b></span>
+                            <span class="float-end">
+                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                                {{item.Reuest_date}}
+                                <i class="fa fa-chevron-right ms-2 circle-icon"
+                                    (click)="openDialog(item, 'assign-to-sales-team')"></i>
+                            </span>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-12 mt-2">
+                            <b>Customer:</b> {{item.RequesterName}}
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-12 mt-1">
+                            <b> <i class="fa fa-map-marker"></i> Address:</b> {{item.Delivery_Address}}
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-12 mt-1">
+                            <b> <i class="fa fa-phone" aria-hidden="true"></i> Contact No:</b>
+                            {{item.Requester_Mobile}}
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-12 mt-1">
+                            <b> <i class="fa fa-envelope" aria-hidden="true"></i> Email ID:</b>
+                            {{item.Requester_Email}}
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-12 mt-1">
+                            <b> Customer Segment:</b>
+                            {{item.RequestOrderCategory}}
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-12 mt-1">
+                            <b> Product Segment:</b>
+                            {{item.RequestOrder_Project_Type}}
+                        </div>
+                        <hr>
+                        <div class="segment-div">
+                            <div class="col-md-12 col-sm-12 col-12 mt-1">
+                                <div class="row">
+                                    <div class="col-md-5 col-sm-5 col-5"> <b>Assign To</b></div>
+                                    <div class="col-md-7 col-sm-7 col-7">:&nbsp;&nbsp;{{item.User_Full_Name}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-12 mt-1">
+                                <div class="row">
+                                    <div class="col-md-5 col-sm-5 col-5"> <b>Assign Date</b></div>
+                                    <div class="col-md-7 col-sm-7 col-7">:&nbsp;&nbsp;{{item.Request_Assigned_Date}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    </mat-tab>
+</mat-tab-group>

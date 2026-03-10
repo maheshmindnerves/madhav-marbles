@@ -3,103 +3,33 @@
 
 <div class="row header">
    <div class="col-md-12 col-sm-12 col-12 text-end">
-      <span class="cursor-pointer h6" (click)="submitRequest()"> Submit Request &nbsp;&nbsp;<i
-            class="fa fa-angle-right "></i></span>
+      <!-- <span class="cursor-pointer h6" (click)="submitRequest()"> Submit Request &nbsp;&nbsp;<i
+            class="fa fa-angle-right "></i></span> -->
+      <button class="btn btn-warning submit-btn" (click)="submitRequest()">
+         Submit Request <i class="fa fa-angle-right ms-1"></i>
+      </button>
+
    </div>
 </div>
 <div class="row y-scroll-card">
    @for (item of items(); track item.productId) {
-   <div class="col-md-4 col-sm-4 col-6">
+   <div class="col-md-4 col-sm-6 col-12">
       <div class="card custom-card">
          <div class="card-body">
             <img class="card-img-top" [src]="'data:image/png;base64,' + item.image_Path" alt="Card image cap"
                (click)="onClickImage(item)">
             <div class="main-title">{{item.name + item.item_Code }}</div>
-            <div><label class="text-white">Category : </label><span class="sub-title ms-2">{{item.category_Name}}</span>
+            <div>
+               <label class="text-white">Category : </label><span class="sub-title ms-2">{{item.category_Name}}</span>
+
+               <button type="button" class="btn btn-outline-light view-details" (click)="openDialog(item)">
+                  <i class="fa fa-eye" aria-hidden="true"></i> &nbsp;&nbsp;View Details
+               </button>
             </div>
             <div><label class="text-white"> Sub Category : </label><span
                   class="sub-title ms-2">{{item.subCategory_name}}</span></div>
-            <div class="row mt-1">
-               <div class="col d-flex">
-                  <div><label class="sub-title"><input type="checkbox" [(ngModel)]="item.hold" /> Hold</label></div>
-                  <div class="ms-auto">
-                     <button type="button" class="btn btn-outline-light view-details" (click)="openDialog(item)">
-                        <i class="fa fa-eye" aria-hidden="true"></i> &nbsp;&nbsp;View Details
-                     </button>
-                  </div>
-               </div>
-            </div>
-            <div class="row mt-1">
-               <div class="col d-flex">
-                  <div><label class="sub-title"><input type="checkbox" [(ngModel)]="item.sampleOrder" /> Sample
-                        Order</label></div>
-
-                  <div class="ms-auto"><img class="image-width" src="./images/address.svg"><span
-                        class="sub-title ms-1">{{item.address || 'India'}}</span></div>
-               </div>
-            </div>
-
          </div>
       </div>
    </div>
    }
 </div>
-<!--  @else {
-   <div class="row">
-      <div class="header">
-         <i class="fa fa-angle-left cursor-pointer" (click)="goToCatlog()"></i> &nbsp;&nbsp;Submit Request
-      </div>
-   </div>
-   <div class="row">
-      <div class="col-md-6 col-sm-6 col-12">
-         @for (item of holdItem(); track item.id) {
-         <div class="card mt-2">
-            <div class="card-body">
-               <div class="row">
-                  <div class="col-md-3 col-sm-3 col-3">
-                     <img class="card-img-submit" [src]="'data:image/png;base64,' + item.image_Path"
-                        alt="Card image cap">
-                  </div>
-                  <div class="col-md-9 col-sm-9 col-9">
-                     <div class="main-title-submit">{{item.name}}</div>
-                     <div class="sub-title-submit">Category :{{item.name}}</div>
-                  </div>
-               </div>
-            </div>
-         </div>
-         }
-      </div>
-      <div class="col-md-6 col-sm-6 col-12">
-         <div class="form-container">
-            <form [formGroup]="otpForm" (ngSubmit)="onSubmit()">
-               <input type="text" class="form-control" placeholder="Full Name*" formControlName="name">
-               @if(otpForm.get('name')?.touched && otpForm.get('name')?.invalid) {
-               <div class="error"> Name is required.</div>
-               }
-               <input type="text" class="form-control" placeholder="City*" formControlName="city">
-               @if(otpForm.get('city')?.touched && otpForm.get('city')?.invalid) {
-               <div class="error"> City is required.</div>
-               }
-               <input type="text" class="form-control" placeholder="State*" formControlName="state">
-               @if(otpForm.get('state')?.touched && otpForm.get('state')?.invalid) {
-               <div class="error"> State is required.</div>
-               }
-               <input type="text" class="form-control" placeholder="Country*" formControlName="country">
-               @if(otpForm.get('country')?.touched && otpForm.get('country')?.invalid) {
-               <div class="error"> Country is required.</div>
-               }
-
-               <input type="email" class="form-control" placeholder="Email*" formControlName="email">
-               @if(otpForm.get('email')?.touched && otpForm.get('email')?.invalid) {
-               <div class="error"> Email is required.</div>
-               }
-               <input type="tel" class="form-control" placeholder="Mobile*" formControlName="mobile" maxlength="10">
-               @if(otpForm.get('mobile')?.touched && otpForm.get('mobile')?.invalid) {
-               <div class="error"> Enter valid 10-digit mobile number.</div>
-               }
-               <button type="submit" class="btn btn-success w-100 mt-2">Send OTP</button>
-            </form>
-         </div>
-      </div>
-   </div>
-   } -->

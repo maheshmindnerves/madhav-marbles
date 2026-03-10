@@ -11,16 +11,22 @@
             </h5>
 
             <form [formGroup]="infoForm">
-                <div class="row g-3">
+                <div class="row g-1">
                     <div class="col-md-6">
                         <label class="form-label">Full Name <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" formControlName="fullName"
                             placeholder="Enter your full name">
+                        @if(infoForm.get('fullName')?.touched && infoForm.get('fullName')?.invalid) {
+                        <div class="error"> Full name is required.</div>
+                        }
                     </div>
 
                     <div class="col-md-6">
                         <label class="form-label">Email Address <span class="text-danger">*</span></label>
                         <input type="email" class="form-control" formControlName="email" placeholder="Enter your email">
+                        @if(infoForm.get('email')?.touched && infoForm.get('email')?.invalid) {
+                        <div class="error"> Email is required.</div>
+                        }
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Phone Number <span class="text-danger">*</span></label>
@@ -33,39 +39,60 @@
                             <input type="text" class="form-control" formControlName="phone" numbersOnly maxlength="10"
                                 placeholder="Enter phone number">
                         </div>
+                        @if(infoForm.get('phone')?.touched && infoForm.get('phone')?.errors?.['required']) {
+                        <div class="error"> Phone number is required.</div>
+                        }
+                        @if(infoForm.get('phone')?.touched && infoForm.get('phone')?.errors?.['minlength']) {
+                        <div class="error"> Phone number must be at least 10 digits.</div>
+                        }
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">City <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" formControlName="city" placeholder="Enter your city">
+                        @if(infoForm.get('city')?.touched && infoForm.get('city')?.invalid) {
+                        <div class="error"> City is required.</div>
+                        }
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">State <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" formControlName="state" placeholder="Enter your state">
+                        @if(infoForm.get('state')?.touched && infoForm.get('state')?.invalid) {
+                        <div class="error"> State is required.</div>
+                        }
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Country <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" formControlName="country"
                             placeholder="Enter your country">
+                        @if(infoForm.get('country')?.touched && infoForm.get('country')?.invalid) {
+                        <div class="error"> Country is required.</div>
+                        }
                     </div>
 
                     <div class="col-md-6">
-                        <label class="form-label">Category</label>
+                        <label class="form-label">Category<span class="text-danger">*</span></label>
                         <select formControlName="category" class="form-control">
                             <option value="null" hidden>-select-</option>
                             @for (company of categoryTypeList(); track company.id) {
                             <option [value]="company.id">{{company.RequestOrderCategory}}</option>
                             }
                         </select>
+                        @if(infoForm.get('category')?.touched && infoForm.get('category')?.invalid) {
+                        <div class="error"> Category is required.</div>
+                        }
                     </div>
 
                     <div class="col-md-6">
-                        <label class="form-label">Project Type</label>
+                        <label class="form-label">Project Type<span class="text-danger">*</span></label>
                         <select formControlName="projectType" class="form-control">
                             <option value="null" hidden>-select-</option>
                             @for (company of projectTypeList(); track company.id) {
                             <option [value]="company.id">{{company.RequestOrder_Project_Type}}</option>
                             }
                         </select>
+                        @if(infoForm.get('projectType')?.touched && infoForm.get('projectType')?.invalid) {
+                        <div class="error"> Project type is required.</div>
+                        }
                     </div>
 
                 </div>
@@ -80,6 +107,9 @@
                         <textarea rows="3" class="form-control" formControlName="address"
                             placeholder="Enter your complete delivery address">
                         </textarea>
+                        @if(infoForm.get('address')?.touched && infoForm.get('address')?.invalid) {
+                        <div class="error"> Address is required.</div>
+                        }
                     </div>
                 </div>
 
@@ -89,7 +119,7 @@
                 </h5>
                 <div class="row">
                     <div class="col-12">
-                        <label class="form-label">Messaage(Optional) <span class="text-danger">*</span></label>
+                        <label class="form-label">Messaage(Optional)</label>
                         <textarea rows="3" class="form-control" formControlName="message"
                             placeholder="Tell us about your project,timeline, or any specific requirements..">
                         </textarea>
@@ -106,12 +136,13 @@
             <div class="card mt-2 p-2">
                 <div class="row">
                     <div class="col-md-3 col-sm-3 col-3">
-                        <img class="card-img-submit" [src]="'data:image/png;base64,' + item.image_Path"
+                        <img class="card-img-submit" [src]="'data:image/png;base64,' + item.Image_Path"
                             alt="Card image cap" (click)="onClickImage(item)">
                     </div>
                     <div class="col-md-9 col-sm-9 col-9 m-auto">
                         <div class="main-title-submit">{{item.name}}</div>
-                        <div class="sub-title-submit">Category :{{item.name}}</div>
+                        <div class="sub-title-submit">Category :{{item.category_Name}}</div>
+                        <div class="sub-title-submit">Sub Category :{{item.subCategory_name}}</div>
                     </div>
                 </div>
             </div>
