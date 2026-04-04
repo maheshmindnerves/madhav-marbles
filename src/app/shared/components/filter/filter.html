@@ -1,10 +1,19 @@
-<div id="mySidebar" class="sidebar">
-    <!--   <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">×</a> -->
-    <a href="#">About</a>
-    <a href="#">Services</a>
-    <a href="#">Clients</a>
-    <a href="#">Contact</a>
+<!-- Toggle Button -->
+<div class="cust" [class.cust-open]="isSidebarOpen" (click)="toggleSidebar()">
+    <i class="fa fa-filter" aria-hidden="true"></i>
 </div>
-<div id="main">
-    <button class="openbtn" (click)="openNav()">☰</button>
+
+<!-- Overlay (IMPORTANT) -->
+<div class="overlay" [class.show]="isSidebarOpen" (click)="closeSidebar()">
+</div>
+
+<!-- Sidebar -->
+<div class="sidebar" [class.open]="isSidebarOpen">
+    <h5>Menu</h5>
+
+    <ul class="list-unstyled">
+        <li><a href="#">Dashboard</a></li>
+        <li><a href="#">Profile</a></li>
+        <li><a href="#">Settings</a></li>
+    </ul>
 </div>

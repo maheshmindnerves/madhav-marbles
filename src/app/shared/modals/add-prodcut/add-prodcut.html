@@ -1,5 +1,5 @@
 <div class="modal-header bg-light">
-    <h5 class="modal-title">Add Product</h5>
+    <h5 class="modal-title">Add Stone Product</h5>
     <button type="button" class="btn-close" mat-dialog-close></button>
 </div>
 <div class="bg-light ps-3 pe-3 p-1 p-2">
@@ -17,14 +17,14 @@
             }
         </div>
         <div class="col-md-12 col-sm-12 col-12 mb-3">
-            <label>Item Name</label>
+            <label>Product Name</label>
             <input class="form-control" formControlName="name">
             @if(productForm.get('name')?.touched && productForm.get('name')?.invalid) {
             <div class="error"> Name is required.</div>
             }
         </div>
         <div class="col-md-12 col-sm-12 col-12 mb-3">
-            <label>Item Code</label>
+            <label>Product Code</label>
             <input class="form-control" formControlName="code">
             @if(productForm.get('code')?.touched && productForm.get('code')?.invalid) {
             <div class="error"> Code is required.</div>

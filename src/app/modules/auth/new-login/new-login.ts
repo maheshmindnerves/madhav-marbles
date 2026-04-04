@@ -1,31 +1,34 @@
-import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit, signal } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthService } from '../../../services/auth';
+import { Component, inject, signal } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SnackBarService } from '../../../services/snack-bar-service';
-import { MatTabsModule } from '@angular/material/tabs';
+import { AuthService } from '../../../services/auth';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.html',
-  styleUrl: './login.scss',
+  selector: 'app-new-login',
+  templateUrl: './new-login.html',
+  styleUrl: './new-login.scss',
   standalone: false,
 })
-export class Login implements OnInit {
-  tabs = ['Existing User', 'New User'];
-  activeIndex = 0;
-
-  protected readonly isOTP = signal(false);
-  private authService = inject(AuthService);
+export class NewLogin {
+  activeTab: string = 'existing';
+  newUser!: FormGroup;
+  mobileNumber = new FormControl('9950271506', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]);
   readonly fb = inject(FormBuilder);
+  protected readonly isOTP = signal(false);
   private router = inject(Router);
   private snackBar = inject(SnackBarService);
-  mobileNumber = new FormControl('9950271506', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]);
-  termsCondition = new FormControl(false, Validators.required);
   otpForm!: FormGroup;
-
+  private authService = inject(AuthService);
+  
   ngOnInit(): void {
+    this.newUser = this.fb.group({
+      lastName: ['', Validators.required],
+      firstName: ['', Validators.required],
+      emailId: ['', Validators.required],
+      mobileNo: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
+    });
+
     this.otpForm = this.fb.group({
       v1: ['', Validators.required],
       v2: ['', Validators.required],
@@ -42,7 +45,7 @@ export class Login implements OnInit {
     }
   }
 
-  verify(): void {
+   verify(): void {
     const otpValue = this.otpForm.value;
     const otp = Number(otpValue.v1 + otpValue.v2 + otpValue.v3 + otpValue.v4);
     if (otp === 1234) {
@@ -70,9 +73,5 @@ export class Login implements OnInit {
         next.focus();
       }
     }
-  }
-
-  selectTab(index: number): void {
-    this.activeIndex = index;
   }
 }

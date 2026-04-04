@@ -47,6 +47,10 @@ export class CustomerRequestService {
         return this.http.get(environment.baseApiUrl + 'CustomerRequest/GetRequestListAssignedTosalesTeam?userid=' + id);
     }
 
+    GetCancelledRequestList(id: number): Observable<any> {
+        return this.http.get(environment.baseApiUrl + 'CustomerRequest/GetCancelledRequestList?userid=' + id);
+    }
+
     RequestAssignToSalesTeam(payload: any): Observable<any> {
         return this.http.post(environment.baseApiUrl + 'CustomerRequest/RequestAssignToSalesTeam', payload);
     }
@@ -62,4 +66,22 @@ export class CustomerRequestService {
     GetProcessDataListofSalesTeam(id: number): Observable<any> {
         return this.http.get(environment.baseApiUrl + 'CustomerRequest/GetProcessDataListofSalesTeam?userid=' + id);
     }
+
+    RequestCancellByBackOffice(payload: any): Observable<any> {
+        return this.http.post(environment.baseApiUrl + 'CustomerRequest/RequestCancellByBackOffice', payload);
+    }
+
+    GetLeadSource(): Observable<any> {
+        return this.http.get(environment.baseApiUrl + 'CustomerRequest/GetLeadSource');
+    }
+
+    GetLeadStatus(): Observable<any> {
+        return this.http.get(environment.baseApiUrl + 'CustomerRequest/GetLeadStatus');
+    }
+
+    RequestSalesFollowUp(payload: any): Observable<any> {
+        return this.http.post(environment.baseApiUrl + 'CustomerRequest/RequestSalesFollowUp', payload);
+    }
+
+
 }

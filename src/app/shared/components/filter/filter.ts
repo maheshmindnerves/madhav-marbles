@@ -1,23 +1,24 @@
 import { Component, signal } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-filter',
   imports: [],
   templateUrl: './filter.html',
-  styleUrl: './filter.scss'
+  styleUrl: './filter.scss',
+  standalone: true,
 })
 export class Filter {
-  readonly isSubmit = signal(false);
-  readonly isOpenFilter = signal(false);
+  isSidebarOpen = false;
 
-  openNav() {
-    this.isOpenFilter.set(!this.isOpenFilter());
-    if (this.isOpenFilter()) {
-      (document.getElementById("mySidebar") as HTMLElement).style.width = "200px";
-      (document.getElementById("main") as HTMLElement).style.marginLeft = "185px";
-    } else {
-      (document.getElementById("mySidebar") as HTMLElement).style.width = "0";
-      (document.getElementById("main") as HTMLElement).style.marginLeft = "-11px";
-    }
+  toggleSidebar() {
+    this.isSidebarOpen = !this.isSidebarOpen;
+  }
+
+  closeSidebar() {
+    this.isSidebarOpen = false;
   }
 }

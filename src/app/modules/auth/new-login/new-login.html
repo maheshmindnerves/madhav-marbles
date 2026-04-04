@@ -1,0 +1,124 @@
+<div class="bg-container">
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        @if(!isOTP()) {
+        <div class="card p-3 shadow-sm login-card">
+            <h4 class="text-center mb-4">
+                Hi, Welcome to <span class="text-primary fw-bold">Madhav Marbles</span>
+            </h4>
+
+            <!-- Tabs -->
+            <ul class="nav nav-tabs mb-3">
+                <li class="nav-item w-50 text-center">
+                    <button class="nav-link w-100" [class.active]="activeTab === 'existing'"
+                        (click)="activeTab='existing'">
+                        Existing User
+                    </button>
+                </li>
+                <li class="nav-item w-50 text-center">
+                    <button class="nav-link w-100" [class.active]="activeTab === 'new'" (click)="activeTab='new'">
+                        New User
+                    </button>
+                </li>
+            </ul>
+
+            <!-- Existing User -->
+            @if(activeTab === 'existing') {
+            <div class="row">
+                <div class="input-group mb-2">
+                    <span class="input-group-text">
+                        <i class="fa fa-phone"></i>
+                    </span>
+                    <input type="text" class="form-control" placeholder="Mobile Number" [formControl]="mobileNumber"
+                        numbersOnly maxlength="10">
+                </div>
+                @if(mobileNumber.touched && mobileNumber.invalid) {
+                <div class="error-login">phone number is incorrect</div>
+                }
+            </div>
+            <button class="btn btn-primary w-100 rounded-pill mt-2" (click)="onClickGetOtp(true)">
+                Get OTP
+            </button>
+            } @else {
+            <!-- New User -->
+            <form [formGroup]="newUser">
+                <div class="row mb-4">
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="First Name" formControlName="firstName">
+                        @if(newUser.get('firstName')?.touched && newUser.get('firstName')?.invalid) {
+                        <div class="error">first name is required</div>
+                        }
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="Last Name" formControlName="lastName">
+                        @if(newUser.get('lastName')?.touched && newUser.get('lastName')?.invalid) {
+                        <div class="error">last name is required</div>
+                        }
+                    </div>
+                </div>
+
+                <div class="input-group mb-2">
+                    <span class="input-group-text">
+                        <i class="fa fa-envelope"></i>
+                    </span>
+                    <input type="email" class="form-control" placeholder="Email Id" formControlName="emailId">
+                </div>
+                @if(newUser.get('emailId')?.touched && newUser.get('emailId')?.invalid) {
+                <div class="error-login">email id is required</div>
+                }
+                <div class="input-group mb-2">
+                    <span class="input-group-text">
+                        <i class="fa fa-phone"></i>
+                    </span>
+                    <input type="text" class="form-control" placeholder="Mobile No" numbersOnly maxlength="10"
+                        formControlName="mobileNo">
+                </div>
+                @if(newUser.get('mobileNo')?.touched && newUser.get('mobileNo')?.invalid) {
+                <div class="error-login">mobile is required</div>
+                }
+            </form>
+            <button class="btn btn-primary w-100 rounded-pill mt-2">
+                Create Account
+            </button>
+
+            <p class="small text-center mt-3">
+                By clicking Create Account, you agree to our
+                <a href="#">Terms & condition</a>
+            </p>
+            }
+        </div>
+        } @else {
+        <div class="card p-2 shadow-sm login-card">
+            <h2 class="text-center">Verify OTP</h2>
+            <hr>
+            <div class="sub-title mb-2">A verification code has been sent to your mobile number via sms. please enter
+                the code below.</div>
+            <div class="text-center"><b>OTP sent on mobile {{mobileNumber.value}}</b></div>
+            <div class="text-center">Valid for 01:10</div>
+            <form [formGroup]="otpForm">
+                <div class="otp-screen">
+                    <div id="inputs" class="inputs">
+                        <input class="input" type="text" maxlength="1" (input)="onInputChange($event)"
+                            formControlName="v1" />
+                        <input class="input" type="text" maxlength="1" (input)="onInputChange($event)"
+                            formControlName="v2" />
+                        <input class="input" type="text" maxlength="1" (input)="onInputChange($event)"
+                            formControlName="v3" />
+                        <input class="input" type="text" maxlength="1" (input)="onInputChange($event)"
+                            formControlName="v4" />
+                    </div>
+                </div>
+            </form>
+            <div class="text-center mt-2">
+                <h6><a href="#">Resend</a></h6>
+            </div>
+            <div class="text-center mt-4">
+                <button type="button" class="btn btn btn-outline-secondary me-2"
+                    (click)="onClickGetOtp(false)">Back</button>
+                <button type="button" class="btn btn-success" (click)="verify()"
+                    [disabled]="otpForm.invalid">Verify</button>
+            </div>
+        </div>
+        }
+
+    </div>
+</div>

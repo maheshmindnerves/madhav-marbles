@@ -1,0 +1,107 @@
+<!--  -->
+<div class="modal-header bg-light">
+    <h5 class="modal-title">
+        {{categroyDetails.title}}
+    </h5>
+    <!--  <button type="button" class="btn-close" mat-dialog-close></button> -->
+</div>
+<div class="container-fluid">
+    <div class="row mb-2">
+        @for (item of categroyDetails.data; track item.product_Specification_id; let i = $index) {
+        <div class="col-md-4 col-sm-6 col-12 mt-2">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-12">
+                            <img [src]="'data:image/png;base64,' + item.tempImage" class="card-img-top"
+                                (click)="onClickImage(item.tempImage)">
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-12 image-info"> {{item.tempDesc}}</div>
+                        <hr class="mt-1 mb-1">
+                        <div class="swiper mySwiper ps-2 pe-2">
+                            <div class="swiper-wrapper">
+                                @for (ii of item.product_Images; track ii.id; let i = $index) {
+                                <div class="swiper-slide">
+                                    <img [src]="'data:image/png;base64,' + ii.image_Path" class="img-fluid"
+                                        (click)="onClickDefultImage(item, ii.image_Path, ii.image_description)" />
+                                </div>
+                                }
+                            </div>
+
+                            <!-- Navigation -->
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+                        </div>
+                        <hr class="mt-1 mb-1">
+                        <div class="col-md-12 col-sm-12 col-12 text-center mt-2">
+                            <label class="smoke-color"><input type="checkbox" [(ngModel)]="item.hold" />
+                                Hold</label>
+                            <label class="smoke-color ms-3"><input type="checkbox" [(ngModel)]="item.sampleOrder" />
+                                Sample Order</label>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-12 position-relative" style="z-index: 1;">
+                            <div class="col-md-12 col-sm-12 col-12 more-info" (click)="openInfo(item)">
+                                Additional Information & Specification
+                            </div>
+                            <div class="info-panel" [class.open]="item.isOpenAccordion">
+                                <button type="button" class="btn-close ac-close"
+                                    (click)="item.isOpenAccordion = false"></button>
+                                <div class="addition-info">
+                                    <h6 class="mb-1">Additional Information</h6>
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-6 col-6"> <b>ORIGEN:</b> {{item.origin}}</div>
+                                        <div class="col-md-6 col-sm-6 col-6"><b>THICKNESSES:</b>{{item.Thickness}}</div>
+                                        <div class="col-md-6 col-sm-6 col-6"> <b>Color:</b> {{item.color}}</div>
+                                        <div class="col-md-6 col-sm-6 col-6"> <b>Pattern:</b> {{item.pattern}}</div>
+                                        <div class="col-md-6 col-sm-6 col-6"> <b>Finish Type:</b> {{item.sFinishType}}
+                                        </div>
+                                        <div class="col-md-6 col-sm-6 col-6"> <b>Price Category:</b>
+                                            {{item.sPriceCategory}}</div>
+                                        <div class="col-md-6 col-sm-6 col-6"> <b>surface Quality:</b>
+                                            {{item.surfaceQuality}}</div>
+                                        <div class="col-md-12 col-sm-12 col-12"> <b>Applications:</b>
+                                            {{item.applications}}</div>
+                                        <div class="col-md-12 col-sm-12 col-12"> <b>Stone Size(L*W):</b>
+                                            {{item.sLength}} * {{item.sWidth}} = {{item.sTotalArea}}</div>
+                                    </div>
+
+                                    <hr class="mt-2 mb-2">
+                                    <h6 class="mb-2">Specification</h6>
+                                    <div class="">{{item.specification}}</div>
+                                </div>
+                            </div>
+                            <!-- Popup (Above) -->
+                            <!--   @if(item.isOpenAccordion) {
+                            <div class="card card-body shadow custom-box">
+                                <div class="mt-1 addition-info">
+                                    <h6 class="mb-1">Additional Information</h6>
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-6 col-6"> <b>ORIGEN:</b> Quartz</div>
+                                        <div class="col-md-6 col-sm-6 col-6"><b>THICKNESSES:</b>{{item.Thickness}}</div>
+                                        <div class="col-md-6 col-sm-6 col-6"> <b>DIMENSIONS:</b> {{item.Dimension}}
+                                        </div>
+                                        <div class="col-md-6 col-sm-6 col-6"> <b>Color:</b> {{item.color}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            }
+                            <div class="col-md-12 col-sm-12 col-12 more-info" (click)="openInfo(item)">
+                                Additional Information
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+    <div class="row mt-2 mb-2">
+        <!-- <div class="col-md-6 col-sm-6 col-6 text-end">
+            <button type="button" class="btn btn-secondary" mat-dialog-close>Cancel</button>
+
+        </div> -->
+        <div class="col-md-12 col-sm-12 col-12 text-end">
+            <button type="button" class="btn btn-success view-details" mat-dialog-close>Add</button>
+        </div>
+    </div>
+</div>

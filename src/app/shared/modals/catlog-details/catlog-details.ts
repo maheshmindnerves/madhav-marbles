@@ -7,18 +7,57 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import Swiper from 'swiper';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+declare var bootstrap: any;
+
+Swiper.use([Navigation, Pagination, Autoplay]);
+
+export interface ProductData {
+  applications: string;
+  sTotalArea: string;
+  sWidth: string;
+  sLength: string;
+  sFinishType: string;
+  pattern: string;
+  sPriceCategory: string;
+  surfaceQuality: string;
+  origin: string;
+  isOpenAccordion: boolean;
+  tempImage: string;
+  tempDesc: string;
+  Dimension: string;
+  Image_Description: string;
+  Image_Path: string;
+  Image_Sr_No: string;
+  parent_product_id: string;
+  product_Specification_id: string;
+  specification: string;
+  Thickness: string;
+  color: string;
+  id: string;
+  selling_price: string;
+  hold: boolean;
+  sampleOrder: boolean;
+  product_Images: any[]
+}
+
+export interface ProductDetails {
+  title: string;
+  data: ProductData[];
+}
 
 @Component({
-  selector: 'app-category-details',
+  selector: 'app-catlog-details',
   imports: [MatDialogModule, FormsModule, MatIconModule, MatMenuModule, MatButtonModule],
-  templateUrl: './category-details.html',
-  styleUrl: './category-details.scss'
+  templateUrl: './catlog-details.html',
+  styleUrl: './catlog-details.scss'
 })
-export class CategoryDetails {
-  readonly categroyDetails = inject<ProductDetails>(MAT_DIALOG_DATA);
+export class CatlogDetails {
+  readonly data = inject<ProductDetails>(MAT_DIALOG_DATA);
   readonly dialog = inject(MatDialog);
+  categroyDetails!: ProductDetails;
 
   ngOnInit(): void {
+    this.categroyDetails = { ...this.data };
     this.categroyDetails.data.forEach(element => {
       element.tempImage = element.product_Images[0].image_Path;
       element.tempDesc = element.product_Images[0].image_description;
@@ -59,10 +98,11 @@ export class CategoryDetails {
     });
   }
 
-  onClickImage(imageItem: any): void {
+
+  onClickImage(base64: string): void {
     const dialogRef = this.dialog.open(ZoomImage, {
       width: '98vw', maxWidth: '98vw', height: '98vh',
-      data: imageItem.Image_Path
+      data: base64
     });
   }
   /* 
@@ -72,7 +112,7 @@ export class CategoryDetails {
   
       const content = `
       <div>
-         ${item.Specification}
+         ${item.specification}
       </div>
     `;
   
@@ -100,7 +140,8 @@ export class CategoryDetails {
       if (popover) {
         popover.hide();
       }
-    } */
+    }
+   */
 
   onClickDefultImage(data: ProductData, base64: string, desc: string): void {
     data.tempImage = base64;
@@ -111,38 +152,4 @@ export class CategoryDetails {
   openInfo(item: ProductData) {
     item.isOpenAccordion = !item.isOpenAccordion;
   }
-}
-
-export interface ProductData {
-  applications: string;
-  sTotalArea: string;
-  sWidth: string;
-  sLength: string;
-  sFinishType: string;
-  pattern: string;
-  sPriceCategory: string;
-  surfaceQuality: string;
-  origin: string;
-  isOpenAccordion: boolean;
-  tempImage: string;
-  tempDesc: string;
-  Dimension: string;
-  Image_Description: string;
-  Image_Path: string;
-  Image_Sr_No: string;
-  parent_product_id: string;
-  product_Specification_id: string;
-  specification: string;
-  Thickness: string;
-  color: string;
-  id: string;
-  selling_price: string;
-  isample: boolean;
-  isHold: boolean;
-  product_Images: any[]
-}
-
-export interface ProductDetails {
-  title: string;
-  data: ProductData[];
 }

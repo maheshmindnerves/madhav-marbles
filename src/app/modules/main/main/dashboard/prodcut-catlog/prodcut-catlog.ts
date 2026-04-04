@@ -80,7 +80,8 @@ export class ProdcutCatlog {
 
   onClickEdit(item: any): void {
     const dialogRef = this.dialog.open(EditProdcut, {
-      width: '450px',
+      width: '650px',
+      height: '80vh',
       data: item
     });
 

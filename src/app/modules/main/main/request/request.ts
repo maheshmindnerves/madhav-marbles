@@ -8,6 +8,7 @@ import { SnackBarService } from '../../../../services/snack-bar-service';
 import { ResultModel } from '../../../../shared/models/result.model';
 import { CategoryDetails } from '../../../../shared/modals/category-details/category-details';
 import { AssignToSale } from '../../../../shared/modals/assign-to-sale/assign-to-sale';
+import { RequestReject } from '../../../../shared/modals/request-reject/request-reject';
 
 @Component({
   selector: 'app-request',
@@ -18,7 +19,7 @@ import { AssignToSale } from '../../../../shared/modals/assign-to-sale/assign-to
 export class Request {
   protected readonly requestItems = signal<requestItems[]>([]);
   protected readonly rassignedToSalesItems = signal<requestItems[]>([]);
-
+  protected readonly cancelRequestItems = signal<requestItems[]>([]);
   readonly fb = inject(FormBuilder);
   readonly crService = inject(CustomerRequestService);
   private snackBar = inject(SnackBarService);
@@ -37,10 +38,15 @@ export class Request {
     if (event.index === 1) {
       this.getRequestListAssignedTosalesTeam();
     }
+
+    if (event.index === 2) {
+      this.GetCancelledRequestList();
+    }
   }
 
   getRequestList(): void {
     this.loader.start();
+    this.requestItems.set([]);
     this.crService.GetRequestList().subscribe({
       next: (res: ResultModel) => {
         this.loader.stop();
@@ -62,12 +68,35 @@ export class Request {
 
   getRequestListAssignedTosalesTeam(): void {
     this.loader.start();
+    this.rassignedToSalesItems.set([]);
     this.crService.GetRequestListAssignedTosalesTeam(0).subscribe({
       next: (res: ResultModel) => {
         this.loader.stop();
         if (res.isSuccess) {
           if (res.data.length > 0) {
             this.rassignedToSalesItems.set(res.data);
+          } else {
+            this.snackBar.error('No data found.')
+          }
+        } else {
+          this.snackBar.error(res.message);
+        }
+      }, error: (err) => {
+        this.loader.stop();
+        console.error('Error:', err);
+      }
+    });
+  }
+
+  GetCancelledRequestList(): void {
+    this.loader.start();
+    this.cancelRequestItems.set([]);
+    this.crService.GetCancelledRequestList(1).subscribe({
+      next: (res: ResultModel) => {
+        this.loader.stop();
+        if (res.isSuccess) {
+          if (res.data.length > 0) {
+            this.cancelRequestItems.set(res.data);
           } else {
             this.snackBar.error('No data found.')
           }
@@ -106,7 +135,6 @@ export class Request {
 
   onClickAccept(item: requestItems): void {
     this.loader.start();
-    console.log('iiiiiiiiiiiiiiiii', item)
     this.crService.GetUsers(1).subscribe({
       next: (res: ResultModel) => {
         if (res.isSuccess && res.data.length > 0) {
@@ -127,7 +155,15 @@ export class Request {
         this.loader.stop();
       }
     });
+  }
 
+  onClickReject(item: requestItems): void {
+    const dialogRef = this.dialog.open(RequestReject, { width: '480px', data: item });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.getRequestList();
+      }
+    });
   }
 }
 
@@ -148,4 +184,10 @@ export interface requestItems {
   RequestOrder_Project_Type: string;
   User_Full_Name?: string;
   Request_Assigned_Date?: string;
+  Is_Request_Cancelled?: string;
+  Request_Cancel_Remark?: string;
+  Request_Cancelled_User_id?: string;
+  Request_Cancelled_Date?: string;
+  Primary_Rejection_Reason?: string;
+  Sub_Primary_Rejection_Reason?: string;
 }

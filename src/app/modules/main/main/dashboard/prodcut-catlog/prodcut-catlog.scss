@@ -1,5 +1,5 @@
 .custom-header {
-   // border-bottom: 1px solid lightgray;
+    // border-bottom: 1px solid lightgray;
     border-bottom: 1px solid gray;
     padding-top: 5px;
 }
@@ -21,4 +21,9 @@
     --bs-btn-padding-x: .5rem;
     --bs-btn-font-size: .75rem;
     width: 60px;
+}
+
+.product-scroll {
+    overflow: auto;
+    height: calc(100vh - 130px);
 }

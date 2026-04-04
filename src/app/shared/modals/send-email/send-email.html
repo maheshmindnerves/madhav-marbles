@@ -1,0 +1,16 @@
+<div class="bg-light p-3">
+    <div class="col-md-12 col-sm-12 col-12 mb-3">
+        <label>Email</label>
+        <input class="form-control" [formControl]="email">
+    </div>
+    <div class="row mt-2">
+        <div class="col-md-6 col-sm-6 col-6 text-end">
+            <button type="button" class="btn btn-secondary" mat-dialog-close>Cancel</button>
+
+        </div>
+        <div class="col-md-6 col-sm-6 col-6">
+            <button type="button" class="btn btn-success" (click)="onClickConfirm()"
+                [disabled]="email.value === ''">Confirm</button>
+        </div>
+    </div>
+</div>

@@ -9,6 +9,14 @@ import { ResultModel } from '../../../../../shared/models/result.model';
 import { ProductGallary } from '../../../../../shared/modals/product-gallary/product-gallary';
 import { ViewGallery } from '../../../../../shared/modals/view-gallery/view-gallery';
 export interface specificaiton {
+  SurfaceQuality: any;
+  Pattern: any;
+  Applications: any;
+  sFinishType: any;
+  sPriceCategory: any;
+  sLength: any;
+  sWidth: any;
+  sTotalArea: any;
   id: number;
   name: string;
   Color: string;
@@ -39,12 +47,16 @@ export class AddSpecification {
       next: (res: ResultModel) => {
         this.loader.stop();
         if (res.isSuccess) {
-          this.items.set(
-            res.data.map((item: any) => ({
-              ...item,
-              Parent_Product_id: Number(this.route.snapshot.paramMap.get('id')),
-              name: this.route.snapshot.paramMap.get('name')
-            })));
+          if (res.data && res.data.length > 0) {
+            this.items.set(
+              res.data.map((item: any) => ({
+                ...item,
+                Parent_Product_id: Number(this.route.snapshot.paramMap.get('id')),
+                name: this.route.snapshot.paramMap.get('name')
+              })));
+          } else {
+            this.snackBar.success('Product specification details not added');
+          }
         } else {
           this.snackBar.error(res.message);
         }

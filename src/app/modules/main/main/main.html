@@ -1,11 +1,13 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
     <div class="container-fluid">
-        <a class="navbar-brand d-flex align-items-center" routerLink="/">
-            <img src="./images/madhav-logo.png">
+        <a class="navbar-brand d-flex align-items-center bg-light" routerLink="/">
+            <img src="./images/madhav-logo.png" class="logo">
         </a>
-
+        <div class="title">
+            Welcome to, Madhav Marble
+        </div>
         <div class="dropdown">
-            <img src="./images/profile.jpg" class="profile-icon dropdown-toggle" id="profileDropdown"
+            <img src="./images/profile.jpg" class="profile-icon dropdown-toggle bg-light" id="profileDropdown"
                 data-bs-toggle="dropdown" aria-expanded="false" alt="Profile">
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
                 <li><a class="dropdown-item" href="#">Profile</a></li>
@@ -18,4 +20,12 @@
         </div>
     </div>
 </nav>
-<div class="container-fluid"><router-outlet></router-outlet></div>
+<div class="container-fluid overflow-main">
+    <router-outlet></router-outlet>
+</div>
+
+<footer class="bg-dark text-white">
+    <div class="text-center p-2 border-top">
+        <p class="mb-0">© 2026 My Website | All Rights Reserved</p>
+    </div>
+</footer>

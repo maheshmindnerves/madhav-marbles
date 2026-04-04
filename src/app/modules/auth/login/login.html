@@ -1,31 +1,97 @@
 <div class="bg-container browser-view">
   <div class="center-abs">
-    @if( !isOTP()) {
-    <img src="./images/login-black.png">
-    <h2>Login</h2>
-    <div class="sub-title-main">Welcome to Madhav Marbles & Granites Ltd. India's first choice of the region known for
-      its
-      rich reserves of metamorphosed granite.</div>
-    <div class="form-group">
-      <label for="username">Mobile Number</label>
-      <input type="text" class="form-control" numbersOnly placeholder="Enter Mobile Number" maxlength="10"
-        [formControl]="mobileNumber">
-    </div>
-    <div class="row mt-5">
-      <div class="col-md-9 col-sm-9 col-9 m-auto">
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="check1" [formControl]="termsCondition">
-          <label class="form-check-label" for="check1">
-            I accept the Terms of Use & Privacy Policy
-          </label>
+    @if(!isOTP()) {
+    <img class="mb-2" src="./images/login-black.png">
+    <h4>Hi, Welcome to <span class="text-primary"><b>Madhav Marbles</b></span> </h4>
+    <!--  <h2>Login</h2> -->
+    <!-- <div class="sub-title-main">Welcome to Madhav Marbles & Granites Ltd. India's first choice of the region known for
+      its rich reserves of metamorphosed granite.</div> -->
+    <!--  <mat-tab-group dynamicHeight>
+      <mat-tab label="Short tab">
+        <div class="example-small-box mat-elevation-z4">
+          Small content
+        </div>
+      </mat-tab>
+      <mat-tab label="Long tab">
+        <div class="example-large-box mat-elevation-z4">
+          Large content
+        </div>
+      </mat-tab>
+    </mat-tab-group> -->
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="activeIndex === 0" (click)="selectTab(0)">
+          Existing User
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="activeIndex === 1" (click)="selectTab(1)">
+          New User
+        </a>
+      </li>
+    </ul>
+    <div class="tab-containtes p-3">
+      @if(activeIndex === 0) {
+      <div class="form-group">
+        <label for="username">Mobile Number</label>
+        <input type="text" class="form-control" numbersOnly placeholder="Enter Mobile Number" maxlength="10"
+          [formControl]="mobileNumber">
+      </div>
+      <div class="row mt-2">
+        <!-- <div class="col-md-9 col-sm-9 col-9 m-auto">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="check1" [formControl]="termsCondition">
+            <label class="form-check-label" for="check1">
+              I accept the Terms of Use & Privacy Policy
+            </label>
+          </div>
+        </div> -->
+        <div class="col-md-12 col-sm-12 col-12 text-end">
+          <button type="button" class="btn btn-success w-100" (click)="onClickGetOtp(true)"
+            [disabled]="mobileNumber.invalid">Get
+            OTP</button>
         </div>
       </div>
-      <div class="col-md-3 col-sm-3 col-3 text-end">
-        <button type="button" class="btn btn-success" (click)="onClickGetOtp(true)"
-          [disabled]="!(termsCondition.value && mobileNumber.valid)">Get
+      } @else {
+      <div class="row">
+        <div class="col-md-6 col-sm-6 col-6">
+          <div class="form-group">
+            <label for="username">First Name</label>
+            <input type="text" class="form-control" numbersOnly placeholder="Enter Mobile Number" maxlength="10"
+              [formControl]="mobileNumber">
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-6">
+          <div class="form-group">
+            <label for="username">Last Name</label>
+            <input type="text" class="form-control" numbersOnly placeholder="Enter Mobile Number" maxlength="10"
+              [formControl]="mobileNumber">
+          </div>
+        </div>
+        <div class="col-md-12 col-sm-12 col-12">
+          <div class="form-group">
+            <label for="username">Email ID</label>
+            <input type="text" class="form-control" numbersOnly placeholder="Enter Mobile Number" maxlength="10"
+              [formControl]="mobileNumber">
+          </div>
+        </div>
+        <div class="col-md-12 col-sm-12 col-12">
+          <div class="form-group">
+            <label for="username">Mobile Number</label>
+            <input type="text" class="form-control" numbersOnly placeholder="Enter Mobile Number" maxlength="10"
+              [formControl]="mobileNumber">
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12 col-sm-12 col-12 mt-2">
+        <button type="button" class="btn btn-success w-100" (click)="onClickGetOtp(true)"
+          [disabled]="mobileNumber.invalid">Get
           OTP</button>
       </div>
+      }
     </div>
+
     } @else {
     <h2 class="text-center">Verify OTP</h2>
     <hr>

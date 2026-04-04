@@ -20,7 +20,6 @@ export class Otp {
   data = inject<any>(MAT_DIALOG_DATA);
 
   ngOnInit(): void {
-    console.log('1111111111111111111111111', this.data);
     document.querySelectorAll('.otp-input').forEach((input, index, inputs) => {
       const el = input as HTMLInputElement;   // ✅ type cast
       el.addEventListener('input', () => {
@@ -37,23 +36,22 @@ export class Otp {
 
 
   onClickVerify(): void {
-    console.log('1111111111111111111', this.createPayload());
     this.loader.start();
-    this.customerService.SubmitRequestOrder(this.createPayload()).subscribe({
-      next: (res: ResultModel) => {
-        this.loader.stop();
-        if (res.isSuccess) {
-          console.log('44444444444444444444', res.data[0])
-          this.snackBar.success(res.data[0].Result);
-          this.dialogRef.close(this.createPayload());
-        } else {
-          this.snackBar.error(res.message);
-        }
-      }, error: (err) => {
-        this.loader.stop();
-        console.error('Error:', err);
-      }
-    });
+    console.log('11111111111111111', this.createPayload());
+     this.customerService.SubmitRequestOrder(this.createPayload()).subscribe({
+       next: (res: ResultModel) => {
+         this.loader.stop();
+         if (res.isSuccess) {
+           this.snackBar.success(res.data[0].Result);
+           this.dialogRef.close(this.createPayload());
+         } else {
+           this.snackBar.error(res.message);
+         }
+       }, error: (err) => {
+         this.loader.stop();
+         console.error('Error:', err);
+       }
+     });
   }
 
   createPayload(): any {
@@ -69,7 +67,12 @@ export class Otp {
       request_Order_Project_Type_Id: value.projectType,
       delivery_Address: value.address,
       additional_Information: value.message,
-      orderDetails: this.getOrderDetails()
+      orderDetails: this.getOrderDetails(),
+      company_Annual_Revenue: value.annualRevenue,
+      company_Name: value.companyName,
+      number_Of_Employees: value.numberOfEmployees,
+      email_Opt_Out: value.emailOptOut,
+      comp_No_of_Employee: Number(value.numberOfEmployees)
     }
   }
 
@@ -78,8 +81,8 @@ export class Otp {
     this.data.catlogData.forEach((element: any) => {
       const obj = {
         requestID: 0,
-        parent_Product_Id: element.Parent_Product_id,
-        product_Specification_id: element.Product_Specification_id,
+        parent_Product_Id: element.parent_product_id,
+        product_Specification_id: element.product_Specification_id,
         product_Image_Gallery_id: 1,
         request_Location_Id: 1,
         requestQty: 1,

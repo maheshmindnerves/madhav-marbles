@@ -95,3 +95,35 @@
         }
     }
 }
+
+.example-small-box,
+.example-large-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 16px;
+    padding: 16px;
+    border-radius: 8px;
+}
+
+.nav-item {
+    width: 50% !important;
+    text-align: center;
+    cursor: pointer;
+}
+
+.nav-link.active {
+    border: 1px solid blue;
+    border-bottom: none !important;
+}
+
+/* .nav-tabs {
+     border-bottom: 1px solid blue !important;
+} */
+
+.tab-containtes {
+    border: 1px solid blue;
+    margin-top: -2px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+}

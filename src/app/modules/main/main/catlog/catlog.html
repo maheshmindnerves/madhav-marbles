@@ -1,17 +1,32 @@
-<!-- <app-filter></app-filter> -->
-
-
-<div class="row header">
+<app-filter></app-filter>
+<div class="row">
+   <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+         @for (img of swiperImages(); track img) {
+         <div class="swiper-slide">
+            <img [src]="img" class="img-fluid-swiper" />
+         </div>
+         }
+      </div>
+      <div class="swiper-pagination"></div>
+   </div>
+</div>
+<div class="row">
+   <div class="about-us">
+      <h3>About Madhav Marbles</h3>
+      With 35 years of excellence in the field of Natural Stone Industry. We are known as the prominent marble
+      and granite suppliers in India and all over the world.
+   </div>
+</div>
+<!-- <div class="row header">
    <div class="col-md-12 col-sm-12 col-12 text-end">
-      <!-- <span class="cursor-pointer h6" (click)="submitRequest()"> Submit Request &nbsp;&nbsp;<i
-            class="fa fa-angle-right "></i></span> -->
-      <button class="btn btn-warning submit-btn" (click)="submitRequest()">
+      <button class="submit-btn" (click)="submitRequest()">
          Submit Request <i class="fa fa-angle-right ms-1"></i>
       </button>
 
    </div>
-</div>
-<div class="row y-scroll-card">
+</div> -->
+<div class="row">
    @for (item of items(); track item.productId) {
    <div class="col-md-4 col-sm-6 col-12">
       <div class="card custom-card">
@@ -20,16 +35,20 @@
                (click)="onClickImage(item)">
             <div class="main-title">{{item.name + item.item_Code }}</div>
             <div>
-               <label class="text-white">Category : </label><span class="sub-title ms-2">{{item.category_Name}}</span>
-
+               <label>Category : </label><span class="sub-title ms-2">{{item.category_Name}}</span>
                <button type="button" class="btn btn-outline-light view-details" (click)="openDialog(item)">
                   <i class="fa fa-eye" aria-hidden="true"></i> &nbsp;&nbsp;View Details
                </button>
             </div>
-            <div><label class="text-white"> Sub Category : </label><span
-                  class="sub-title ms-2">{{item.subCategory_name}}</span></div>
+            <div><label> Sub Category : </label>
+               <span class="sub-title ms-2">{{item.subCategory_name}}</span>
+               <i class="fa fa-envelope send-email" aria-hidden="true" (click)="onClickEmail()"></i>
+            </div>
          </div>
       </div>
    </div>
    }
 </div>
+@if(isButtonShow) {
+<button class="blink-btn" (click)="submitRequest()">Add to cart</button>
+}

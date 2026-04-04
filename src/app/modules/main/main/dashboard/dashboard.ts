@@ -17,9 +17,8 @@ export class Dashboard {
     { id: 4, name: 'Add Location', imageName: 'location', value: 40 },
     { id: 6, name: 'Reports', imageName: 'reports', value: 33 },
     { id: 7, name: 'User Management', imageName: 'management', value: 30 },
-    { id: 8, name: 'Sales Requests', imageName: 'request', value: 30,  url: '/main/sales-request'  },
+    { id: 8, name: 'Sales Requests', imageName: 'request', value: 30, url: '/main/sales-request' },
   ]);
-
 
   onClickCard(item: any): void {
     this.router.navigate([item.url]);

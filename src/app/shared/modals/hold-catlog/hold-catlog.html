@@ -70,7 +70,7 @@
                     </div>
 
                     <div class="col-md-6">
-                        <label class="form-label">Category<span class="text-danger">*</span></label>
+                        <label class="form-label">Industry<span class="text-danger">*</span></label>
                         <select formControlName="category" class="form-control">
                             <option value="null" hidden>-select-</option>
                             @for (company of categoryTypeList(); track company.id) {
@@ -78,7 +78,7 @@
                             }
                         </select>
                         @if(infoForm.get('category')?.touched && infoForm.get('category')?.invalid) {
-                        <div class="error"> Category is required.</div>
+                        <div class="error">Industry is required.</div>
                         }
                     </div>
 
@@ -95,6 +95,36 @@
                         }
                     </div>
 
+                </div>
+                <!-- Company Information  -->
+                <h5 class="mt-4 mb-3">
+                    <i class="fa fa-info-circle me-2"></i> <b>Company Information </b>
+                </h5>
+
+                <div class="row g-1">
+                    <div class="col-md-6">
+                        <label class="form-label">Company Name</label>
+                        <input type="text" class="form-control" formControlName="companyName"
+                            placeholder="Enter company name">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Annual Revenue</label>
+                        <input type="text" class="form-control" formControlName="annualRevenue"
+                            placeholder="Enter annual revenue">
+                    </div>
+                    <div class="col-md-6 m-auto">
+                        <label class="form-label mt-1">Email Opt Out : &nbsp;&nbsp;</label>
+                        <!--   <input type="checkbox" class="form-control" formControlName="emailOptOut"> -->
+                        <!-- <span>Email Opt Out</span>  --> <mat-slide-toggle
+                            formControlName="emailOptOut"></mat-slide-toggle>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">No. Of Employees </label>
+                        <input type="text" class="form-control" formControlName="numberOfEmployees"
+                            placeholder="Enter number of employees" numbersOnly>
+                    </div>
                 </div>
 
                 <!-- Delivery Address -->
@@ -136,7 +166,7 @@
             <div class="card mt-2 p-2">
                 <div class="row">
                     <div class="col-md-3 col-sm-3 col-3">
-                        <img class="card-img-submit" [src]="'data:image/png;base64,' + item.Image_Path"
+                        <img class="card-img-submit" [src]="'data:image/png;base64,' + item.tempImage"
                             alt="Card image cap" (click)="onClickImage(item)">
                     </div>
                     <div class="col-md-9 col-sm-9 col-9 m-auto">

@@ -1,65 +1,159 @@
-<div class="bg-light p-3">
+<div class="container p-3">
     <form [formGroup]="productForm">
-        <div class="col-md-12 col-sm-12 col-12">
-            <label>Parent Item Name</label>
-            <input class="form-control" formControlName="name">
-            @if(productForm.get('name')?.touched && productForm.get('name')?.invalid) {
-            <div class="error"> Name is required.</div>
-            }
-        </div>
-        <div class="col-md-12 col-sm-12 col-12 mb-3">
-            <label>Color</label>
-            <select formControlName="color" class="form-control">
-                <option value="null" hidden>-select-</option>
-                <option value="red">red</option>
-                <option value="white">white</option>
-                <option value="black">black</option>
-                <option value="pink">pink</option>
-            </select>
-            @if(productForm.get('color')?.touched && productForm.get('color')?.invalid) {
-            <div class="error"> color is required.</div>
-            }
+        <div class="row g-3">
+            <div class="col-12">
+                <label class="form-label">Stone Name</label>
+                <input class="form-control" formControlName="name">
+                @if(productForm.get('name')?.touched && productForm.get('name')?.invalid) {
+                <div class="error"> Name is required.</div>
+                }
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Color</label>
+                <select formControlName="color" class="form-control">
+                    <option value="null" hidden>-select-</option>
+                    @for(color of colors(); track color) {
+                    <option [value]=color>{{color}}</option>
+                    }
+                </select>
+                @if(productForm.get('color')?.touched && productForm.get('color')?.invalid) {
+                <div class="error"> color is required.</div>
+                }
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Origin</label>
+                <input class="form-control" formControlName="origin">
+                @if(productForm.get('origin')?.touched && productForm.get('origin')?.invalid) {
+                <div class="error">Origin is required.</div>
+                }
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Pattern / Vein Type</label>
+                <select formControlName="pattern" class="form-control">
+                    <option value="null" hidden>-select-</option>
+                    <option value="linear">Linear</option>
+                    <option value="cloudy">Cloudy</option>
+                    <option value="bold">Bold</option>
+                    <option value="random">Random</option>
+                </select>
+                @if(productForm.get('pattern')?.touched && productForm.get('pattern')?.invalid) {
+                <div class="error">pattern type is required.</div>
+                }
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Slab Length</label>
+                <span class="d-flex">
+                    <input class="form-control" formControlName="length" numbersOnly (blur)="onFocusOut($event)">
+                    <select formControlName="lengthType" class="form-control text-center" style="width: 50px;"
+                        (change)="onFocusOut($event)">
+                        <option value="mm">mm</option>
+                        <option value="ft">ft</option>
+                    </select>
+                </span>
+                @if(productForm.get('length')?.touched && productForm.get('length')?.invalid) {
+                <div class="error"> Length is required.</div>
+                }
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label">Slab Width</label>
+                <span class="d-flex">
+                    <input class="form-control" formControlName="width" numbersOnly (blur)="onFocusOut($event)">
+                    <select formControlName="widthType" class="form-control text-center" style="width: 50px;"
+                        (change)="onFocusOut($event)">
+                        <option value="mm">mm</option>
+                        <option value="ft">ft</option>
+                    </select>
+
+                </span>
+                @if(productForm.get('width')?.touched && productForm.get('width')?.invalid) {
+                <div class="error"> Width is required.</div>
+                }
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Thickness(mm)</label>
+                <span class="d-flex">
+                    <input class="form-control" formControlName="thickness" numbersOnly>
+                    <!--    <select formControlName="thicknessType" class="form-control" style="width: 50px;">
+                        <option value="mm">MM</option>
+                        <option value="FT">ft</option>
+                    </select> -->
+                </span>
+                @if(productForm.get('thickness')?.touched && productForm.get('thickness')?.invalid) {
+                <div class="error"> Thickness is required.</div>
+                }
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Finish Type</label>
+                <select formControlName="finishType" class="form-control">
+                    <option value="null" hidden>-select-</option>
+                    <option value="polished">Polished</option>
+                    <option value="honed">Honed</option>
+                    <option value="leather">Leather</option>
+                    <option value="flamed">Flamed (granite)</option>
+                </select>
+                @if(productForm.get('finishType')?.touched && productForm.get('finishType')?.invalid) {
+                <div class="error">Finish type is required.</div>
+                }
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Surface Quality</label>
+                <select class="form-control" formControlName="SurfaceQuality">
+                    <option value="null" hidden>-select-</option>
+                    <option value="glosslevel">Gloss level</option>
+                    <option value="smoothness">Smoothness</option>
+                </select>
+                @if(productForm.get('SurfaceQuality')?.touched && productForm.get('SurfaceQuality')?.invalid) {
+                <div class="error">Surface Quality is required.</div>
+                }
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Price Category</label>
+                <select formControlName="priceCategory" class="form-control">
+                    <option value="null" hidden>-select-</option>
+                    <option value="Premium">Premium</option>
+                    <option value="Mid">Mid</option>
+                    <option value="Economy">Economy</option>
+                </select>
+                @if(productForm.get('priceCategory')?.touched && productForm.get('priceCategory')?.invalid) {
+                <div class="error">Price is required.</div>
+                }
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Total Area (sq.ft)</label>
+                <input class="form-control" formControlName="totalArea">
+            </div>
+            <div class="col-md-12 col-sm-12 col-12 mb-2">
+                <label>Application Suitability</label>
+                <div class="row">
+                    @for(opt of suitabilityList; track opt) {
+                    <div class="col-md-4 col-sm-4 col-6">
+                        <input class="form-check-input" type="checkbox" (change)="onChange($event)" [value]="opt">
+                        <label class="form-check-label ms-2">
+                            {{ opt }}
+                        </label>
+                    </div>
+                    }
+                </div>
+                @if(productForm.get('name')?.touched && productForm.get('name')?.invalid) {
+                <div class="error"> Name is required.</div>
+                }
+            </div>
+            <div class="col-md-12 col-sm-12 col-12 mb-3">
+                <label>Addition Information</label>
+                <textarea class="form-control" formControlName="specification"></textarea>
+                @if(productForm.get('specification')?.touched && productForm.get('specification')?.invalid) {
+                <div class="error"> Information is required.</div>
+                }
+            </div>
         </div>
 
-        <div class="col-md-12 col-sm-12 col-12 mb-3">
-            <label>Dimension</label>
-            <select formControlName="dimension" class="form-control">
-                <option value="null" hidden>-select-</option>
-                <option value="3*2">2m * 3m</option>
-                <option value="2*2">2m * 2m</option>
-                <option value="5*2">5m * 2m</option>
-            </select>
-            @if(productForm.get('dimension')?.touched && productForm.get('dimension')?.invalid) {
-            <div class="error"> Dimension is required.</div>
-            }
-        </div>
-        <div class="col-md-12 col-sm-12 col-12 mb-3">
-            <label>Thickness </label>
-            <select formControlName="thickness" class="form-control">
-                <option value="null" hidden>-select-</option>
-                <option value="3*2">20mm * 3cm</option>
-                <option value="2*2">21mm * 2cm</option>
-                <option value="5*2">0.5mm * 1cm</option>
-            </select>
-            @if(productForm.get('thickness')?.touched && productForm.get('thickness')?.invalid) {
-            <div class="error">Dhickness is required.</div>
-            }
-        </div>
-        <div class="col-md-12 col-sm-12 col-12 mb-3" >
-            <label>Specification</label>
-            <textarea class="form-control" formControlName="specification"></textarea>
-            @if(productForm.get('specification')?.touched && productForm.get('specification')?.invalid) {
-            <div class="error"> Specification is required.</div>
-            }
+        <div class="text-end">
+            <button class="btn btn-primary px-4" (click)="onClickConfirm()">Save</button>
         </div>
     </form>
-    <div class="row mt-2">
-        <div class="col-md-6 col-sm-6 col-6 text-end">
-            <button type="button" class="btn btn-secondary" mat-dialog-close>Cancel</button>
-
-        </div>
-        <div class="col-md-6 col-sm-6 col-6">
-            <button type="button" class="btn btn-success" (click)="onClickConfirm()">Add</button>
-        </div>
-    </div>
 </div>

@@ -1,8 +1,41 @@
-.label {
+/* .label {
     color: #000;
 }
 
 .text-area {
     width: 200px;
     height: 100px;
+} */
+
+
+.form-label {
+  font-weight: 700;
+  font-size: 14px;
+  color: #444;
+  margin-bottom: .0rem;
+}
+
+.form-control,
+.form-select {
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  padding: 5px;
+  transition: all 0.2s ease;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #4c8bf5;
+  box-shadow: 0 0 0 2px rgba(76, 139, 245, 0.15);
+}
+
+
+.btn-primary {
+  border-radius: 10px;
+  background: linear-gradient(135deg, #4c8bf5, #6a5af9);
+  border: none;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
 }

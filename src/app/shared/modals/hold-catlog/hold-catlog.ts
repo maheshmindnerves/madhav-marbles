@@ -13,10 +13,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { ResultModel } from '../../models/result.model';
 import { CustomerRequestService } from '../../../services/customer-request-service';
 import { forkJoin } from 'rxjs';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-hold-catlog',
-  imports: [MatButtonModule, MatDialogModule, ReactiveFormsModule, NumbersOnlyDirective, MatTooltipModule, MatIconModule],
+  imports: [MatButtonModule, MatDialogModule, ReactiveFormsModule, NumbersOnlyDirective, MatTooltipModule, MatIconModule, MatSlideToggleModule],
   templateUrl: './hold-catlog.html',
   styleUrl: './hold-catlog.scss',
 })
@@ -44,9 +45,14 @@ export class HoldCatlog {
       category: [null, Validators.required],
       projectType: [null, Validators.required],
       address: ['', Validators.required],
-      message: ['']
+      message: [''],
+      companyName: [''],
+      annualRevenue: [''],
+      emailOptOut: [false],
+      numberOfEmployees: [''],
     });
     this.getCategory();
+    console.log('ddddddddddddddddddddddddd', this.data);
   }
 
   getCategory(): void {
@@ -74,6 +80,7 @@ export class HoldCatlog {
       this.dialog.open(Otp, { width: '30vw', data: { infoForm: this.infoForm.getRawValue(), catlogData: this.data } });
       this.dialogRef.close();
     } else {
+      this.infoForm.markAllAsTouched();
       this.snackBar.error('Select all required fields');
     }
   }

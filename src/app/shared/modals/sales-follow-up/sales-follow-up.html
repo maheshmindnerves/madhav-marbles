@@ -1,0 +1,61 @@
+<div class="bg-light p-3">
+    <form [formGroup]="salesFollowForm">
+        <div class="col-md-12 col-sm-12 col-12 mb-3">
+            <label>Call Status</label>
+            <select formControlName="requestCallStatus" class="form-control">
+                <option value="null" hidden>-select-</option>
+                <option value="open">Open</option>
+                <option value="close">Close</option>
+            </select>
+            @if(salesFollowForm.get('requestCallStatus')?.touched && salesFollowForm.get('requestCallStatus')?.invalid) {
+            <div class="error">Call status is required.</div>
+            }
+        </div>
+        <div class="col-md-12 col-sm-12 col-12 mb-3">
+            <label>Lead Status</label>
+            <select formControlName="resuestLeadStatusId" class="form-control">
+                <option value="null" hidden>-select-</option>
+                @for (source of leadStatus(); track source.id) {
+                <option [value]="source.id">{{source.Lead_Status}}</option>
+                }
+            </select>
+            @if(salesFollowForm.get('resuestLeadStatusId')?.touched && salesFollowForm.get('resuestLeadStatusId')?.invalid) {
+            <div class="error">Lead status is required.</div>
+            }
+        </div>
+        <div class="col-md-12 col-sm-12 col-12 mb-3">
+            <label>Follow up date</label>
+            <input [matDatepicker]="picker" class="form-control" (click)="picker.open()" formControlName="followupDate"
+                [min]="minDate" placeholder="dd-mm-yy">
+            <mat-datepicker #picker></mat-datepicker>
+            @if(salesFollowForm.get('followupDate')?.touched && salesFollowForm.get('followupDate')?.invalid) {
+            <div class="error">Follow up date is required.</div>
+            }
+        </div>
+        <div class="col-md-12 col-sm-12 col-12 mb-3">
+            <label>Next follow up date</label>
+            <input [matDatepicker]="picker1" class="form-control" (click)="picker1.open()"
+                formControlName="nextFollowupDate" [min]="minDate" placeholder="dd-mm-yy">
+            <mat-datepicker #picker1></mat-datepicker>
+            @if(salesFollowForm.get('nextFollowupDate')?.touched && salesFollowForm.get('nextFollowupDate')?.invalid) {
+            <div class="error">Next follow up date is required.</div>
+            }
+        </div>
+        <div class="col-md-12 col-sm-12 col-12 mb-3">
+            <label>Remark</label>
+            <input class="form-control" formControlName="remark">
+            @if(salesFollowForm.get('remark')?.touched && salesFollowForm.get('remark')?.invalid) {
+            <div class="error">Remark is required.</div>
+            }
+        </div>
+    </form>
+    <div class="row mt-2">
+        <div class="col-md-6 col-sm-6 col-6 text-end">
+            <button type="button" class="btn btn-secondary" mat-dialog-close>Cancel</button>
+
+        </div>
+        <div class="col-md-6 col-sm-6 col-6">
+            <button type="button" class="btn btn-success" (click)="onClickConfirm()">Confirm</button>
+        </div>
+    </div>
+</div>

@@ -10,6 +10,7 @@ import { requestItems } from '../request/request';
 import { CategoryDetails } from '../../../../shared/modals/category-details/category-details';
 import { Invoice } from '../../../../shared/modals/invoice/invoice';
 import Swal from 'sweetalert2';
+import { SalesFollowUp } from '../../../../shared/modals/sales-follow-up/sales-follow-up';
 
 @Component({
   selector: 'app-sales-request',
@@ -42,6 +43,7 @@ export class SalesRequest {
 
   getRequestListAssignedTosalesTeam(): void {
     this.loader.start();
+    this.rassignedToRequestItems.set([]);
     this.crService.GetRequestListAssignedTosalesTeam(1).subscribe({
       next: (res: ResultModel) => {
         this.loader.stop();
@@ -63,6 +65,7 @@ export class SalesRequest {
 
   getProcessDataListofSalesTeam(): void {
     this.loader.start();
+    this.rassignedToSalesItems.set([]);
     this.crService.GetProcessDataListofSalesTeam(1).subscribe({
       next: (res: ResultModel) => {
         this.loader.stop();
@@ -164,20 +167,15 @@ export class SalesRequest {
         });
       }
     });
-    // this.dialog.open(Confirmation, { width: '400px', data });
+  }
 
-    //are you sure want to Materilized this request 
-
-    /*   {
-        "requestId": 1,
-          "userid": 1,
-            "isRequestReleased": true,
-              "requestReleaseddBy": 1,
-                "isRequestMaterilized": false,
-                  "requestMaterializeddBy": 0,
-                    "requesMaterizedInvoiceNo": 0,
-                      "requestMaterializedRemark": "cancelled"
-      } */
+  onClickSalesFollwUp(item: requestItems): void {
+    const dialogRef = this.dialog.open(SalesFollowUp, { width: '450px', data: item });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.getRequestListAssignedTosalesTeam();
+      }
+    });
   }
 
 

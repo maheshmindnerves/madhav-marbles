@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { requestItems } from '../../../modules/main/main/request/request';
@@ -14,6 +14,7 @@ import { ResultModel } from '../../models/result.model';
   styleUrl: './assign-to-sale.scss',
 })
 export class AssignToSale {
+  protected readonly sources = signal<leadSource[]>([])
   assignToSaleForm!: FormGroup;
   readonly fb = inject(FormBuilder);
   readonly dialogRef = inject(MatDialogRef);
@@ -26,27 +27,22 @@ export class AssignToSale {
     this.assignToSaleForm = this.fb.group({
       member: [null, Validators.required],
       note: ['', Validators.nullValidator],
+      priority: [null, Validators.required],
+      leadSource: [null, Validators.required]
     });
+
+    this.GetLeadSource();
   }
 
-  onClickConfirm(): void {
+  GetLeadSource(): void {
     this.loader.start();
-    const payload = {
-      requestId: this.data.requestItem.RequestID,
-      isRequestAccepted: true,
-      requestAcceptedBy: 1,
-      isRequestAssigned: true,
-      requesAssignUserId: this.assignToSaleForm.value.member,
-      requestAssignedRemark: this.assignToSaleForm.value.note,
-    }
-
-    this.crService.RequestAssignToSalesTeam(payload).subscribe({
+    this.sources.set([]);
+    this.crService.GetLeadSource().subscribe({
       next: (res: ResultModel) => {
-        if (res.isSuccess) {
-          this.snackBar.success(res.data[0].Result);
-          this.dialogRef.close(true);
+        if (res.isSuccess && res.data.length > 0) {
+          this.sources.set(res.data);
         } else {
-          this.snackBar.error(res.message);
+          this.snackBar.error('No data found.');
         }
       }, error: (err) => {
         console.error('Error:', err);
@@ -54,6 +50,40 @@ export class AssignToSale {
         this.loader.stop();
       }
     });
+  }
+
+  onClickConfirm(): void {
+    if (this.assignToSaleForm.valid) {
+      this.loader.start();
+      const payload = {
+        requestId: this.data.requestItem.RequestID,
+        isRequestAccepted: true,
+        requestAcceptedBy: 1,
+        isRequestAssigned: true,
+        requesAssignUserId: this.assignToSaleForm.value.member,
+        requestAssignedRemark: this.assignToSaleForm.value.note,
+        requestPriority: this.assignToSaleForm.value.priority,
+        requestLeadSourceId: this.assignToSaleForm.value.leadSource
+      }
+
+      this.crService.RequestAssignToSalesTeam(payload).subscribe({
+        next: (res: ResultModel) => {
+          if (res.isSuccess) {
+            this.snackBar.success(res.data[0].Result);
+            this.dialogRef.close(true);
+          } else {
+            this.snackBar.error(res.message);
+          }
+        }, error: (err) => {
+          console.error('Error:', err);
+        }, complete: () => {
+          this.loader.stop();
+        }
+      });
+    } else {
+      this.assignToSaleForm.markAllAsTouched();
+    }
+
   }
 }
 
@@ -71,5 +101,11 @@ export interface userDetails {
   User_Category_id: string;
   User_Full_name: string;
   User_Location_Id: string;
+  id: string;
+}
+
+
+export interface leadSource {
+  Lead_source: string;
   id: string;
 }

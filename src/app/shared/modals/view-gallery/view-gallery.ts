@@ -1,12 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { ProductService } from '../../../services/product-service';
-import { SnackBarService } from '../../../services/snack-bar-service';
-import { FormControl, Validators } from '@angular/forms';
-import { NgxUiLoaderService } from 'ngx-ui-loader';
-import { ResultModel } from '../../models/result.model';
 import { interval, Subscription } from 'rxjs';
-import { MatIcon } from "@angular/material/icon";
 import { ZoomImage } from '../zoom-image/zoom-image';
 
 @Component({
@@ -16,9 +10,6 @@ import { ZoomImage } from '../zoom-image/zoom-image';
   styleUrl: './view-gallery.scss',
 })
 export class ViewGallery {
-  /*  private snackBar = inject(SnackBarService);
-   private productService = inject(ProductService); */
-  /*  private loader = inject(NgxUiLoaderService); */
   items = signal<any[]>([]);
   readonly data = inject<any>(MAT_DIALOG_DATA);
   private timer!: Subscription;

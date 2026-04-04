@@ -1,21 +1,21 @@
 <div class="row">
-    <div class="col-md-6 col-sm-6 col-6 custom-header"><mat-icon class="text-white"
-            (click)="back()"><mat-icon>keyboard_arrow_left</mat-icon></mat-icon></div>
-    <div class="col-md-6 col-sm-6 col-6 custom-header text-end"><mat-icon class="text-white"
-            (click)="addProduct()">add_box</mat-icon></div>
+    <div class="col-md-6 col-sm-6 col-6 custom-header">
+        <mat-icon (click)="back()">keyboard_arrow_left</mat-icon>
+    </div>
+    <div class="col-md-6 col-sm-6 col-6 custom-header text-end"><mat-icon (click)="addProduct()">add_box</mat-icon>
+    </div>
 </div>
-<div class="row">
-
+<div class="row product-scroll">
     @for (item of items(); track item.id) {
     <div class="col-md-4 col-sm-6 col-12">
         <div class="card p-2 mt-2">
             <div class="row">
                 <div class="col-md-5 col-sm-5 col-5 border-right-gray">
-                    <div class="pt-2">Company Name:</div>
-                    <div class="pt-2">Item Name:</div>
-                    <div class="pt-2">Item Code:</div>
-                    <div class="pt-2">Category:</div>
-                    <div class="pt-2">Sub Category:</div>
+                    <div class="pt-2">Company Name</div>
+                    <div class="pt-2">Stone Name</div>
+                    <div class="pt-2">Stone Code</div>
+                    <div class="pt-2">Category</div>
+                    <div class="pt-2">Sub Category</div>
                 </div>
                 <div class="col-md-7 col-sm-7 col-7 text-end">
                     <div class="link pt-2"><b>{{item.company_Name || '-'}}</b></div>
@@ -31,7 +31,7 @@
                 </div>
                 <div class="col-md-6 col-sm-6 col-6 text-end pt-2">
                     <!-- <span></span> -->
-                    <button type="button" (click)="onClickEdit(item)" class="btn btn-primary edit-list"><i
+                    <button type="button" (click)="onClickEdit(item)" class="btn btn-primary btn-sm edit-list"><i
                             class="fa fa-plus me-1"></i>Add</button>
                     <button type="button" (click)="onClickSpecification(item)" class="btn btn-success edit-list ms-2"><i
                             class="fa fa-eye me-1"></i>View</button>

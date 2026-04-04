@@ -1,0 +1,47 @@
+<div class="p-3">
+    <form [formGroup]="requesstRejectForm">
+        <div class="col-md-12 col-sm-12 col-12 mb-3">
+            <label class="form-label">Primary Reason</label>
+            <select formControlName="primaryRejectionReasonId" class="form-control" (change)="onChangeReason()">
+                <option value="null" hidden>-select-</option>
+                @for(reason of primaryReasons(); track reason.id) {
+                <option [value]=reason.id>{{reason.Primary_Rejection_Reason}}</option>
+                }
+            </select>
+            @if(requesstRejectForm.get('primaryRejectionReasonId')?.touched &&
+            requesstRejectForm.get('primaryRejectionReasonId')?.invalid) {
+            <div class="error">Reason is required.</div>
+            }
+        </div>
+        <div class="col-md-12 col-sm-12 col-12 mb-3">
+            <label class="form-label">Sub Primary Reason</label>
+            <select formControlName="subPrimaryRejectionReasonId" class="form-control">
+                <option value="null" hidden>-select-</option>
+                @for(reason of subPrimaryReason(); track reason.SubPrimaryRejectionId) {
+                <option [value]=reason.SubPrimaryRejectionId>{{reason.Sub_Primary_Rejection_Reason}}</option>
+                }
+            </select>
+            @if(requesstRejectForm.get('subPrimaryRejectionReasonId')?.touched &&
+            requesstRejectForm.get('subPrimaryRejectionReasonId')?.invalid) {
+            <div class="error">Reason is required.</div>
+            }
+        </div>
+        <div class="col-md-12 col-sm-12 col-12 mb-3">
+            <label>Reject Remark</label>
+            <textarea class="form-control" formControlName="requestCancelRemark"></textarea>
+            @if(requesstRejectForm.get('requestCancelRemark')?.touched &&
+            requesstRejectForm.get('requestCancelRemark')?.invalid) {
+            <div class="error">Remark is required.</div>
+            }
+        </div>
+    </form>
+    <div class="row mt-2">
+        <div class="col-md-6 col-sm-6 col-6 text-end">
+            <button type="button" class="btn btn-secondary" mat-dialog-close>Cancel</button>
+
+        </div>
+        <div class="col-md-6 col-sm-6 col-6">
+            <button type="button" class="btn btn-success" (click)="onClickConfirm()">Confirm</button>
+        </div>
+    </div>
+</div>

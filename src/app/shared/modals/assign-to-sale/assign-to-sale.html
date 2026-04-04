@@ -7,16 +7,38 @@
                 @for (user of data.user; track user.id) {
                 <option [value]="user.id">{{user.User_Full_name}}</option>
                 }
-                <!--   <option value="null" hidden>-select-</option>
-                <option value="red">mahesh</option>
-                <option value="white">nitin</option>
-                <option value="black">vikas</option>
-                <option value="pink">sweta</option> -->
             </select>
             @if(assignToSaleForm.get('member')?.touched && assignToSaleForm.get('member')?.invalid) {
             <div class="error"> Team member is required.</div>
             }
         </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-6 mb-3">
+                <label>Lead Source</label>
+                <select formControlName="leadSource" class="form-control">
+                    <option value="null" hidden>-select-</option>
+                    @for (source of sources(); track source.id) {
+                    <option [value]="source.id">{{source.Lead_source}}</option>
+                    }
+                </select>
+                @if(assignToSaleForm.get('leadSource')?.touched && assignToSaleForm.get('leadSource')?.invalid) {
+                <div class="error"> Lead source is required.</div>
+                }
+            </div>
+            <div class="col-md-6 col-sm-6 col-6 mb-3">
+                <label>Select Priority</label>
+                <select formControlName="priority" class="form-control">
+                    <option value="null" hidden>-select-</option>
+                    <option value="Low">Low</option>
+                    <option value="Moderate">Moderate</option>
+                    <option value="High">High</option>
+                </select>
+                @if(assignToSaleForm.get('priority')?.touched && assignToSaleForm.get('priority')?.invalid) {
+                <div class="error"> priority is required.</div>
+                }
+            </div>
+        </div>
+
         <div class="col-md-12 col-sm-12 col-12 mb-3">
             <label>Note For Sales Team (Optional)</label>
             <textarea class="form-control" formControlName="note"></textarea>
