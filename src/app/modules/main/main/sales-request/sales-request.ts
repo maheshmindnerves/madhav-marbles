@@ -9,12 +9,14 @@ import { ResultModel } from '../../../../shared/models/result.model';
 import { requestItems } from '../request/request';
 import { CategoryDetails } from '../../../../shared/modals/category-details/category-details';
 import { Invoice } from '../../../../shared/modals/invoice/invoice';
-import Swal from 'sweetalert2';
 import { SalesFollowUp } from '../../../../shared/modals/sales-follow-up/sales-follow-up';
+import { MatIconModule } from '@angular/material/icon';
+import { StorageService } from '../../../../services/storage-service';
+import { FollupHistory } from '../../../../shared/modals/follup-history/follup-history';
 
 @Component({
   selector: 'app-sales-request',
-  imports: [MatTabsModule],
+  imports: [MatTabsModule, MatIconModule],
   templateUrl: './sales-request.html',
   styleUrl: './sales-request.scss',
 })
@@ -25,6 +27,7 @@ export class SalesRequest {
   readonly crService = inject(CustomerRequestService);
   private snackBar = inject(SnackBarService);
   private loader = inject(NgxUiLoaderService);
+  private storage = inject(StorageService);
   readonly dialog = inject(MatDialog);
 
   ngOnInit(): void {
@@ -128,52 +131,73 @@ export class SalesRequest {
     });
   }
 
-  onClickCancel(item: requestItems): void {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: 'You will to materilized this request!',
-      icon: 'warning',
-      width: '350px',
-      padding: '0.5em',
-      showCancelButton: true,
-      confirmButtonText: 'Yes!'
-    }).then((result) => {
-      if (result.isConfirmed) {
-
-        const payload = {
-          requestId: item.RequestID,
-          userid: 1,
-          isRequestReleased: true,
-          requestReleaseddBy: 1,
-          isRequestMaterilized: false,
-          requestMaterializeddBy: 0,
-          requesMaterizedInvoiceNo: '0',
-          requestMaterializedRemark: "cancelled"
-        }
-        this.loader.start();
-        this.crService.RequestMaterializeBySaleTeam(payload).subscribe({
-          next: (res: ResultModel) => {
-            if (res.isSuccess) {
-              this.getRequestListAssignedTosalesTeam();
-              this.snackBar.success(res.data[0].Result)
-            } else {
-              this.snackBar.error(res.message);
-            }
-          }, error: (err) => {
-            console.error('Error:', err);
-          }, complete: () => {
-            this.loader.stop();
-          }
-        });
-      }
-    });
-  }
+  /*  onClickCancel(item: requestItems): void {
+     Swal.fire({
+       title: 'Are you sure?',
+       text: 'You will to materilized this request!',
+       icon: 'warning',
+       width: '350px',
+       padding: '0.5em',
+       showCancelButton: true,
+       confirmButtonText: 'Yes!'
+     }).then((result) => {
+       if (result.isConfirmed) {
+ 
+         const payload = {
+           requestId: item.RequestID,
+           userid: 1,
+           isRequestReleased: true,
+           requestReleaseddBy: 1,
+           isRequestMaterilized: false,
+           requestMaterializeddBy: 0,
+           requesMaterizedInvoiceNo: '0',
+           requestMaterializedRemark: "cancelled"
+         }
+         this.loader.start();
+         this.crService.RequestMaterializeBySaleTeam(payload).subscribe({
+           next: (res: ResultModel) => {
+             if (res.isSuccess) {
+               this.getRequestListAssignedTosalesTeam();
+               this.snackBar.success(res.data[0].Result)
+             } else {
+               this.snackBar.error(res.message);
+             }
+           }, error: (err) => {
+             console.error('Error:', err);
+           }, complete: () => {
+             this.loader.stop();
+           }
+         });
+       }
+     });
+   } */
 
   onClickSalesFollwUp(item: requestItems): void {
     const dialogRef = this.dialog.open(SalesFollowUp, { width: '450px', data: item });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.getRequestListAssignedTosalesTeam();
+      }
+    });
+  }
+
+  onClickHistory(requestId: number): void {
+    this.loader.start();
+    this.crService.GetFollowUphistory(this.storage.getItem('userId'), requestId).subscribe({
+      next: (res: ResultModel) => {
+        if (res.isSuccess && res.data.length > 0) {
+          /*   res.data.forEach(element => {
+              element.hold = element.IsHold === 'True' ? true : false;
+              element.sampleOrder = element.Isample === 'True' ? true : false;
+            });*/
+          this.dialog.open(FollupHistory, { data: res.data, width: '90vw', minWidth: '90vw', maxHeight: '90vh' });
+        } else {
+          this.snackBar.error('No data found.');
+        }
+      }, error: (err) => {
+        console.error('Error:', err);
+      }, complete: () => {
+        this.loader.stop();
       }
     });
   }

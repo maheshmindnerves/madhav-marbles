@@ -69,7 +69,7 @@ export class Request {
   getRequestListAssignedTosalesTeam(): void {
     this.loader.start();
     this.rassignedToSalesItems.set([]);
-    this.crService.GetRequestListAssignedTosalesTeam(0).subscribe({
+    this.crService.GetRequestListAssignedTosalesTeam(1).subscribe({
       next: (res: ResultModel) => {
         this.loader.stop();
         if (res.isSuccess) {

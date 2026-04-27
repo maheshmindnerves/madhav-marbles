@@ -33,13 +33,19 @@
                                 <b>Product Segment: <span
                                         class="text-primary">{{item.RequestOrder_Project_Type}}</span></b>
                             </div>
-                            <div class="col-md-12 col-sm-12 col-12 mt-2 text-end">
-                                <button class="btn btn-warning btn-sm me-2" (click)="onClickSalesFollwUp(item)">Sales Follwup</button>
-                                <button class="btn btn-danger btn-sm me-2" (click)="onClickCancel(item)">Cancel</button>
-                                <button class="btn btn-success btn-sm"
-                                    (click)="onClickMaterilized(item)">Materilized</button>
+                            <div class="row mt-2 ">
+                                <div class="col-md-2 col-sm-2 col-2 m-auto">
+                                    <mat-icon (click)="onClickHistory(item.RequestID)">history</mat-icon>
+                                </div>
+                                <div class="col-md-10 col-sm-10 col-10 text-end">
+                                    <button class="btn btn-warning btn-sm me-2"
+                                        (click)="onClickSalesFollwUp(item)">Sales
+                                        Follwup</button>
+                                    <!-- <button class="btn btn-danger btn-sm me-2" (click)="onClickCancel(item)">Cancel</button> -->
+                                    <button class="btn btn-success btn-sm"
+                                        (click)="onClickMaterilized(item)">Materilized</button>
+                                </div>
                             </div>
-
                         </div>
                     </div>
                 </div>

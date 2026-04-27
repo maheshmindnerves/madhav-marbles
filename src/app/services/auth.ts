@@ -1,7 +1,11 @@
+import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
+import { environment } from '../environments/environment';
+import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
+  private http = inject(HttpClient);
   /*  private loggedIn = signal<boolean>(false); */
 
   isAuthenticated(): boolean {
@@ -22,5 +26,9 @@ export class AuthService {
   logout() {
     /* this.loggedIn.set(false); */
     localStorage.clear();
+  }
+
+  ValidateUser(mobile: string): Observable<any> {
+    return this.http.get(environment.baseApiUrl + 'Auth/ValidateUser?mobile=' + mobile);
   }
 }

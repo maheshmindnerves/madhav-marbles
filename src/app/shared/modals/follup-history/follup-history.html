@@ -1,0 +1,49 @@
+<div class="header">
+    <h5>Followup History</h5>
+    <span mat-dialog-close class="btn-close-custom"></span>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-12">
+            <input type="text" class="form-control w-25 float-end p-1 m-2" placeholder="search here..."
+                [formControl]="searchValue">
+        </div>
+    </div>
+
+    @if(filteredData && filteredData.length > 0) {
+    <table class="table table-striped">
+        <thead class="text-center">
+            <tr>
+                <th scope="col">User Name</th>
+                <th scope="col">Call Status</th>
+                <th scope="col">Follow Up Date</th>
+                <th scope="col">Lead Status</th>
+                <th scope="col">Next Meeting Date</th>
+                <th scope="col">Primary Rejection Reason</th>
+                <th scope="col">Sub Primary Rejection Reason</th>
+                <th scope="col">Remark</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            @for(d of filteredData; track d.id; let i = $index) {
+            <tr>
+                <td>{{d.User_Full_name}}</td>
+                <td>{{d.Call_Status}}</td>
+                <td>{{d.Follow_Up_Date}}</td>
+                <td>{{d.Lead_Status}}</td>
+                <td>{{d.Next_Meeting_Date}}</td>
+                <td>{{d.Primary_Rejection_Reason}}</td>
+                <td>{{d.Sub_Primary_Rejection_Reason}}</td>
+                <td>{{d.Remark}}</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    } @else {
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-12 text-center h3 text-danger mt-3 mb-2">
+            No Data Found.
+        </div>
+    </div>
+    }
+</div>

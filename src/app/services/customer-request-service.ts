@@ -84,4 +84,7 @@ export class CustomerRequestService {
     }
 
 
+    GetFollowUphistory(userId: Number, requestId: Number): Observable<any> {
+        return this.http.get(environment.baseApiUrl + 'CustomerRequest/GetFollowUphistory?userid=' + userId + '&requestid=' + requestId,);
+    }
 }

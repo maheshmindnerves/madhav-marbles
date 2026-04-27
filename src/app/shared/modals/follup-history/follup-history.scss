@@ -1,0 +1,23 @@
+.header {
+    background: #fff;
+    border-bottom: 1px solid gray;
+    padding-top: 10px !important;
+    color: black;
+    padding-left: 10px;
+}
+
+.btn-close-custom::before {
+    content: "×";
+    font-size: 2rem;
+    color: #000;
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    cursor: pointer;
+}
+
+.btn-close-custom {
+    position: absolute;
+    right: 0;
+    top: 0;
+}

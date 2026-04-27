@@ -1,16 +1,14 @@
 <div class="bg-light p-3">
+    <div class="col-md-12 col-sm-12 col-12 mb-3">
+        <label>Call Status</label>
+        <select [formControl]="requestCallStatus" class="form-control" (change)="onChangeCallStatus()">
+            <option value="null" hidden>-select-</option>
+            <option value="open">Open</option>
+            <option value="close">Close</option>
+        </select>
+    </div>
+    @if(requestCallStatus.value === 'open') {
     <form [formGroup]="salesFollowForm">
-        <div class="col-md-12 col-sm-12 col-12 mb-3">
-            <label>Call Status</label>
-            <select formControlName="requestCallStatus" class="form-control">
-                <option value="null" hidden>-select-</option>
-                <option value="open">Open</option>
-                <option value="close">Close</option>
-            </select>
-            @if(salesFollowForm.get('requestCallStatus')?.touched && salesFollowForm.get('requestCallStatus')?.invalid) {
-            <div class="error">Call status is required.</div>
-            }
-        </div>
         <div class="col-md-12 col-sm-12 col-12 mb-3">
             <label>Lead Status</label>
             <select formControlName="resuestLeadStatusId" class="form-control">
@@ -19,28 +17,43 @@
                 <option [value]="source.id">{{source.Lead_Status}}</option>
                 }
             </select>
-            @if(salesFollowForm.get('resuestLeadStatusId')?.touched && salesFollowForm.get('resuestLeadStatusId')?.invalid) {
+            @if(salesFollowForm.get('resuestLeadStatusId')?.touched &&
+            salesFollowForm.get('resuestLeadStatusId')?.invalid) {
             <div class="error">Lead status is required.</div>
             }
         </div>
         <div class="col-md-12 col-sm-12 col-12 mb-3">
             <label>Follow up date</label>
             <input [matDatepicker]="picker" class="form-control" (click)="picker.open()" formControlName="followupDate"
-                [min]="minDate" placeholder="dd-mm-yy">
+                [min]="minDate" placeholder="dd-mm-yy" readonly>
             <mat-datepicker #picker></mat-datepicker>
             @if(salesFollowForm.get('followupDate')?.touched && salesFollowForm.get('followupDate')?.invalid) {
             <div class="error">Follow up date is required.</div>
             }
         </div>
-        <div class="col-md-12 col-sm-12 col-12 mb-3">
-            <label>Next follow up date</label>
-            <input [matDatepicker]="picker1" class="form-control" (click)="picker1.open()"
-                formControlName="nextFollowupDate" [min]="minDate" placeholder="dd-mm-yy">
-            <mat-datepicker #picker1></mat-datepicker>
-            @if(salesFollowForm.get('nextFollowupDate')?.touched && salesFollowForm.get('nextFollowupDate')?.invalid) {
-            <div class="error">Next follow up date is required.</div>
-            }
+        <div class="row mb-3">
+            <div class="col-md-6 col-sm-6 col-6">
+                <label>Next follow up date</label>
+                <input [matDatepicker]="picker1" class="form-control" (click)="picker1.open()"
+                    formControlName="nextFollowupDate" [min]="minDate" placeholder="dd-mm-yy" readonly>
+                <mat-datepicker #picker1></mat-datepicker>
+                @if(salesFollowForm.get('nextFollowupDate')?.touched &&
+                salesFollowForm.get('nextFollowupDate')?.invalid) {
+                <div class="error">Next follow up date is required.</div>
+                }
+            </div>
+            <div class="col-md-6 col-sm-6 col-6">
+                <label>Next follow up time</label>
+                <input matInput [matTimepicker]="pickerTime" class="form-control" formControlName="nextFollowupTime"
+                    placeholder="HH:mm A" readonly>
+                <mat-timepicker #pickerTime />
+                @if(salesFollowForm.get('nextFollowupTime')?.touched &&
+                salesFollowForm.get('nextFollowupTime')?.invalid) {
+                <div class="error">Next follow up time is required.</div>
+                }
+            </div>
         </div>
+
         <div class="col-md-12 col-sm-12 col-12 mb-3">
             <label>Remark</label>
             <input class="form-control" formControlName="remark">
@@ -49,6 +62,46 @@
             }
         </div>
     </form>
+    } @else {
+    <form [formGroup]="requesstRejectForm">
+        <div class="col-md-12 col-sm-12 col-12 mb-3">
+            <label class="form-label">Primary Reason</label>
+            <select formControlName="primaryRejectionReasonId" class="form-control" (change)="onChangeReason()">
+                <option value="null" hidden>-select-</option>
+                @for(reason of primaryReasons(); track reason.id) {
+                <option [value]=reason.id>{{reason.Primary_Rejection_Reason}}</option>
+                }
+            </select>
+            @if(requesstRejectForm.get('primaryRejectionReasonId')?.touched &&
+            requesstRejectForm.get('primaryRejectionReasonId')?.invalid) {
+            <div class="error">Reason is required.</div>
+            }
+        </div>
+        <div class="col-md-12 col-sm-12 col-12 mb-3">
+            <label class="form-label">Sub Primary Reason</label>
+            <select formControlName="subPrimaryRejectionReasonId" class="form-control">
+                <option value="null" hidden>-select-</option>
+                @for(reason of subPrimaryReason(); track reason.SubPrimaryRejectionId) {
+                <option [value]=reason.SubPrimaryRejectionId>{{reason.Sub_Primary_Rejection_Reason}}</option>
+                }
+            </select>
+            @if(requesstRejectForm.get('subPrimaryRejectionReasonId')?.touched &&
+            requesstRejectForm.get('subPrimaryRejectionReasonId')?.invalid) {
+            <div class="error">Reason is required.</div>
+            }
+        </div>
+        <div class="col-md-12 col-sm-12 col-12 mb-3">
+            <label>Reject Remark</label>
+            <textarea class="form-control" formControlName="requestCancelRemark"></textarea>
+            @if(requesstRejectForm.get('requestCancelRemark')?.touched &&
+            requesstRejectForm.get('requestCancelRemark')?.invalid) {
+            <div class="error">Remark is required.</div>
+            }
+        </div>
+    </form>
+
+    }
+
     <div class="row mt-2">
         <div class="col-md-6 col-sm-6 col-6 text-end">
             <button type="button" class="btn btn-secondary" mat-dialog-close>Cancel</button>

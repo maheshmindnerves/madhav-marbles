@@ -11,12 +11,15 @@ import { MAT_DATE_FORMATS } from '@angular/material/core';
 export const MY_DATE_FORMATS = {
   parse: {
     dateInput: 'DD-MM-YY',
+    timeInput: 'HH:mm A'
   },
   display: {
     dateInput: 'DD-MM-YY',
     monthYearLabel: 'MMM YYYY',
     dateA11yLabel: 'LL',
     monthYearA11yLabel: 'MMMM YYYY',
+    timeInput: 'HH:mm A',
+    timeOptionLabel: 'HH:mm A'
   },
 };
 
