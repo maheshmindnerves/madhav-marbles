@@ -1,0 +1,105 @@
+<div class="row">
+    <!-- @for (item of dashboardSummary(); track item.TotalLeads) { -->
+    <div class="col-md-3 col-sm-3 col-6">
+        <div class="card mb-1 mt-1">
+            <div class="card-body p-2">
+                <div class="text-center">
+                    <h4>Total Leads</h4>
+                </div>
+                <div class="text-center">
+                    <h3><b>{{dashboardSummary()?.TotalLeads}}</b></h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 col-sm-3 col-6">
+        <div class="card mb-1 mt-1">
+            <div class="card-body p-2">
+                <div class="text-center">
+                    <h4>New Leads(Today)</h4>
+                </div>
+                <div class="text-center">
+                    <h3><b>{{dashboardSummary()?.TodayLeads}}</b></h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-3 col-6">
+        <div class="card mb-1 mt-1">
+            <div class="card-body p-2">
+                <div class="text-center">
+                    <h4>Followup Due(Today)</h4>
+                </div>
+                <div class="text-center">
+                    <h3><b>{{dashboardSummary()?.FollowupDueToday}}</b></h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-3 col-6">
+        <div class="card mb-1 mt-1">
+            <div class="card-body p-2">
+                <div class="text-center">
+                    <h4>Deals Closed</h4>
+                </div>
+                <div class="text-center">
+                    <h3><b>{{dashboardSummary()?.DealsClosed}}</b></h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-12">
+        <div class="card mb-1 mt-1 custom-card">
+            <div class="card-header">
+                <b>Today's Follow Up</b>
+            </div>
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Customer Name</th>
+                            <th>Action</th>
+                            <th>Status</th>
+                            <th>Priority</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (item of dashboardSummary()?.TodayFollowupList; track item.RequestID) {
+                        <tr>
+                            <td>{{item.Meeting_Time}}</td>
+                            <td>{{item.CustomerName}}</td>
+                            <td>{{item.Call_Status}}</td>
+                            <td>{{item.Lead_Status}}</td>
+                            <td [ngClass]="{
+                                'text-success':item.Priority === 'Low',
+                                'text-warning':item.Priority === 'Moderate',
+                                'text-danger':item.Priority === 'High'
+                            }">{{item.Priority}}</td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4 col-sm-4 col-6">
+        <div class="card mb-1 mt-1">
+            <div class="card-header">
+                <b>Quick actions for assigned request</b>
+            </div>
+            <div class="card-body p-2">
+                <img class="image-width" src="./images/request.svg"> <span class="value-list">20</span>
+                <mat-icon class="right-icon" (click)="onClickCard()">chevron_right</mat-icon>
+            </div>
+            <div class="col-md-12 col-sm-12 col-12 name-title">
+                Sales Request
+            </div>
+        </div>
+    </div>
+</div>
