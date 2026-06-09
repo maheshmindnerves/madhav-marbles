@@ -1,9 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { SnackBarService } from '../../../../services/snack-bar-service';
-import { StorageService } from '../../../../services/storage-service';
 import { UserDashboardService } from '../../../../services/user-dashboard-service';
 import { ReportsService } from '../../../../services/reports-service';
 import { HistoryDataComponent } from '../../../../shared/modals/history-data/history-data';
@@ -35,7 +33,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-admin-dashboard',
   standalone: true,
-  imports: [NgApexchartsModule, CommonModule, MatIconModule, HistoryDataComponent],
+  imports: [NgApexchartsModule, CommonModule, MatIconModule],
   templateUrl: './admin-dashboard.html',
   styleUrl: './admin-dashboard.scss',
 })

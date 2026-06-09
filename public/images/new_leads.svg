@@ -1,0 +1,20 @@
+<svg width="220" height="220" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="110" cy="110" r="105" fill="#EAF2FB"/>
+
+  <!-- User head -->
+  <circle cx="110" cy="70" r="22" stroke="#1877F2" stroke-width="8" fill="none"/>
+
+  <!-- User body -->
+  <path
+    d="M65 145C65 118 87 100 110 100C133 100 155 118 155 145"
+    stroke="#1877F2"
+    stroke-width="8"
+    stroke-linecap="round"
+    fill="none"
+  />
+
+  <!-- Plus sign -->
+  <line x1="165" y1="118" x2="165" y2="168" stroke="#1877F2" stroke-width="10" stroke-linecap="round"/>
+  <line x1="140" y1="143" x2="190" y2="143" stroke="#1877F2" stroke-width="10" stroke-linecap="round"/>
+</svg>

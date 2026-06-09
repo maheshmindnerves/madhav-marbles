@@ -1,0 +1,43 @@
+<svg width="220" height="260" viewBox="0 0 220 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0" y1="0" x2="220" y2="260" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1F6FFF"/>
+      <stop offset="1" stop-color="#2F7BFF"/>
+    </linearGradient>
+
+    <filter id="shadow" x="0" y="0" width="220" height="260" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="3" dy="5" stdDeviation="5" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="220" height="260" rx="36" fill="url(#bgGradient)"/>
+
+  <!-- User Group Icon -->
+  <g filter="url(#shadow)"
+     stroke="white"
+     stroke-width="9"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     fill="none">
+
+    <!-- Center Head -->
+    <circle cx="110" cy="92" r="24"/>
+
+    <!-- Left Head -->
+    <path d="M72 86C72 78 66 72 58 72C50 72 44 78 44 86C44 94 50 100 58 100C66 100 72 94 72 86Z"/>
+
+    <!-- Right Head -->
+    <path d="M176 86C176 78 170 72 162 72C154 72 148 78 148 86C148 94 154 100 162 100C170 100 176 94 176 86Z"/>
+
+    <!-- Center Body -->
+    <path d="M76 172V154C76 132 92 118 110 118C128 118 144 132 144 154V172"/>
+
+    <!-- Left Body -->
+    <path d="M44 166V152C44 138 54 128 68 126"/>
+
+    <!-- Right Body -->
+    <path d="M176 166V152C176 138 166 128 152 126"/>
+
+  </g>
+</svg>

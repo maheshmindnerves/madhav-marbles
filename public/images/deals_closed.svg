@@ -1,0 +1,30 @@
+<svg width="220" height="220" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Circle -->
+  <circle cx="110" cy="110" r="100" fill="#EAF6E8"/>
+
+  <!-- Main Circle -->
+  <circle cx="110" cy="110" r="48"
+          stroke="#2DB33F"
+          stroke-width="10"
+          fill="none"
+          stroke-linecap="round"/>
+
+  <!-- Check Mark -->
+  <path d="M88 111 L105 128 L136 92"
+        stroke="#2DB33F"
+        stroke-width="10"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        fill="none"/>
+
+  <!-- Small Accent Cross -->
+  <path d="M140 72 L156 88"
+        stroke="#2DB33F"
+        stroke-width="10"
+        stroke-linecap="round"/>
+
+  <path d="M156 72 L140 88"
+        stroke="#2DB33F"
+        stroke-width="10"
+        stroke-linecap="round"/>
+</svg>

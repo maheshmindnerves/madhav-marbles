@@ -1,0 +1,24 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Circle -->
+  <circle cx="64" cy="64" r="60" fill="#F5EFE9"/>
+
+  <!-- Calendar Body -->
+  <rect x="28" y="36" width="72" height="56" rx="6"
+        stroke="#F57C00" stroke-width="6" fill="white"/>
+
+  <!-- Top Bar -->
+  <line x1="28" y1="52" x2="100" y2="52"
+        stroke="#F57C00" stroke-width="6"/>
+
+  <!-- Rings -->
+  <line x1="48" y1="26" x2="48" y2="44"
+        stroke="#F57C00" stroke-width="8" stroke-linecap="round"/>
+  <line x1="80" y1="26" x2="80" y2="44"
+        stroke="#F57C00" stroke-width="8" stroke-linecap="round"/>
+
+  <!-- Dots -->
+  <circle cx="74" cy="70" r="3.5" fill="#F57C00"/>
+  <circle cx="86" cy="70" r="3.5" fill="#F57C00"/>
+  <circle cx="74" cy="82" r="3.5" fill="#F57C00"/>
+  <circle cx="86" cy="82" r="3.5" fill="#F57C00"/>
+</svg>

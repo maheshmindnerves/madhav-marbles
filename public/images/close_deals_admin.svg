@@ -1,0 +1,29 @@
+<svg width="220" height="260" viewBox="0 0 220 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0" y1="0" x2="220" y2="260" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6D4CFF"/>
+      <stop offset="1" stop-color="#7B5CFF"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="220" height="260" rx="32" fill="url(#bgGradient)"/>
+
+  <!-- Bag -->
+  <rect x="58" y="85" width="104" height="90" rx="10"
+        stroke="white" stroke-width="10" fill="none"/>
+
+  <!-- Handle -->
+  <path d="M84 85V72C84 62 92 54 102 54H118C128 54 136 62 136 72V85"
+        stroke="white" stroke-width="10"
+        stroke-linecap="round"
+        fill="none"/>
+
+  <!-- Check -->
+  <path d="M92 125L108 141L132 117"
+        stroke="white"
+        stroke-width="10"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        fill="none"/>
+</svg>
