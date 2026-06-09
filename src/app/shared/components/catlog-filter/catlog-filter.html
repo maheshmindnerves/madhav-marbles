@@ -1,15 +1,4 @@
-<!-- Toggle Button -->
-<div class="cust" [class.cust-open]="isSidebarOpen" (click)="toggleSidebar()">
-    <i class="fa fa-filter" aria-hidden="true"></i>
-</div>
-
-<!-- Overlay (IMPORTANT) -->
-<div class="overlay" [class.show]="isSidebarOpen" (click)="closeSidebar()">
-</div>
-
-<!-- Sidebar -->
-<div class="sidebar" [class.open]="isSidebarOpen">
-    <div class="filter-scroll">
+<div class="filter-scroll">
     <div class="col-md-12 col-sm-12 col-12">
         <div class="ps-2">
             <label>CATEGORY</label>
@@ -99,5 +88,4 @@
             <button type="button" class="btn btn-danger" (click)="clearFilter()">Clear</button>
         </div> -->
     </div>
-</div>
 </div>

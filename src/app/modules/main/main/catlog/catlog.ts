@@ -1,8 +1,5 @@
-import { Component, computed, HostListener, inject, NgZone, signal } from '@angular/core';
-import { CategoryDetails } from '../../../../shared/modals/category-details/category-details';
+import { Component, inject, signal, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Otp } from '../../../../shared/modals/otp/otp';
 import { CustomerRequestService } from '../../../../services/customer-request-service';
 import { ResultModel } from '../../../../shared/models/result.model';
 import { SnackBarService } from '../../../../services/snack-bar-service';
@@ -10,46 +7,53 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { ZoomImage } from '../../../../shared/modals/zoom-image/zoom-image';
 import { HoldCatlog } from '../../../../shared/modals/hold-catlog/hold-catlog';
 import { SendEmail } from '../../../../shared/modals/send-email/send-email';
-import { Filter } from "../../../../shared/components/filter/filter";
 import { CatlogDetails } from '../../../../shared/modals/catlog-details/catlog-details';
 import Swiper from 'swiper';
-import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import { CatlogFilter } from "../../../../shared/components/catlog-filter/catlog-filter";
+import { Filter } from "../../../../shared/components/filter/filter";
 
 export interface ProductList {
+  isOpen: boolean;
   productId: number;
   company_Id: number;
   name: string;
   category_id: number;
   subCategory_Id: number;
-  hold: boolean;
-  sampleOrder: boolean;
   item_Code: string;
   category_Name: string;
   subCategory_name: string;
+  color: string;
+  specification: string;
+  origin: string;
+  sLength: string;
+  sWidth: string;
+  sTotalArea: string;
+  sFinishType: string;
+  sPriceCategory: string;
+  applications: string;
+  surfaceQuality: string | null;
   image_sr_no: number;
   image_Path: string;
-  address: string;
-  isOpen: boolean;
+  image_Description: string | null;
 }
 
 @Component({
   selector: 'app-catlog',
-  imports: [ReactiveFormsModule, Filter],
+  imports: [CatlogFilter, Filter],
   templateUrl: './catlog.html',
   styleUrl: './catlog.scss'
 })
 export class Catlog {
-  readonly fb = inject(FormBuilder);
   readonly crService = inject(CustomerRequestService);
   private snackBar = inject(SnackBarService);
   private loader = inject(NgxUiLoaderService);
   readonly dialog = inject(MatDialog);
   subCatlog: any[] = [];
   isButtonShow: boolean = false;
-
-
+  @ViewChild(CatlogFilter) CatlogFilter!: CatlogFilter;
 
   protected readonly items = signal<ProductList[]>([]);
+  protected readonly tempItems = signal<ProductList[]>([]);
   protected readonly swiperImages = signal<any[]>([
     "https://www.madhavmarbles.com/wp-content/uploads/2021/02/banner-3.jpg",
     "https://www.madhavmarbles.com/wp-content/uploads/2021/01/MMGL-feature.jpg",
@@ -66,12 +70,7 @@ export class Catlog {
       next: (res: ResultModel) => {
         if (res.isSuccess && res.data.length > 0) {
           this.items.set(res.data);
-          /* res.data.forEach((o) => {
-            this.items.update(arr => [
-              ...arr,
-              o
-            ]);
-          }); */
+          this.tempItems.set(res.data);
         } else {
           this.snackBar.error('No data found.');
         }
@@ -83,8 +82,6 @@ export class Catlog {
         this.loader.stop();
       }
     });
-
-
   }
 
   ngAfterViewInit(): void {
@@ -215,6 +212,50 @@ export class Catlog {
       if (result) {
       }
     });
+  }
+
+  onClickClearFilter(): void {
+    this.items.set(this.tempItems());
+    this.CatlogFilter.clearFilter();
+  }
+
+  filterProducts(filters: any) {
+    const pp = this.tempItems().filter(product => {
+
+      // Category filter
+      const activeCategories = filters.categories
+        ?.filter((c: any) => c.checked)
+        .map((c: any) => c.id);
+
+      // SubCategory filter
+      const activeSubCategories = filters.subcategories
+        ?.filter((s: any) => s.checked)
+        .map((s: any) => s.id);
+
+      // Color filter
+      const activeColors = filters.colors
+        ?.filter((c: any) => c.checked)
+        .map((c: any) => c.color);
+
+      // Finish Type filter
+      const activeFinishTypes = filters.FinishType
+        ?.filter((f: any) => f.checked)
+        .map((f: any) => f.sFinishType);
+
+      // Origin filter
+      const activeOrigins = filters.Origin
+        ?.filter((o: any) => o.checked)
+        .map((o: any) => o.origin);
+
+      return (
+        (!activeCategories?.length || activeCategories.includes(product.category_id)) &&
+        (!activeSubCategories?.length || activeSubCategories.includes(product.subCategory_Id)) &&
+        (!activeColors?.length || activeColors.includes(product.color)) &&
+        (!activeFinishTypes?.length || activeFinishTypes.includes(product.sFinishType)) &&
+        (!activeOrigins?.length || activeOrigins.includes(product.origin))
+      );
+    });
+    this.items.set(pp);
   }
 
 }

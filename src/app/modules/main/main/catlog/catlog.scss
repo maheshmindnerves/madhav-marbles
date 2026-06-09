@@ -11,6 +11,16 @@
   border: 1px solid gray;
 }
 
+.custom-card2 {
+  margin-bottom: .4rem;
+  margin-top: .4rem;
+  border: 1px solid gray;
+}
+
+.custom-card2:hover {
+  transform: none !important;
+}
+
 .card-body {
   padding: 5px;
 }
@@ -61,11 +71,27 @@
   background-color: #005daa;
 }
 
+.mobile-filter {
+  display: none;
+}
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
   .card-img-top {
     height: 22vh;
   }
+
+  .img-fluid-swiper {
+    height: calc(100vh - 290px) !important;
+  }
+
+  .custom-card2 {
+    display: none;
+  }
+
+  .mobile-filter {
+    display: block;
+  }
+
 }
 
 .header {
@@ -213,4 +239,9 @@
   padding: 5px;
   text-align: center;
   font-weight: 700;
+}
+
+.height-scroll {
+  overflow: auto;
+  height: calc(100vh - 100px);
 }

@@ -18,13 +18,12 @@
 /* Sidebar */
 .sidebar {
     position: fixed;
-    top: 72px;
     left: -260px;
     width: 260px;
     height: 100%;
     background: rgb(37 36 36 / 94%);
     color: #fff;
-    padding: 20px;
+    padding: 10px;
 
     transition: left 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
 
@@ -55,4 +54,38 @@
 .overlay.show {
     opacity: 1;
     visibility: visible;
+}
+
+.sub-category {
+    border-radius: 15px;
+    border: 1px solid lightgray;
+    padding: 1px 10px 2px 10px;
+    margin: 2px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.sub-category.active {
+    background: lightgray;
+    border: 1px solid gray;
+}
+
+.color-active {
+    border: 3px solid skyblue !important;
+}
+
+.color-box {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    display: inline-block;
+    margin-top: 0px !important;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.filter-scroll {
+    overflow: auto;
+    height: calc(100vh - 100px);
 }

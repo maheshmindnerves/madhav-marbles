@@ -145,7 +145,7 @@ export class SalesRequest {
  
          const payload = {
            requestId: item.RequestID,
-           userid: 1,
+           userid: this.storage.getItem('userId'),
            isRequestReleased: true,
            requestReleaseddBy: 1,
            isRequestMaterilized: false,

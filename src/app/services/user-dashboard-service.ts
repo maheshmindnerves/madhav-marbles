@@ -11,8 +11,16 @@ export class UserDashboardService {
     constructor(private http: HttpClient) { }
 
     // GET
-    GetUserDashboardSummaryData(userId:number): Observable<any> {
-        return this.http.get(environment.baseApiUrl + 'UserDashBoard/GetUserDashboardSummaryData?userid='+userId);
+    GetUserDashboardSummaryData(userId: number): Observable<any> {
+        return this.http.get(environment.baseApiUrl + 'UserDashBoard/GetUserDashboardSummaryData?userid=' + userId);
     }
 
-  }
+    GetAdminDashboardData(): Observable<any> {
+        return this.http.get(environment.baseApiUrl + 'UserDashBoard/GetAdminDashboardData');
+    }
+
+    GetRecentActivityDataforAdmin(flag: string): Observable<any> {
+        return this.http.get(environment.baseApiUrl + 'UserDashBoard/GetRecentActivityDataforAdmin?flag=' + flag);
+    }
+
+}

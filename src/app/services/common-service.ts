@@ -18,5 +18,9 @@ export class CommonService {
         return this.http.get(environment.baseApiUrl + 'common/GetSubPrimaryRejectionReason/?id=' + id);
     }
 
+    GetFilterMasterData(): Observable<any> {
+        return this.http.get(environment.baseApiUrl + 'common/GetFilterMasterData');
+    }
+
 
 }

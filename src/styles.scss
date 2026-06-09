@@ -10,6 +10,8 @@
 @import url('swiper/css');
 @import url('swiper/css/navigation');
 @import url('swiper/css/pagination');
+@import 'ag-grid-community/styles/ag-grid.css';
+@import 'ag-grid-community/styles/ag-theme-quartz.css';
 
 html {
   @include mat.theme((color: (primary: mat.$azure-palette,
@@ -187,15 +189,20 @@ hr {
 }
 
 .swiper-pagination-bullet {
-  background: white;   /* dot color */
-  width: 12px;         /* size */
+  background: white;
+  /* dot color */
+  width: 12px;
+  /* size */
   height: 12px;
-  opacity: 0.7;        /* optional */
+  opacity: 0.7;
+  /* optional */
 }
 
 .swiper-pagination-bullet-active {
-  background: white;   /* active dot */
-  width: 14px;         /* bigger active */
+  background: white;
+  /* active dot */
+  width: 14px;
+  /* bigger active */
   height: 14px;
   opacity: 1;
 }
@@ -204,4 +211,33 @@ hr {
   text-align: right;
   right: 10px;
   left: auto !important;
+}
+
+.custom-chart {
+  .apx-legend-position-right {
+    height: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    flex-direction: column !important;
+    top: 0px !important;
+  }
+}
+
+.mdc-checkbox {
+  flex: 0 0 14px !important;
+  margin-top: -10px !important;
+}
+
+.mdc-label {
+  margin-top: -2px !important;
+  font-weight: 400 !important;
+}
+
+.sidebar {
+  .mdc-label {
+    color: white !important;
+  }
+  .mdc-checkbox__background  {
+        border: 2px solid rgb(189, 232, 16) !important;
+  }
 }

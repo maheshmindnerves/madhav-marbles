@@ -1,26 +1,22 @@
 import { Component, EventEmitter, inject, Output, signal } from '@angular/core';
 import { FormBuilder, FormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSelectModule } from '@angular/material/select';
-import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatDialog } from '@angular/material/dialog';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { CommonService } from '../../../services/common-service';
+import { CustomerRequestService } from '../../../services/customer-request-service';
 import { SnackBarService } from '../../../services/snack-bar-service';
 import { FilterResponse } from '../../models/filter.model';
 import { ResultModel } from '../../models/result.model';
-import { MatCheckbox, MatCheckboxModule } from "@angular/material/checkbox";
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-filter',
+  selector: 'app-catlog-filter',
   imports: [MatCheckboxModule, CommonModule, FormsModule],
-  templateUrl: './filter.html',
-  styleUrl: './filter.scss',
-  standalone: true,
+  templateUrl: './catlog-filter.html',
+  styleUrl: './catlog-filter.scss',
 })
-export class Filter {
-  isSidebarOpen = false;
+export class CatlogFilter {
   protected readonly filterResponse = signal<FilterResponse | null>(null);
 
   readonly fb = inject(FormBuilder);
@@ -47,13 +43,6 @@ export class Filter {
     });
   }
 
-  toggleSidebar() {
-    this.isSidebarOpen = !this.isSidebarOpen;
-  }
-
-  closeSidebar() {
-    this.isSidebarOpen = false;
-  }
   onClickType(item: { checked: boolean; }) {
     item.checked = item.checked ? false : true;
     this.filterEvent.emit(this.filterResponse());
@@ -62,6 +51,12 @@ export class Filter {
   onChangeValue(): void {
     this.filterEvent.emit(this.filterResponse());
   }
+
+
+
+  /*  applyFilter(): void {
+     this.filterEvent.emit(this.filterResponse());
+   }*/
 
   clearFilter(): void {
     const data = structuredClone(this.filterResponse());
@@ -97,6 +92,4 @@ export class Filter {
       this.filterResponse.set(data);
     }
   }
-
-
 }

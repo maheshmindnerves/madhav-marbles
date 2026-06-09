@@ -1,0 +1,43 @@
+.header {
+  background: #ffffff;
+  border-bottom: 1px solid #dee2e6;
+  padding: 15px 20px !important;
+  color: #212529;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h5 {
+    margin: 0;
+    font-size: 1.2rem;
+  }
+}
+
+.btn-close-custom::before {
+  content: "×";
+  font-size: 2rem;
+  color: #6c757d;
+  position: absolute;
+  right: 15px;
+  top: 8px;
+  cursor: pointer;
+  line-height: 1;
+  transition: color 0.15s ease-in-out;
+}
+
+.btn-close-custom:hover::before {
+  color: #212529;
+}
+
+.dialog-body {
+  background-color: #f8f9fa;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+::ng-deep {
+  .ag-header-cell-label {
+    justify-content: center !important;
+  }
+}

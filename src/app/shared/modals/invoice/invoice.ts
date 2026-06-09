@@ -5,6 +5,7 @@ import { CustomerRequestService } from '../../../services/customer-request-servi
 import { ResultModel } from '../../models/result.model';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SnackBarService } from '../../../services/snack-bar-service';
+import { StorageService } from '../../../services/storage-service';
 
 @Component({
   selector: 'app-invoice',
@@ -21,11 +22,12 @@ export class Invoice {
   date = new Date().toLocaleDateString('en-IN').replace(/\//g, '-');
   remark = new FormControl('', Validators.required);
   private snackBar = inject(SnackBarService);
+  private storage = inject(StorageService);
 
   onClickSubmit(): void {
     const payload = {
       requestId: this.data.reqestId,
-      userid: 1,
+      userid: this.storage.getItem('userId'),
       isRequestReleased: false,
       requestReleaseddBy: 1,
       isRequestMaterilized: true,

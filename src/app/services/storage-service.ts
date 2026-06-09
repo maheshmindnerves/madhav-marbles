@@ -10,7 +10,15 @@ export class StorageService {
     }
 
     getItem(key: string) {
-        return JSON.parse(localStorage.getItem(key) || 'null');
+        const val = localStorage.getItem(key);
+        if (!val) {
+            return null;
+        }
+        try {
+            return JSON.parse(val);
+        } catch (e) {
+            return val;
+        }
     }
 
     removeItem(key: string) {

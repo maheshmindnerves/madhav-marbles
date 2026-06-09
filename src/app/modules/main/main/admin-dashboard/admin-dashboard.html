@@ -4,18 +4,18 @@
             <div class="card-body p-2">
                 <div class="row">
                     <div class="col-md-4 col-sm-3 col-12 m-auto text-center">
-                        <img class="image-width" src="./images/total_lead.svg">
+                        <img class="image-width" src="./images/total_leads_admin.svg">
                     </div>
                     <div class="col-md-8 col-sm-9 col-12 m-auto">
                         <div class="text-center">
                             <h4>Total Leads</h4>
                         </div>
                         <div class="text-center">
-                            <h3><b>{{dashboardSummary()?.TotalLeads}}</b></h3>
+                            <h3><b>{{adminDashboardData()?.TotalLeads}}</b></h3>
                         </div>
                     </div>
                 </div>
-                <div class="history-btn-card" (click)="onClickHistory('CustomerDetails', '', 'Total Leads', $event)" title="History Data">
+                <div class="history-btn-card" (click)="onClickHistory('CustomerDetails', 'All', 'Total Leads', $event)" title="History Data">
                     <i class="fa fa-history"></i>
                 </div>
             </div>
@@ -26,18 +26,18 @@
             <div class="card-body p-2">
                 <div class="row">
                     <div class="col-md-4 col-sm-3 col-12 m-auto text-center">
-                        <img class="image-width" src="./images/new_leads.svg">
+                        <img class="image-width" src="./images/total_customers_admin.svg">
                     </div>
                     <div class="col-md-8 col-sm-9 col-12 m-auto">
                         <div class="text-center">
-                            <h4>New Leads(Today)</h4>
+                            <h4>Total Customers</h4>
                         </div>
                         <div class="text-center">
-                            <h3><b>{{dashboardSummary()?.TodayLeads}}</b></h3>
+                            <h3><b>{{adminDashboardData()?.TotalCustomers}}</b></h3>
                         </div>
                     </div>
                 </div>
-                <div class="history-btn-card" (click)="onClickHistory('CustomerDetails', '', 'New Leads (Today)', $event)" title="History Data">
+                <div class="history-btn-card" (click)="onClickHistory('CustomerDetails', 'All', 'Total Customers', $event)" title="History Data">
                     <i class="fa fa-history"></i>
                 </div>
             </div>
@@ -48,18 +48,18 @@
             <div class="card-body p-2">
                 <div class="row">
                     <div class="col-md-4 col-sm-3 col-12 m-auto text-center">
-                        <img class="image-width" src="./images/follow-ups.svg">
+                        <img class="image-width" src="./images/pending_followups_admin.svg">
                     </div>
                     <div class="col-md-8 col-sm-9 col-12 m-auto">
                         <div class="text-center">
-                            <h4>Followup Due(Today)</h4>
+                            <h4>Pending Follow UPS</h4>
                         </div>
                         <div class="text-center">
-                            <h3><b>{{dashboardSummary()?.FollowupDueToday}}</b></h3>
+                            <h3><b>{{adminDashboardData()?.TotalPendingFollowUps}}</b></h3>
                         </div>
                     </div>
                 </div>
-                <div class="history-btn-card" (click)="onClickHistory('PendingFollowup', '', 'Followup Due (Today)', $event)" title="History Data">
+                <div class="history-btn-card" (click)="onClickHistory('PendingFollowup', 'All', 'Pending Follow UPS', $event)" title="History Data">
                     <i class="fa fa-history"></i>
                 </div>
             </div>
@@ -70,18 +70,18 @@
             <div class="card-body p-2">
                 <div class="row">
                     <div class="col-md-4 col-sm-3 col-12 m-auto text-center">
-                        <img class="image-width" src="./images/deals_closed.svg">
+                        <img class="image-width" src="./images/close_deals_admin.svg">
                     </div>
                     <div class="col-md-8 col-sm-9 col-12 m-auto">
                         <div class="text-center">
-                            <h4>Deals Closed</h4>
+                            <h4>Closed Deals</h4>
                         </div>
                         <div class="text-center">
-                            <h3><b>{{dashboardSummary()?.DealsClosed}}</b></h3>
+                            <h3><b>{{adminDashboardData()?.TotalMaterializedDeals}}</b></h3>
                         </div>
                     </div>
                 </div>
-                <div class="history-btn-card" (click)="onClickHistory('DealsClosed', '', 'Deals Closed', $event)" title="History Data">
+                <div class="history-btn-card" (click)="onClickHistory('DealsClosed', 'All', 'Closed Deals', $event)" title="History Data">
                     <i class="fa fa-history"></i>
                 </div>
             </div>
@@ -92,54 +92,57 @@
     <div class="col-md-12 col-sm-12 col-12">
         <div class="card mb-1 mt-1 custom-card">
             <div class="card-header">
-                <b>Today's Follow Up</b>
+                <b>Lead Status Distribution</b>
+            </div>
+            @if(!isLoading()) {
+            <div class="card-body p-2 m-auto">
+                <div class="custom-chart">
+                    <apx-chart [series]="chartOptions.series!" [chart]="chartOptions.chart!"
+                        [plotOptions]="chartOptions.plotOptions!" [dataLabels]="chartOptions.dataLabels!"
+                        [fill]="chartOptions.fill!" [legend]="chartOptions.legend!" [title]="chartOptions.title!"
+                        [responsive]="chartOptions.responsive!" [labels]="chartOptions.labels"></apx-chart>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-12">
+        <div class="card mb-1 mt-1 custom-card">
+            <div class="card-header">
+                <b>Recent Activities</b>
             </div>
             <div class="card-body">
                 <div class="table-wrapper">
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>Time</th>
                                 <th>Customer Name</th>
-                                <th>Action</th>
-                                <th>Status</th>
-                                <th>Priority</th>
+                                <th>Sales Person</th>
+                                <th>Lead Source</th>
+                                <th>Lead Status</th>
+                                <th>Call Satus</th>
+                                <th>Next Followup Date</th>
+                                <th>Remark</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @for (item of dashboardSummary()?.TodayFollowupList; track item.RequestID) {
+                            @for (item of activityData(); track $index) {
                             <tr>
-                                <td>{{item.Meeting_Time}}</td>
                                 <td>{{item.CustomerName}}</td>
-                                <td>{{item.Call_Status}}</td>
-                                <td>{{item.Lead_Status}}</td>
-                                <td [ngClass]="{
-                                'text-success':item.Priority === 'Low',
-                                'text-warning':item.Priority === 'Moderate',
-                                'text-danger':item.Priority === 'High'
-                            }">{{item.Priority}}</td>
+                                <td>{{item.SalesPerson}}</td>
+                                <td>{{item.LeadSource}}</td>
+                                <td>{{item.LeadStatus}}</td>
+                                <td>{{item.CallSatus}}</td>
+                                <td>{{item.NextFollowupDate}}</td>
+                                <td>{{item.Remark}}</td>
+
                             </tr>
                             }
                         </tbody>
                     </table>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-12 col-sm-12 col-12">
-        <div class="card mb-1 mt-1 custom-card">
-            <div class="card-header">
-                <b>Quick actions for assigned request</b>
-            </div>
-            <div class="card-body p-2">
-                <img width="50" src="./images/request.svg">
-                <span class="value-list">20</span>
-                <mat-icon class="right-icon" (click)="onClickCard()">chevron_right</mat-icon>
-            </div>
-            <div class="col-md-12 col-sm-12 col-12 name-title">
-                Sales Request
             </div>
         </div>
     </div>

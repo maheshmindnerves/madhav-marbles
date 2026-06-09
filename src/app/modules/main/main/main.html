@@ -5,8 +5,12 @@
         </a>
         <div class="title">
             Welcome to, Madhav Marble
+            <div class="d-block d-sm-none text-center" style="font-size: 12px; font-weight: normal; margin-top: 2px; opacity: 0.85; text-align: center;">
+                {{ userName() }}
+            </div>
         </div>
-        <div class="dropdown">
+        <div class="dropdown d-flex align-items-center gap-2">
+            <span class="text-white fw-semibold me-1 d-none d-sm-inline-block">{{ userName() }}</span>
             <img src="./images/profile.jpg" class="profile-icon dropdown-toggle bg-light" id="profileDropdown"
                 data-bs-toggle="dropdown" aria-expanded="false" alt="Profile">
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">

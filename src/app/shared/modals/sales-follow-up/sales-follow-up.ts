@@ -8,6 +8,7 @@ import { MY_DATE_FORMATS, ResultModel } from '../../models/result.model';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatTimepickerModule } from '@angular/material/timepicker';
 import { CommonService } from '../../../services/common-service';
+import { StorageService } from '../../../services/storage-service';
 
 @Component({
   selector: 'app-sales-follow-up',
@@ -30,12 +31,12 @@ export class SalesFollowUp {
   primaryReasons = signal<PrimaryReason[]>([]);
   subPrimaryReason = signal<SubPrimaryReason[]>([]);
   readonly commonService = inject(CommonService);
+  private storage = inject(StorageService);
 
   ngOnInit(): void {
     this.salesFollowForm = this.fb.group({
       requestId: [this.data.RequestID],
-      salesUserId: ['0'],
-      requestCallStatus: [null, Validators.required],
+      salesUserId: [this.storage.getItem('userId')],
       resuestLeadStatusId: [null, Validators.required],
       followupDate: [null, Validators.required],
       nextFollowupDate: [null, Validators.required],
@@ -96,6 +97,33 @@ export class SalesFollowUp {
       this.loader.start();
       const payload = this.salesFollowForm.getRawValue();
       payload['requestCallStatus'] = this.requestCallStatus.value;
+
+      const toLocalISOString = (date: Date): string => {
+        const offset = date.getTimezoneOffset() * 60000;
+        return new Date(date.getTime() - offset).toISOString();
+      };
+
+      if (payload.nextFollowupDate && payload.nextFollowupTime) {
+        const nextDate = new Date(payload.nextFollowupDate);
+        const nextTime = new Date(payload.nextFollowupTime);
+        const combinedTime = new Date(
+          nextDate.getFullYear(),
+          nextDate.getMonth(),
+          nextDate.getDate(),
+          nextTime.getHours(),
+          nextTime.getMinutes(),
+          nextTime.getSeconds()
+        );
+        payload.nextFollowupTime = toLocalISOString(combinedTime);
+      }
+
+      if (payload.followupDate) {
+        payload.followupDate = toLocalISOString(new Date(payload.followupDate));
+      }
+
+      if (payload.nextFollowupDate) {
+        payload.nextFollowupDate = toLocalISOString(new Date(payload.nextFollowupDate));
+      }
 
       this.crService.RequestSalesFollowUp(payload).subscribe({
         next: (res: ResultModel) => {

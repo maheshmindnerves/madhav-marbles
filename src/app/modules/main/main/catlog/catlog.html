@@ -1,4 +1,4 @@
-<app-filter></app-filter>
+<app-filter class="mobile-filter" (filterEvent)="filterProducts($event)"></app-filter>
 <div class="row">
    <div class="swiper mySwiper">
       <div class="swiper-wrapper">
@@ -26,28 +26,46 @@
 
    </div>
 </div> -->
+
 <div class="row">
-   @for (item of items(); track item.productId) {
-   <div class="col-md-4 col-sm-6 col-12">
-      <div class="card custom-card">
-         <div class="card-body">
-            <img class="card-img-top" [src]="'data:image/png;base64,' + item.image_Path" alt="Card image cap"
-               (click)="onClickImage(item)">
-            <div class="main-title">{{item.name + item.item_Code }}</div>
-            <div>
-               <label>Category : </label><span class="sub-title ms-2">{{item.category_Name}}</span>
-               <button type="button" class="btn btn-outline-light view-details" (click)="openDialog(item)">
-                  <i class="fa fa-eye" aria-hidden="true"></i> &nbsp;&nbsp;View Details
-               </button>
+   <div class="col-md-3 col-sm-2 col-12">
+      <div class="card custom-card2">
+         <div class="row p-2 pb-0">
+            <div class="col-md-6 col-sm-6 col-6 fw-bold"><i class="fa fa-filter me-2" aria-hidden="true"></i>FILTER
             </div>
-            <div><label> Sub Category : </label>
-               <span class="sub-title ms-2">{{item.subCategory_name}}</span>
-               <i class="fa fa-envelope send-email" aria-hidden="true" (click)="onClickEmail()"></i>
-            </div>
+            <div class="col-md-6 col-sm-6 col-6 text-end text-warning cursor-pointer" (click)="onClickClearFilter()">
+               CLEAR ALL</div>
          </div>
+         <hr>
+         <app-catlog-filter (filterEvent)="filterProducts($event)"></app-catlog-filter>
       </div>
    </div>
-   }
+   <div class="col-md-9 col-sm-8 col-12 height-scroll">
+      <div class="row">
+         @for (item of items(); track $index) {
+         <div class="col-md-4 col-sm-6 col-12">
+            <div class="card custom-card">
+               <div class="card-body">
+                  <img class="card-img-top" [src]="'data:image/png;base64,' + item.image_Path" alt="Card image cap"
+                     (click)="onClickImage(item)">
+                  <div class="main-title">{{item.name + item.item_Code }}</div>
+                  <div>
+                     <label>Category : </label><span class="sub-title ms-2">{{item.category_Name}}</span>
+                     <button type="button" class="btn btn-outline-light view-details" (click)="openDialog(item)">
+                        <i class="fa fa-eye" aria-hidden="true"></i> &nbsp;&nbsp;View Details
+                     </button>
+                  </div>
+                  <div><label> Sub Category : </label>
+                     <span class="sub-title ms-2">{{item.subCategory_name}}</span>
+                     <i class="fa fa-envelope send-email" aria-hidden="true" (click)="onClickEmail()"></i>
+                  </div>
+               </div>
+            </div>
+         </div>
+         }
+      </div>
+   </div>
+
 </div>
 @if(isButtonShow) {
 <button class="blink-btn" (click)="submitRequest()">Add to cart</button>

@@ -11,6 +11,7 @@ import { AddSpecification } from './main/dashboard/add-specification/add-specifi
 import { Request } from './main/request/request';
 import { SalesRequest } from './main/sales-request/sales-request';
 import { UserDashboard } from './main/user-dashboard/user-dashboard';
+import { AdminDashboard } from './main/admin-dashboard/admin-dashboard';
 const routes: Routes = [
   {
     path: '', component: Main,
@@ -23,7 +24,8 @@ const routes: Routes = [
       { path: 'request', component: Request, canActivate: [authGuard] },
       { path: 'sales-request', component: SalesRequest, canActivate: [authGuard] },
       { path: 'user-dashboard', component: UserDashboard, canActivate: [authGuard] },
-      
+      { path: 'admin-dashboard', component: AdminDashboard, canActivate: [authGuard] },
+
     ],
   }
 ];
