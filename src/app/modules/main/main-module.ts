@@ -12,6 +12,8 @@ import { Request } from './main/request/request';
 import { SalesRequest } from './main/sales-request/sales-request';
 import { UserDashboard } from './main/user-dashboard/user-dashboard';
 import { AdminDashboard } from './main/admin-dashboard/admin-dashboard';
+import { MatDialogModule } from '@angular/material/dialog';
+
 const routes: Routes = [
   {
     path: '', component: Main,
@@ -33,7 +35,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [Main],
   imports: [
-    CommonModule, RouterModule.forChild(routes)
+    CommonModule, RouterModule.forChild(routes), MatDialogModule
   ]
 })
 export class MainModule { }

@@ -1,0 +1,42 @@
+.user-details-container {
+  padding: 1rem;
+  font-family: 'Outfit', 'Inter', sans-serif;
+  
+  .modal-title {
+    font-weight: 600;
+    color: #1e3a8a;
+  }
+
+  .detail-item {
+    background-color: #f8fafc;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    border-left: 4px solid #1e3a8a;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      background-color: #f1f5f9;
+      transform: translateX(4px);
+    }
+  }
+
+  .label {
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    margin-bottom: 2px;
+  }
+
+  .value {
+    font-weight: 500;
+    word-break: break-all;
+  }
+
+  .btn-primary {
+    background-color: #1e3a8a;
+    border: none;
+    
+    &:hover {
+      background-color: #162f6b;
+    }
+  }
+}

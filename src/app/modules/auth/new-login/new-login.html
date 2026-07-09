@@ -63,7 +63,13 @@
                     <input type="email" class="form-control" placeholder="Email Id" formControlName="emailId">
                 </div>
                 @if(newUser.get('emailId')?.touched && newUser.get('emailId')?.invalid) {
-                <div class="error-login">email id is required</div>
+                <div class="error-login">
+                    @if(newUser.get('emailId')?.hasError('required')) {
+                    email id is required
+                    } @else {
+                    email id is invalid
+                    }
+                </div>
                 }
                 <div class="input-group mb-2">
                     <span class="input-group-text">
@@ -74,6 +80,15 @@
                 </div>
                 @if(newUser.get('mobileNo')?.touched && newUser.get('mobileNo')?.invalid) {
                 <div class="error-login">mobile is required</div>
+                }
+                <div class="input-group mb-2">
+                    <span class="input-group-text">
+                        <i class="fa fa-map-marker"></i>
+                    </span>
+                    <input type="text" class="form-control" placeholder="Address" formControlName="userAddress">
+                </div>
+                @if(newUser.get('userAddress')?.touched && newUser.get('userAddress')?.invalid) {
+                <div class="error-login">address is required</div>
                 }
             </form>
             <button class="btn btn-primary w-100 rounded-pill mt-2">
@@ -87,34 +102,40 @@
             }
         </div>
         } @else {
-        <div class="card p-2 shadow-sm login-card">
-            <h2 class="text-center">Verify OTP</h2>
-            <hr>
-            <div class="sub-title mb-2">A verification code has been sent to your mobile number via sms. please enter
-                the code below.</div>
-            <div class="text-center"><b>OTP sent on mobile {{mobileNumber.value}}</b></div>
-            <div class="text-center">Valid for 01:10</div>
+        <div class="card p-4 shadow-sm login-card">
+            <h4 class="text-center mb-3">Verify OTP</h4>
+            <div class="sub-title mb-3">A verification code has been sent to your mobile number via SMS. Please enter the code below.</div>
+            <div class="text-center mb-2"><b>OTP sent to mobile {{mobileNumber.value}}</b></div>
+            <div class="text-center text-muted small mb-3">Valid for {{timerText()}}</div>
             <form [formGroup]="otpForm">
                 <div class="otp-screen">
-                    <div id="inputs" class="inputs">
-                        <input class="input" type="text" maxlength="1" (input)="onInputChange($event)"
+                    <div id="inputs" class="inputs" (paste)="onPaste($event)">
+                        <input class="input" type="text" maxlength="1" 
+                            (input)="onInputChange($event)" 
+                            (keydown)="onKeyDown($event)"
                             formControlName="v1" />
-                        <input class="input" type="text" maxlength="1" (input)="onInputChange($event)"
+                        <input class="input" type="text" maxlength="1" 
+                            (input)="onInputChange($event)" 
+                            (keydown)="onKeyDown($event)"
                             formControlName="v2" />
-                        <input class="input" type="text" maxlength="1" (input)="onInputChange($event)"
+                        <input class="input" type="text" maxlength="1" 
+                            (input)="onInputChange($event)" 
+                            (keydown)="onKeyDown($event)"
                             formControlName="v3" />
-                        <input class="input" type="text" maxlength="1" (input)="onInputChange($event)"
+                        <input class="input" type="text" maxlength="1" 
+                            (input)="onInputChange($event)" 
+                            (keydown)="onKeyDown($event)"
                             formControlName="v4" />
                     </div>
                 </div>
             </form>
-            <div class="text-center mt-2">
-                <h6><a href="#">Resend</a></h6>
+            <div class="text-center mt-3">
+                <h6><a href="javascript:void(0)" class="text-decoration-none" [class.disabled-link]="timerSeconds() > 0" (click)="timerSeconds() === 0 && resendOtp()">Resend OTP</a></h6>
             </div>
             <div class="text-center mt-4">
-                <button type="button" class="btn btn btn-outline-secondary me-2"
+                <button type="button" class="btn btn-outline-secondary rounded-pill px-4 me-2"
                     (click)="onClickGetOtp(false)">Back</button>
-                <button type="button" class="btn btn-success" (click)="verify()"
+                <button type="button" class="btn btn-success rounded-pill px-4" (click)="verify()"
                     [disabled]="otpForm.invalid">Verify</button>
             </div>
         </div>
